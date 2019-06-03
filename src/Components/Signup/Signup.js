@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from "./Login/firebase.js";
+import firebase from "../firebase.js";
 
 class Signup extends Component {
   constructor() {

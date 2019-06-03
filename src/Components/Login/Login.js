@@ -1,30 +1,6 @@
 import React, { Component } from "react";
-import firebase from "./firebase.js";
+import firebase from "../firebase.js";
 import { Redirect, withRouter } from 'react-router-dom';
-/* var provider = new firebase.auth.GoogleAuthProvider();
-
-class Login extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  }); */
 
 class Login extends Component{
     constructor(props){
@@ -38,36 +14,44 @@ class Login extends Component{
         }
     }
 
+    //login button press takes in email and password
     login(e){
         e.preventDefault();
+
+        //email and password from state is entered into firebase authentication
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user)=>{
         }).catch((error) => {console.log(error);})
+
         //pass email and password user enters in form
-        console.log("user put in email and password");
-
+      
+        //gets database of users
         const usersRef = firebase.database().ref('users');
-        const user = (firebase.auth().currentUser ? firebase.auth().currentUser : "Reload the Page"); //specific user id for logged in user
-        console.log("User id: " + user.uid)
 
+        //gets user currently logged in
+        const user = (firebase.auth().currentUser ? firebase.auth().currentUser : "Reload the Page"); 
+
+        //on the values of the database of users, get the matching user id to currently logged in user
         usersRef.on('value', (snapshot) => {
-       // console.log(snapshot.val())
-        let items = snapshot.val() || [];
+        
+        let items = snapshot.val() || []; //get values of database entry
          
-        const entries = Object.entries(items)
-        console.log(entries)
-        for (const [id, tasks] of entries) {
+        const entries = Object.entries(items) //entries gets [uid, array of items]
+        //console.log(entries)
+
+        //finds if current user id matches any id, if so, appends
+        //true/false array of type (admin, student, company)
+        for (const [id, fields] of entries) {
             if(id === user.uid) {
-            const taskArray = Object.values(tasks)
-            console.log(taskArray)
-            //const entries3 = Object.entries(entries2)
-           this.setState({type : taskArray})
+            const fieldArray = Object.values(fields)
+            console.log(fieldArray)
+           this.setState({type : fieldArray}) //sets state to equal true/false array
             }
           } 
         });
         
     }
-  
-    signup(){
+    //pushes path if signup button is pressed to lead user to signup page
+    signup(){ 
       let path = `signup`;
       this.props.history.push(path);
         
@@ -76,17 +60,19 @@ class Login extends Component{
     render(){
       console.log(this.state.type)
 
-      if(this.state.type[0] === true) {
+      //redirects user if current logged in user fits below criteria
+      if(this.state.type[0] === true) { //if company
         return <Redirect to = '/company'/>
       }
-      else if (this.state.type[1] === true) {
+      else if (this.state.type[1] === true) { //if admin
         return <Redirect to = '/company' />
       }
-      else if (this.state.type[3] === true) {
+      else if (this.state.type[3] === true) { //if student
         return <Redirect to = '/student' />
       }
 
-        return(
+      //normal rendering for login page
+      return(
             <div class="login">
                 <form onSubmit={this.login}>
                     <input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" name="email" placeholder="enter email"/> <br/>
@@ -101,4 +87,5 @@ class Login extends Component{
     }
 }
 
+//uses withRouter for changing urls if signup page is clicked
 export default withRouter(Login);
