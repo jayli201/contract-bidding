@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "./firebase.js";
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 /* var provider = new firebase.auth.GoogleAuthProvider();
 
 class Login extends Component {
@@ -67,12 +67,10 @@ class Login extends Component{
         
     }
   
-    signup(e){
-        e.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .catch((error) => {
-            console.log(error);
-        })
+    signup(){
+      let path = `signup`;
+      this.props.history.push(path);
+        
     }
 
     render(){
@@ -103,4 +101,4 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default withRouter(Login);
