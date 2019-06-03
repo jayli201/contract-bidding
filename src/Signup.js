@@ -117,11 +117,12 @@ class Signup extends Component {
     return (
       <div>
         <input onChange={this.handleChange} value={this.state.email} />
-        {this.state.email}
         <input onChange={this.handleChangep} value={this.state.password} />
-        <button onClick={this.signupAd}>sign up as admin</button>
-        <button onClick={this.signupCo}>sign up as company</button>
-        <button onClick={this.signupSt}>sign up as student</button>
+        <div>
+          <button onClick={this.signupAd}>sign up as admin</button>
+          <button onClick={this.signupCo}>sign up as company</button>
+          <button onClick={this.signupSt}>sign up as student</button>
+        </div>
       </div>
     );
   }

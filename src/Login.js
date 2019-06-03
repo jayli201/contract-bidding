@@ -1,47 +1,32 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./firebase.js";
-import Signup from "./Signup";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
     super();
-    this.state = {
-      signIn: false
-    };
+    this.state = {};
   }
 
-  handleCompany = () => {
-    // firebase
-    //   .auth()
-    //   .currentUser.getIdTokenResult()
-    //   .then(idTokenResult => {
-    //     // Confirm the user is an Admin.
-    //     if (!!idTokenResult.claims.admin) {
-    //       // Show admin UI.
-    //       showAdminUI();
-    //     } else {
-    //       // Show regular user UI.
-    //       showRegularUI();
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    this.setState({
-      signIn: true
-    });
+  handleClick = () => {
+    this.props.history.push("/Signup");
+  };
+
+  logout = () => {
+    firebase.auth().signOut();
+    this.props.reset();
+    this.props.history.push("/");
   };
 
   render() {
     return (
       <div>
-        {/* handle routing to signup page */}
-        <button onClick={this.handleCompany}>sign up</button>
-        <Signup />
+        <button onClick={this.handleClick}>sign up</button>
+        <button onClick={this.logout}>log out</button>
       </div>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);
