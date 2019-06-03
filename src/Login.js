@@ -1,34 +1,46 @@
 import React, { Component } from "react";
 import "./App.css";
-import firebase from "./firebase.js"
-
-var provider = new firebase.auth.GoogleAuthProvider();
+import firebase from "./firebase.js";
+import Signup from "./Signup";
 
 class Login extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      signIn: false
+    };
   }
 
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+  handleCompany = () => {
+    // firebase
+    //   .auth()
+    //   .currentUser.getIdTokenResult()
+    //   .then(idTokenResult => {
+    //     // Confirm the user is an Admin.
+    //     if (!!idTokenResult.claims.admin) {
+    //       // Show admin UI.
+    //       showAdminUI();
+    //     } else {
+    //       // Show regular user UI.
+    //       showRegularUI();
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    this.setState({
+      signIn: true
+    });
+  };
 
   render() {
-    return;
+    return (
+      <div>
+        {/* handle routing to signup page */}
+        <button onClick={this.handleCompany}>sign up</button>
+        <Signup />
+      </div>
+    );
   }
 }
 
