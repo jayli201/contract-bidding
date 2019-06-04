@@ -3,7 +3,7 @@ import filepic from "./filepic.svg";
 import CustomUploadButton from "react-firebase-file-uploader/lib/CustomUploadButton";
 import FileUploader from "react-firebase-file-uploader";
 import firebase from "firebase";
-import { Progress } from "antd";
+import { Progress, Button } from "antd";
 import "./Challenge.css";
 
 class Challenge extends Component {

@@ -9,7 +9,7 @@ import SignupA from "./Signup/SignupA.js";
 import SignupS from "./Signup/SignupS.js";
 import ComContractSubmit from "./Company/ComContractSubmit.js";
 import ViewContracts from "./Admin/ViewContracts.js";
-// import Challenge from "./Admin/Challenge.js";
+import Challenge from "./Admin/Challenge.js";
 
 export default class Routes extends React.Component {
   render() {
@@ -25,7 +25,7 @@ export default class Routes extends React.Component {
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/contract" component={ComContractSubmit} />
           <Route exact path="/approve" component={ViewContracts} />
-          {/* <Route exact path="/subchallenge" component={Challenge} /> */}
+          <Route exact path="/subchallenge" component={Challenge} />
         </Switch>
       </main>
     );
