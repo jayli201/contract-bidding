@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import { Button } from "antd";
+import NavbarAd from "./NavbarAd.js";
 
 class Admin extends React.Component {
   logout = () => {
@@ -13,6 +14,7 @@ class Admin extends React.Component {
   render() {
     return (
       <main>
+        <NavbarAd />
         <header>I'm an admin!</header>
         <Button onClick={this.logout}>log out</Button>
       </main>

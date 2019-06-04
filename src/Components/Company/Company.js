@@ -3,6 +3,7 @@ import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import ComContractSubmit from "./ComContractSubmit.js";
 import { Button } from "antd";
+import NavbarCo from "./NavbarCo.js";
 
 class Company extends React.Component {
   logout = () => {
@@ -14,8 +15,8 @@ class Company extends React.Component {
   render() {
     return (
       <main>
+        <NavbarCo />
         <header>I'm a company!</header>
-        <ComContractSubmit />
         <Button onClick={this.logout}>log out</Button>
       </main>
     );

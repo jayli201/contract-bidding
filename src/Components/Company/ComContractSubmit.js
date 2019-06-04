@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "../firebase.js";
-import ViewContracts from "./ViewContracts.js";
+import NavbarCo from "./NavbarCo";
 
 export default class ComContractSubmit extends React.Component {
   constructor(props) {
@@ -32,6 +32,7 @@ export default class ComContractSubmit extends React.Component {
   render() {
     return (
       <div>
+        <NavbarCo />
         <form onSubmit={this.handleSubmit}>
           <h2>Enter Contract Title: </h2>
           <input type="text" id="name" />
@@ -44,7 +45,6 @@ export default class ComContractSubmit extends React.Component {
             Submit
           </button>
         </form>
-        <ViewContracts />
       </div>
     );
   }

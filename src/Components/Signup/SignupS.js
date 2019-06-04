@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
+import { Button, Form, Input } from "antd";
 
 class SignupS extends Component {
   constructor() {
@@ -70,10 +71,18 @@ class SignupS extends Component {
   render() {
     return (
       <div>
-        <input onChange={this.handleChange} value={this.state.email} />
-        <input onChange={this.handleChangep} value={this.state.password} />
+        <Input
+          style={{ width: 280 }}
+          onChange={this.handleChange}
+          value={this.state.email}
+        />
+        <Input
+          style={{ width: 280 }}
+          onChange={this.handleChangep}
+          value={this.state.password}
+        />
         <div>
-          <button onClick={this.signupSt}>sign up as student</button>
+          <Button onClick={this.signupSt}>sign up as student</Button>
         </div>
       </div>
     );

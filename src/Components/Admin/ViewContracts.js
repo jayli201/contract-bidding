@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
+import NavbarAd from "./NavbarAd.js";
 
 class ViewContracts extends Component {
   constructor() {
@@ -29,7 +30,13 @@ class ViewContracts extends Component {
   }
 
   render() {
-    return <div>viewing contracts</div>;
+    return (
+      <div>
+        <NavbarAd />
+        viewing contracts
+        {/* {this.state.contracts.map(contract => {})} */}
+      </div>
+    );
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
+import { Button, Form, Input } from "antd";
 
 class SignupA extends Component {
   constructor() {
@@ -22,6 +23,7 @@ class SignupA extends Component {
       .catch(error => {
         alert(error.message);
       });
+    this.assignBool();
   }
 
   assignBool = () => {
@@ -69,10 +71,18 @@ class SignupA extends Component {
   render() {
     return (
       <div>
-        <input onChange={this.handleChange} value={this.state.email} />
-        <input onChange={this.handleChangep} value={this.state.password} />
+        <Input
+          style={{ width: 280 }}
+          onChange={this.handleChange}
+          value={this.state.email}
+        />
+        <Input
+          style={{ width: 280 }}
+          onChange={this.handleChangep}
+          value={this.state.password}
+        />
         <div>
-          <button onClick={this.signupAd}>sign up as admin</button>
+          <Button onClick={this.signupAd}>sign up as admin</Button>
         </div>
       </div>
     );
