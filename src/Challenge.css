@@ -1,0 +1,17 @@
+.dc{
+  
+}
+.submitPage{
+font-size: 200px, ;
+
+}
+.progress{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+}
+.button{
+    font-size: 40px;
+}
