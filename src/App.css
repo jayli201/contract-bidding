@@ -20,6 +20,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+body {
+  background-color: rgb(206, 206, 206);
+}
 
 .App-link {
   color: #61dafb;
@@ -33,3 +36,4 @@
     transform: rotate(360deg);
   }
 }
+@import "~antd/dist/antd.css";
