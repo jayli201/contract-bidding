@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Layout } from "antd";
 
 class SignupC extends Component {
   constructor() {
@@ -68,20 +68,31 @@ class SignupC extends Component {
   }
 
   render() {
+    const { Header } = Layout;
+
     return (
       <div>
+        <Header style={{ background: "white", textAlign: "left" }}>
+          Revtek
+        </Header>
         <Input
           style={{ width: 280 }}
           onChange={this.handleChange}
           value={this.state.email}
+          placeholder="enter email"
         />
+        <br />
+        <br />
         <Input
           style={{ width: 280 }}
           onChange={this.handleChangep}
           value={this.state.password}
+          placeholder="enter password"
         />
+        <br />
+        <br />
         <div>
-          <Button onClick={this.signupCo}>sign up as company</Button>
+          <Button onClick={this.signupCo}>Sign up as company</Button>
         </div>
       </div>
     );

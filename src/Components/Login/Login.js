@@ -115,12 +115,11 @@ class Login extends Component {
     return (
       <div class="login">
         <Col span={3} />
-        <Header
-          style={{ color: "blue", background: "white", textAlign: "left" }}
-        >
+        <Header style={{ background: "white", textAlign: "left" }}>
           Revtek
         </Header>
-
+        <h2>Welcome to Revtek</h2>
+        <br />
         <Form onSubmit={this.login}>
           <Input
             style={{ width: 280 }}
@@ -131,6 +130,7 @@ class Login extends Component {
             placeholder="enter email"
           />
           <br />
+          <br />
           <Input
             style={{ width: 280 }}
             value={this.state.password}
@@ -140,12 +140,22 @@ class Login extends Component {
             placeholder="enter password"
           />
           <br />
+          <br />
           <div class="loginbutton">
-            <Button onClick={this.login}> Login </Button>
+            <Button onClick={this.login}>Login</Button>
           </div>
+          <br />
+          <br />
+          <br />
+          <h3>New to Revtek?</h3>
+          <br />
           <div>
-            <Button onClick={this.signupa}> Sign up as admin</Button>
-            <Button onClick={this.signupc}> Sign up as company</Button>
+            <Button onClick={this.signupa}>Sign up as admin</Button>
+            <br />
+            <br />
+            <Button onClick={this.signupc}>Sign up as company</Button>
+            <br />
+            <br />
             <Button onClick={this.signups}>Sign up as student</Button>
           </div>
         </Form>
