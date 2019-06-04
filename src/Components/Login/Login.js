@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from 'react-router-dom';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 class Login extends Component{
     constructor(props){
@@ -50,6 +51,36 @@ class Login extends Component{
         });
         
     }
+
+    googleSignIn(){
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      //firebase.auth().currentUser.linkWithRedirect(provider);
+     firebase.auth().signInWithRedirect(provider);
+
+     firebase.auth().getRedirectResult().then(function(result) {
+       console.log(result)
+      if (result.credential) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        console.log(result.user)
+        console.log(token)
+        // ...
+      }
+      // The signed-in user info.
+      var user = result.user;
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+      
+    }
     //pushes path if signup button is pressed to lead user to signup page
     signup(){ 
       let path = `signup`;
@@ -57,9 +88,18 @@ class Login extends Component{
         
     }
 
+    handleSubmit (e) {
+      e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+   }
+
     render(){
       console.log(this.state.type)
-
+      
       //redirects user if current logged in user fits below criteria
       if(this.state.type[0] === true) { //if company
         return <Redirect to = '/company'/>
@@ -74,18 +114,36 @@ class Login extends Component{
       //normal rendering for login page
       return(
             <div class="login">
-                <form onSubmit={this.login}>
-                    <input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" name="email" placeholder="enter email"/> <br/>
-                    <input value={this.state.password} onChange={e => this.setState({password: e.target.value})} type="password" name="password" placeholder="enter password"/> <br/>
+                <Form onSubmit={this.login}>
+                    <Input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" name="email" placeholder="enter email"/> <br/>
+                    <Input value={this.state.password} onChange={e => this.setState({password: e.target.value})} type="password" name="password" placeholder="enter password"/> <br/>
                     <div class="loginbutton">
-                        <button onClick={this.login}> Login </button>
-                        <button onClick={this.signup}> Sign up </button>
+                        <Button onClick={this.login}> Login </Button>
+                        <Button onClick={this.googleSignIn.bind(this)}> Google Sign-In </Button>
+                        <Button onClick={this.signup}> Sign up </Button>
                     </div>
-                </form>
+                </Form> 
+               
             </div>
         )
     }
 }
 
+export default Login;
+
+/* handleSearchChange (e) {
+        this.setState({response: e.target.value});
+     };
+
+    render() {
+        return (
+        <div>
+        <form> 
+            <input type="text" id="input1" onChange={evt => this.handleSearchChange(evt)}/>
+           {/*  <button onClick={evt => this.getAuthor(evt)}>Search</button> */
+           
+       /*  </form>
+        <button onClick={this.getAuthor.bind(this)}>Search</button>  */
+
 //uses withRouter for changing urls if signup page is clicked
-export default withRouter(Login);
+//</div>export default withRouter(Login)
