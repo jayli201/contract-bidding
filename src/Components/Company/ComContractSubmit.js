@@ -1,6 +1,7 @@
 import React from "react";
 import firebase from "../firebase.js";
 import NavbarCo from "./NavbarCo";
+import { Form, Input, Button } from "antd";
 
 export default class ComContractSubmit extends React.Component {
   constructor(props) {
@@ -33,18 +34,23 @@ export default class ComContractSubmit extends React.Component {
     return (
       <div>
         <NavbarCo />
-        <form onSubmit={this.handleSubmit}>
-          <h2>Enter Contract Title: </h2>
-          <input type="text" id="name" />
+        <div className="all">
+          <h1>New Contract Submit Form</h1>
+          <h2>Enter Name: </h2>
+          <Input onChange={this.handleNameChange} value={this.state.codename} />
           <h2>Enter Company Name: </h2>
-          <input type="text" id="company" />
+          <Input
+            onChange={this.handleCompanyChange}
+            value={this.state.codecompany}
+          />
           <h2>Enter Contract Details: </h2>
-          <input type="text" id="details" />
+          <Input
+            onChange={this.handleDetailChange}
+            value={this.state.codedetails}
+          />
           <h2>Press Submit When Finished </h2>
-          <button type="button" onClick={this.handleChange}>
-            Submit
-          </button>
-        </form>
+          <Button onClick={this.handleSubmit}> Submit </Button>
+        </div>
       </div>
     );
   }

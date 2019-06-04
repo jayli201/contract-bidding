@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
-import { Button, Form, Input } from "antd";
+import { Row, Col, Button, Form, Input, Layout } from "antd";
 
 class Login extends Component {
   constructor(props) {
@@ -109,9 +109,18 @@ class Login extends Component {
       return <Redirect to="/student" />;
     }
 
+    const { Header } = Layout;
+
     //normal rendering for login page
     return (
       <div class="login">
+        <Col span={3} />
+        <Header
+          style={{ color: "blue", background: "white", textAlign: "left" }}
+        >
+          Revtek
+        </Header>
+
         <Form onSubmit={this.login}>
           <Input
             style={{ width: 280 }}
