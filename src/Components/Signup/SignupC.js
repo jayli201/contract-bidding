@@ -32,7 +32,6 @@ class SignupC extends Component {
         if (user) {
           console.log(user.uid);
           const usersRef = firebase.database().ref("users/" + user.uid);
-
           usersRef.on("value", snapshot => {
             if (snapshot.exists()) {
               console.log("exists");

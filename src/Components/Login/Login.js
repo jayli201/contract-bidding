@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
+import { Button, Form, Input } from "antd";
 
 class Login extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Login extends Component {
       email: "",
       password: "",
       type: [],
+      admin: false,
       company: false,
       student: false
     };
@@ -56,7 +58,7 @@ class Login extends Component {
             //sets state to equal true/false array
             if (this.state.type[0].admin === true) {
               //if company
-              this.setState({ company: true });
+              this.setState({ admin: true });
             } else if (this.state.type[0].company === true) {
               //if admin
               this.setState({ company: true });
@@ -88,11 +90,13 @@ class Login extends Component {
 
   render() {
     console.log(this.state.type);
-
     console.log(this.state.type[0]);
-
-    //redirects user if current logged in user fits below criteria
-    if (this.state.company === true) {
+    if (this.state.admin === true) {
+      this.setState({
+        admin: false
+      });
+      return <Redirect to="/admin" />;
+    } else if (this.state.company === true) {
       //if company
       this.setState({
         company: false
@@ -108,8 +112,9 @@ class Login extends Component {
     //normal rendering for login page
     return (
       <div class="login">
-        <form onSubmit={this.login}>
-          <input
+        <Form onSubmit={this.login}>
+          <Input
+            style={{ width: 280 }}
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
             type="email"
@@ -117,7 +122,8 @@ class Login extends Component {
             placeholder="enter email"
           />
           <br />
-          <input
+          <Input
+            style={{ width: 280 }}
             value={this.state.password}
             onChange={e => this.setState({ password: e.target.value })}
             type="password"
@@ -126,14 +132,14 @@ class Login extends Component {
           />
           <br />
           <div class="loginbutton">
-            <button onClick={this.login}> Login </button>
+            <Button onClick={this.login}> Login </Button>
           </div>
           <div>
-            <button onClick={this.signupa}> Sign up as admin</button>
-            <button onClick={this.signupc}> Sign up as company</button>
-            <button onClick={this.signups}>Sign up as student</button>
+            <Button onClick={this.signupa}> Sign up as admin</Button>
+            <Button onClick={this.signupc}> Sign up as company</Button>
+            <Button onClick={this.signups}>Sign up as student</Button>
           </div>
-        </form>
+        </Form>
       </div>
     );
   }

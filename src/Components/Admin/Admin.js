@@ -3,7 +3,7 @@ import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import { Button } from "antd";
 
-class Student extends React.Component {
+class Admin extends React.Component {
   logout = () => {
     firebase.auth().signOut();
     console.log(firebase.auth().currentUser);
@@ -13,11 +13,11 @@ class Student extends React.Component {
   render() {
     return (
       <main>
-        <header>I'm a student!</header>
+        <header>I'm an admin!</header>
         <Button onClick={this.logout}>log out</Button>
       </main>
     );
   }
 }
 
-export default withRouter(Student);
+export default withRouter(Admin);

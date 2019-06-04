@@ -22,7 +22,6 @@ class SignupA extends Component {
       .catch(error => {
         alert(error.message);
       });
-    this.assignBool();
   }
 
   assignBool = () => {
