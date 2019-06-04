@@ -44,7 +44,15 @@ class SignupS extends Component {
                 company: false,
                 student: true
               };
+              const studentInfo = {
+                photoID : "",
+                name : "",
+                skillLevel : "",
+                skills : [],
+                phone : "",
+              };
               usersRef.push(bools);
+              usersRef.push(studentInfo);
             }
           });
         }

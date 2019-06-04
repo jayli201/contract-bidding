@@ -11,7 +11,7 @@ class NavbarSt extends Component {
             <Link to="/marketplace">Marketplace</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/profile">Profile</Link>
+            <Link to="/studentProfile">Profile</Link>
           </Menu.Item>
           <Menu.Item>
             <Link to="/challenge">Daily challenge</Link>
