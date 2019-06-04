@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import { Row, Col, Button, Form, Input, Layout } from "antd";
-
+import { green } from '@ant-design/colors';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -116,7 +116,7 @@ class Login extends Component {
       <div class="login">
         <Col span={3} />
         <Header
-          style={{ color: "blue", background: "white", textAlign: "left" }}
+          style={{ color: "white", background: "green", textAlign: "center" }}
         >
           Revtek
         </Header>

@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "../firebase.js";
 import NavbarCo from "./NavbarCo";
 import { Form, Input, Button } from "antd";
+import './ComContractSubmit.css';
 
 export default class ComContractSubmit extends React.Component {
   constructor(props) {
