@@ -142,7 +142,9 @@ class Login extends Component {
           <br />
           <br />
           <div class="loginbutton">
-            <Button onClick={this.login}>Login</Button>
+            <Button onClick={this.login} type="primary">
+              Login
+            </Button>
           </div>
           <br />
           <br />

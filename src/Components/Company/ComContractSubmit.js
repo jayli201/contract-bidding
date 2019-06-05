@@ -51,6 +51,7 @@ export default class ComContractSubmit extends React.Component {
 
   render() {
     const { Header, Footer } = Layout;
+    const { TextArea } = Input;
 
     return (
       <div className="all">
@@ -63,9 +64,9 @@ export default class ComContractSubmit extends React.Component {
         <Row style={{ textAlign: "left" }}>
           <Col span={3} />
           <Col span={9}>
-            <h1 style={{ textAlign: "left" }}>New Contract Submit Form</h1>
+            <h2 style={{ textAlign: "left" }}>Submit a new contract:</h2>
             <br />
-            <h2 style={{ textAlign: "left" }}>Enter title of contract: </h2>
+            <h3 style={{ textAlign: "left" }}>Enter title of contract: </h3>
             <Input
               style={{ textAlign: "left" }}
               onChange={this.handleNameChange}
@@ -74,7 +75,7 @@ export default class ComContractSubmit extends React.Component {
             />
             <br />
             <br />
-            <h2 style={{ textAlign: "left" }}>Enter company name: </h2>
+            <h3 style={{ textAlign: "left" }}>Enter company name: </h3>
             <Input
               style={{ textAlign: "left" }}
               onChange={this.handleCompanyChange}
@@ -83,8 +84,9 @@ export default class ComContractSubmit extends React.Component {
             />
             <br />
             <br />
-            <h2 style={{ textAlign: "left" }}>Enter contract details: </h2>
-            <Input
+            <h3 style={{ textAlign: "left" }}>Enter contract details: </h3>
+            <TextArea
+              rows={5}
               onChange={this.handleDetailChange}
               value={this.state.codedetails}
               placeholder="details"
@@ -92,7 +94,9 @@ export default class ComContractSubmit extends React.Component {
             <br />
             <br />
             <br />
-            <Button onClick={this.handleSubmit}> Submit </Button>
+            <Button onClick={this.handleSubmit} type="primary">
+              Submit
+            </Button>
           </Col>
         </Row>
       </div>

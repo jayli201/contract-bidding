@@ -22,7 +22,9 @@ class Company extends React.Component {
         </Header>
         <NavbarCo />
         <header>I'm a company!</header>
-        <Button onClick={this.logout}>log out</Button>
+        <Button onClick={this.logout} type="primary">
+          Log out
+        </Button>
       </main>
     );
   }

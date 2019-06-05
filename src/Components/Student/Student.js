@@ -22,7 +22,9 @@ class Student extends React.Component {
         </Header>
         <NavbarSt />
         <header>I'm a student!</header>
-        <Button onClick={this.logout}>log out</Button>
+        <Button onClick={this.logout} type="primary">
+          Log out
+        </Button>
       </main>
     );
   }

@@ -21,7 +21,9 @@ class Admin extends React.Component {
         </Header>
         <NavbarAd />
         <header>I'm an admin!</header>
-        <Button onClick={this.logout}>log out</Button>
+        <Button onClick={this.logout} type="primary">
+          Log out
+        </Button>
       </main>
     );
   }

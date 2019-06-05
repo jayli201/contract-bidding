@@ -3,7 +3,8 @@ import filepic from "./filepic.svg";
 import CustomUploadButton from "react-firebase-file-uploader/lib/CustomUploadButton";
 import FileUploader from "react-firebase-file-uploader";
 import firebase from "firebase";
-import { Progress, Button } from "antd";
+import { Progress, Button, Layout } from "antd";
+import NavbarAd from "./NavbarAd.js";
 import "./Challenge.css";
 
 class Challenge extends Component {
@@ -44,8 +45,14 @@ class Challenge extends Component {
 
   render() {
     console.log(this.state);
+    const { Header } = Layout;
+
     return (
       <div className="dc">
+        <Header style={{ background: "white", textAlign: "left" }}>
+          Revtek
+        </Header>
+        <NavbarAd />
         <label className="submitPage"> Daily Challenge Submission </label>
         <p className="progress">
           <Progress type="circle" percent={this.state.percent} />
