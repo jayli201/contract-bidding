@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
-import { Row, Col, Button, Form, Input, Layout } from "antd";
+import { Row, Col, Button, Form, Input, Layout, Icon, Card } from "antd";
 
 class Login extends Component {
   constructor(props) {
@@ -45,7 +45,6 @@ class Login extends Component {
     //on the values of the database of users, get the matching user id to currently logged in user
     usersRef.on("value", snapshot => {
       let items = snapshot.val() || []; //get values of database entry
-
       const entries = Object.entries(items); //entries gets [uid, array of items]
 
       //finds if current user id matches any id, if so, appends
@@ -56,17 +55,18 @@ class Login extends Component {
           console.log(fieldArray);
           this.setState({ type: fieldArray }, () => {
             //sets state to equal true/false array
-            if (this.state.type[0].admin === true) {
+            if (this.state.type[0] === true) {
               //if company
               this.setState({ admin: true });
-            } else if (this.state.type[0].company === true) {
+            } else if (this.state.type[1] === true) {
               //if admin
               this.setState({ company: true });
-            } else if (this.state.type[0].student === true) {
+            } else if (this.state.type[3] === true) {
               //if student
               this.setState({ student: true });
             }
           });
+          console.log(this.state.type);
         }
       }
     });
@@ -90,7 +90,6 @@ class Login extends Component {
 
   render() {
     console.log(this.state.type);
-    console.log(this.state.type[0]);
     if (this.state.admin === true) {
       this.setState({
         admin: false
@@ -114,14 +113,12 @@ class Login extends Component {
     //normal rendering for login page
     return (
       <div class="login">
-        <Col span={3} />
-        <Header style={{ background: "white", textAlign: "left" }}>
-          Revtek
-        </Header>
+        <Header style={{ background: "white", textAlign: "left" }} />
         <h2>Welcome to Revtek</h2>
         <br />
         <Form onSubmit={this.login}>
           <Input
+            prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
             style={{ width: 280 }}
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
@@ -132,6 +129,7 @@ class Login extends Component {
           <br />
           <br />
           <Input
+            prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
             style={{ width: 280 }}
             value={this.state.password}
             onChange={e => this.setState({ password: e.target.value })}

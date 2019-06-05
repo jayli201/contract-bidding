@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
-import { Button, Form, Input, Layout } from "antd";
+import { Button, Form, Input, Layout, Icon } from "antd";
 import { Redirect, withRouter } from "react-router-dom";
 
 class SignupA extends Component {
@@ -21,41 +21,29 @@ class SignupA extends Component {
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .catch(error => {
-        alert(error.message);
+      .then(user => {
+        console.log(user.user);
+        const userRef = user.user;
+        //set data into user database
+        firebase
+          .database()
+          .ref("users/" + userRef.uid)
+          .set({
+            admin: true,
+            company: false,
+            student: false,
+            email: userRef.email
+          })
+          .then(success => {
+            // firebase.auth().signOut();
+            console.log(userRef);
+            this.redirect();
+          });
       });
-    this.assignBool();
   }
 
-  assignBool = () => {
-    firebase
-      .auth()
-      .onAuthStateChanged(user => {
-        if (user) {
-          console.log(user.uid);
-          const usersRef = firebase.database().ref("users/" + user.uid);
-
-          usersRef.on("value", snapshot => {
-            if (snapshot.exists()) {
-              console.log("exists");
-            } else {
-              const bools = {
-                email: user.email,
-                admin: true,
-                company: false,
-                student: false
-              };
-              usersRef.push(bools);
-            }
-          });
-        }
-        this.setState({
-          email: "",
-          password: ""
-        });
-        this.props.history.push("/");
-      })
-      .bind(this);
+  redirect = () => {
+    this.props.history.push("/admin");
   };
 
   handleChange(e) {
@@ -78,7 +66,10 @@ class SignupA extends Component {
         <Header style={{ background: "white", textAlign: "left" }}>
           Revtek
         </Header>
+        <h2>Register as a new admin</h2>
+        <br />
         <Input
+          prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
           style={{ width: 280 }}
           onChange={this.handleChange}
           value={this.state.email}
@@ -88,6 +79,7 @@ class SignupA extends Component {
         <br />
         <br />
         <Input
+          prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
           style={{ width: 280 }}
           onChange={this.handleChangep}
           value={this.state.password}
@@ -97,7 +89,9 @@ class SignupA extends Component {
         <br />
         <br />
         <div>
-          <Button onClick={this.signupAd}>Sign up as admin</Button>
+          <Button onClick={this.signupAd} type="primary">
+            Sign up as admin
+          </Button>
         </div>
       </div>
     );
