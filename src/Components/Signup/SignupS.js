@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Layout } from "antd";
+import { Redirect, withRouter } from "react-router-dom";
 
 class SignupS extends Component {
   constructor() {
@@ -60,6 +61,7 @@ class SignupS extends Component {
           email: "",
           password: ""
         });
+        this.props.history.push("/");
       })
       .bind(this);
   };
@@ -77,24 +79,37 @@ class SignupS extends Component {
   }
 
   render() {
+    const { Header } = Layout;
+
     return (
       <div>
+        <Header style={{ background: "white", textAlign: "left" }}>
+          Revtek
+        </Header>
         <Input
           style={{ width: 280 }}
           onChange={this.handleChange}
           value={this.state.email}
+          type="email"
+          placeholder="enter email"
         />
+        <br />
+        <br />
         <Input
           style={{ width: 280 }}
           onChange={this.handleChangep}
           value={this.state.password}
+          type="password"
+          placeholder="enter password"
         />
+        <br />
+        <br />
         <div>
-          <Button onClick={this.signupSt}>sign up as student</Button>
+          <Button onClick={this.signupSt}>Sign up as student</Button>
         </div>
       </div>
     );
   }
 }
 
-export default SignupS;
+export default withRouter(SignupS);

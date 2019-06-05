@@ -3,6 +3,7 @@ import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import { Button } from "antd";
 import NavbarSt from "./NavbarSt";
+import { Layout } from "antd";
 
 class Student extends React.Component {
   logout = () => {
@@ -12,11 +13,18 @@ class Student extends React.Component {
   };
 
   render() {
+    const { Header } = Layout;
+
     return (
       <main>
+        <Header style={{ background: "white", textAlign: "center" }}>
+          Revtek
+        </Header>
         <NavbarSt />
         <header>I'm a student!</header>
-        <Button onClick={this.logout}>log out</Button>
+        <Button onClick={this.logout} type="primary">
+          Log out
+        </Button>
       </main>
     );
   }

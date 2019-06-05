@@ -1,20 +1,44 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menu } from "antd";
 
-class NavbarCo extends Component {
+class NavbarAd extends Component {
   render() {
     return (
       <div>
         <Menu mode="horizontal">
           <Menu.Item>
-            <Link to="/approve">Approve contracts</Link>
+            <NavLink
+              to="/approve"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Edit contracts
+            </NavLink>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/subchallenge">Submit challenge</Link>
+            <NavLink
+              to="/subchallenge"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Daily challenge
+            </NavLink>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/allstudents">Student profiles</Link>
+            <NavLink
+              to="/allstudents"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Profiles
+            </NavLink>
           </Menu.Item>
         </Menu>
       </div>
@@ -22,4 +46,4 @@ class NavbarCo extends Component {
   }
 }
 
-export default NavbarCo;
+export default NavbarAd;

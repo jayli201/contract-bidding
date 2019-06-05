@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import { Row, Col, Button, Form, Input, Layout } from "antd";
-import { green } from '@ant-design/colors';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -114,14 +114,12 @@ class Login extends Component {
     //normal rendering for login page
     return (
       <div class="login">
-        <Col span={3} />
-        <Header
-          style={{ color: "white", background: "green", textAlign: "center" }}
-        >
+        <Header style={{ background: "white", textAlign: "center" }}>
           Revtek
         </Header>
-
-        <Form onSubmit={this.login}>
+        <h2 style={{ textAlign: "center"}}>Welcome to Revtek</h2>
+        <br />
+        <Form onSubmit={this.login} style={{ textAlign: "center"}}>
           <Input
             style={{ width: 280 }}
             value={this.state.email}
@@ -130,6 +128,7 @@ class Login extends Component {
             name="email"
             placeholder="enter email"
           />
+          <br />
           <br />
           <Input
             style={{ width: 280 }}
@@ -140,12 +139,24 @@ class Login extends Component {
             placeholder="enter password"
           />
           <br />
+          <br />
           <div class="loginbutton">
-            <Button onClick={this.login}> Login </Button>
+            <Button onClick={this.login} type="primary">
+              Login
+            </Button>
           </div>
+          <br />
+          <br />
+          <br />
+          <h3>New to Revtek?</h3>
+          <br />
           <div>
-            <Button onClick={this.signupa}> Sign up as admin</Button>
-            <Button onClick={this.signupc}> Sign up as company</Button>
+            <Button onClick={this.signupa}>Sign up as admin</Button>
+            <br />
+            <br />
+            <Button onClick={this.signupc}>Sign up as company</Button>
+            <br />
+            <br />
             <Button onClick={this.signups}>Sign up as student</Button>
           </div>
         </Form>

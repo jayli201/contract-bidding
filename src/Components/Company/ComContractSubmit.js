@@ -1,57 +1,106 @@
 import React from "react";
-import firebase from "../firebase.js";
+import firebase from "firebase";
+import { Row, Col, Button, Input, Layout, Form} from "antd";
 import NavbarCo from "./NavbarCo";
-import { Form, Input, Button } from "antd";
 import './ComContractSubmit.css';
+
 
 export default class ComContractSubmit extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       codename: "",
       codecompany: "",
       codedetails: ""
     };
-    this.handleChange = this.handleChange.bind(this);
+    let classes = null;
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleCompanyChange = this.handleCompanyChange.bind(this);
+    this.handleDetailChange = this.handleDetailChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange() {
-    let nameinput = document.getElementById("name").value;
-    let companyinput = document.getElementById("company").value;
-    let detailsinput = document.getElementById("details").value;
-    console.log(nameinput);
-    console.log(companyinput);
-    console.log(detailsinput);
-
+  handleSubmit() {
     var contractRef = firebase.database().ref("Contracts");
     var userPosted = contractRef.push({
-      name: nameinput,
-      company: companyinput,
-      details: detailsinput
+      name: this.state.codename,
+      company: this.state.codecompany,
+      details: this.state.codedetails
     });
   }
 
+  handleNameChange(event) {
+    this.setState({
+      codename: event.target.value
+    });
+    console.log(this.state.codename);
+  }
+
+  handleCompanyChange(event) {
+    this.setState({
+      codecompany: event.target.value
+    });
+    console.log(this.state.codecompany);
+  }
+
+  handleDetailChange(event) {
+    this.setState({
+      codedetails: event.target.value
+    });
+    console.log(this.state.codedetails);
+  }
+
   render() {
+    const { Header, Footer } = Layout;
+    const { TextArea } = Input;
+
     return (
-      <div>
+      <div className="all">
+        <Header style={{ background: "white", textAlign: "left" }}>
+          Revtek
+        </Header>
         <NavbarCo />
-        <div className="all">
-          <h1>New Contract Submit Form</h1>
-          <h2>Enter Name: </h2>
-          <Input onChange={this.handleNameChange} value={this.state.codename} />
-          <h2>Enter Company Name: </h2>
-          <Input
-            onChange={this.handleCompanyChange}
-            value={this.state.codecompany}
-          />
-          <h2>Enter Contract Details: </h2>
-          <Input
-            onChange={this.handleDetailChange}
-            value={this.state.codedetails}
-          />
-          <h2>Press Submit When Finished </h2>
-          <Button onClick={this.handleSubmit}> Submit </Button>
-        </div>
+        <br />
+        <br />
+        <Row style={{ textAlign: "left" }}>
+          <Col span={3} />
+          <Col span={9}>
+            <h2 style={{ textAlign: "left" }}>Submit a new contract:</h2>
+            <br />
+            <h3 style={{ textAlign: "left" }}>Enter title of contract: </h3>
+            <Input
+              style={{ textAlign: "left" }}
+              onChange={this.handleNameChange}
+              value={this.state.codename}
+              placeholder="title"
+            />
+            <br />
+            <br />
+            <h3 style={{ textAlign: "left" }}>Enter company name: </h3>
+            <Input
+              style={{ textAlign: "left" }}
+              onChange={this.handleCompanyChange}
+              value={this.state.codecompany}
+              placeholder="company"
+            />
+            <br />
+            <br />
+            <h3 style={{ textAlign: "left" }}>Enter contract details: </h3>
+            <TextArea
+              rows={5}
+              onChange={this.handleDetailChange}
+              value={this.state.codedetails}
+              placeholder="details"
+            />
+            <br />
+            <br />
+            <br />
+            <Button onClick={this.handleSubmit} type="primary">
+              Submit
+            </Button>
+          </Col>
+        </Row>
       </div>
     );
   }

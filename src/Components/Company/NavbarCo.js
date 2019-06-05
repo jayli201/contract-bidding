@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menu } from "antd";
 
 class NavbarCo extends Component {
@@ -8,13 +8,37 @@ class NavbarCo extends Component {
       <div>
         <Menu mode="horizontal">
           <Menu.Item>
-            <Link to="/marketplace">Marketplace</Link>
+            <NavLink
+              to="/marketplace"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Marketplace
+            </NavLink>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/contract">Submit contracts</Link>
+            <NavLink
+              to="/contract"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Submit contracts
+            </NavLink>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/students">Student profiles</Link>
+            <NavLink
+              to="/students"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Student profiles
+            </NavLink>
           </Menu.Item>
         </Menu>
       </div>
