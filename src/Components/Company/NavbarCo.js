@@ -31,6 +31,14 @@ class NavbarCo extends Component {
           </Menu.Item>
           <Menu.Item>
             <NavLink
+              to="/task"
+              activeStyle={{ color: "green", fontWeight: "bold" }}
+            >
+              Task manager
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
               to="/students"
               activeStyle={{
                 color: "green",

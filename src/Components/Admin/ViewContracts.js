@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import NavbarAd from "./NavbarAd.js";
-import { Modal, Button, Row, Col, Layout, Input } from "antd";
+import { Modal, Button, Row, Col, Layout, Input, Icon } from "antd";
 
 class ViewContracts extends Component {
   constructor() {
@@ -97,6 +97,7 @@ class ViewContracts extends Component {
                   <p>Details: {contract.contract}</p>
                   <div>
                     <Button
+                      icon="check-circle"
                       onClick={() => {
                         const id = contract.id;
                         const contractRef = firebase
@@ -110,6 +111,7 @@ class ViewContracts extends Component {
                       Approve
                     </Button>
                     <Button
+                      icon="edit"
                       type="primary"
                       onClick={() => {
                         const id = contract.id;
@@ -122,6 +124,7 @@ class ViewContracts extends Component {
                       Edit
                     </Button>
                     <Modal
+                      mask={false}
                       title="Edit contract"
                       visible={this.state.visible}
                       onOk={this.handleOk}
@@ -180,6 +183,7 @@ class ViewContracts extends Component {
                       />
                     </Modal>
                     <Button
+                      icon="delete"
                       onClick={() => {
                         const id = contract.id;
                         const contractRef = firebase

@@ -20,17 +20,6 @@ class NavbarSt extends Component {
           </Menu.Item>
           <Menu.Item>
             <NavLink
-              to="/profile"
-              activeStyle={{
-                color: "green",
-                fontWeight: "bold"
-              }}
-            >
-              Profile
-            </NavLink>
-          </Menu.Item>
-          <Menu.Item>
-            <NavLink
               to="/challenge"
               activeStyle={{
                 color: "green",
@@ -38,6 +27,25 @@ class NavbarSt extends Component {
               }}
             >
               Daily challenge
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/task"
+              activeStyle={{ color: "green", fontWeight: "bold" }}
+            >
+              Task manager
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/profile"
+              activeStyle={{
+                color: "green",
+                fontWeight: "bold"
+              }}
+            >
+              Profile
             </NavLink>
           </Menu.Item>
         </Menu>
