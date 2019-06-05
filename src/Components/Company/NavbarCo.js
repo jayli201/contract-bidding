@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { Menu } from "antd";
+import { NavLink, withRouter } from "react-router-dom";
+import { Menu, Button } from "antd";
+import firebase from "../firebase.js";
 
 class NavbarCo extends Component {
+  logout = () => {
+    firebase.auth().signOut();
+    console.log(firebase.auth().currentUser);
+    this.props.history.push("/");
+  };
+
   render() {
     return (
       <div>
@@ -48,10 +55,13 @@ class NavbarCo extends Component {
               Student profiles
             </NavLink>
           </Menu.Item>
+          <Button onClick={this.logout} type="primary">
+            Log out
+          </Button>
         </Menu>
       </div>
     );
   }
 }
 
-export default NavbarCo;
+export default withRouter(NavbarCo);

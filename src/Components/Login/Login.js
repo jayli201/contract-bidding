@@ -94,18 +94,18 @@ class Login extends Component {
       this.setState({
         admin: false
       });
-      return <Redirect to="/admin" />;
+      this.props.history.push("/approve");
     } else if (this.state.company === true) {
       //if company
       this.setState({
         company: false
       });
-      return <Redirect to="/company" />;
+      this.props.history.push("/contract");
     } else if (this.state.student === true) {
       this.setState({
         student: false
       });
-      return <Redirect to="/student" />;
+      this.props.history.push("/marketplace");
     }
 
     const { Header } = Layout;

@@ -1,6 +1,7 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
+import { Layout, Button } from "antd";
 
 //Profile page for students in the RevTek Dashboard
 //Displays individual's photo, name, skill level, skills, and contact info
@@ -122,8 +123,13 @@ class StudentProfile extends React.Component {
     console.log(this.state.userID);
     console.log(this.state.key);
     console.log(this.state.info);
+
+    const { Header } = Layout;
     return (
       <div>
+        <Header style={{ background: "white", textAlign: "left" }}>
+          Revtek
+        </Header>
         <NavbarSt />
         {this.printEntries()}
         {/* <ul key={this.state.info.name}>Photo : {this.state.info.photo}, 
@@ -131,14 +137,13 @@ class StudentProfile extends React.Component {
             Skill Level: {this.state.info.skillLevel}, 
             Phone Number: {this.state.info.phone}</ul> */}
 
-        <button onClick={this.updatePhoto.bind(this)}> Update Photo </button>
-        <button onClick={this.updateName.bind(this)}> Update Name </button>
-        <button onClick={this.updateSkill.bind(this)}> Update Skills </button>
-        <button onClick={this.updateskillLevel.bind(this)}>
-          {" "}
-          Update Skill Level{" "}
-        </button>
-        <button onClick={this.updatePhone.bind(this)}> Update Phone </button>
+        <Button onClick={this.updatePhoto.bind(this)}> Update Photo </Button>
+        <Button onClick={this.updateName.bind(this)}> Update Name </Button>
+        <Button onClick={this.updateSkill.bind(this)}> Update Skills </Button>
+        <Button onClick={this.updateskillLevel.bind(this)}>
+          Update Skill Level
+        </Button>
+        <Button onClick={this.updatePhone.bind(this)}> Update Phone </Button>
       </div>
     );
   }
