@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
-import { Row, Col, Button, Form, Input, Layout, Icon, Card } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Input,
+  Layout,
+  Icon,
+  Card,
+  PageHeader
+} from "antd";
 
 class Login extends Component {
   constructor(props) {
@@ -113,52 +123,75 @@ class Login extends Component {
     //normal rendering for login page
     return (
       <div class="login">
-        <Header style={{ background: "white", textAlign: "left" }} />
-        <h2>Welcome to Revtek</h2>
-        <br />
-        <Form onSubmit={this.login}>
-          <Input
-            prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-            style={{ width: 280 }}
-            value={this.state.email}
-            onChange={e => this.setState({ email: e.target.value })}
-            type="email"
-            name="email"
-            placeholder="enter email"
-          />
-          <br />
-          <br />
-          <Input
-            prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-            style={{ width: 280 }}
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-            type="password"
-            name="password"
-            placeholder="enter password"
-          />
-          <br />
-          <br />
-          <div class="loginbutton">
-            <Button onClick={this.login} type="primary">
-              Login
-            </Button>
-          </div>
-          <br />
-          <br />
-          <br />
-          <h3>New to Revtek?</h3>
-          <br />
-          <div>
-            <Button onClick={this.signupa}>Sign up as admin</Button>
+        <Row>
+          <Col span={2} />
+          <Col span={20}>
+            <PageHeader style={{ background: "#d9f7be", textAlign: "left" }}>
+              <img src="images/logo.png" width="175" height="50" />
+            </PageHeader>
+          </Col>
+          <Col span={2} />
+        </Row>
+        <Row>
+          <Col span={2} />
+          <Col span={20}>
             <br />
             <br />
-            <Button onClick={this.signupc}>Sign up as company</Button>
+            <h1>Login</h1>
             <br />
+            <h3>Welcome back! Login to access your dashboard.</h3>
             <br />
-            <Button onClick={this.signups}>Sign up as student</Button>
-          </div>
-        </Form>
+            <Form onSubmit={this.login}>
+              <Input
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                style={{ width: 280 }}
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value })}
+                type="email"
+                name="email"
+                placeholder="enter email"
+              />
+              <br />
+              <br />
+              <Input
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                style={{ width: 280 }}
+                value={this.state.password}
+                onChange={e => this.setState({ password: e.target.value })}
+                type="password"
+                name="password"
+                placeholder="enter password"
+              />
+              <br />
+              <br />
+              <div class="loginbutton">
+                <Button onClick={this.login} type="primary">
+                  Login
+                </Button>
+              </div>
+              <br />
+              <br />
+              <br />
+              <h3>New to Revtek?</h3>
+              <br />
+              <div>
+                <Button onClick={this.signupa}>Sign up as admin</Button>
+                <br />
+                <br />
+                <Button onClick={this.signupc}>Sign up as company</Button>
+                <br />
+                <br />
+                <Button onClick={this.signups}>Sign up as student</Button>
+                <br />
+              </div>
+            </Form>
+          </Col>
+          <Col span={2} />
+        </Row>
       </div>
     );
   }
