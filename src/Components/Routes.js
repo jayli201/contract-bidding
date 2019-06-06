@@ -4,6 +4,7 @@ import Login from "./Login/Login.js";
 import SignupC from "./Signup/SignupC.js";
 import SignupA from "./Signup/SignupA.js";
 import SignupS from "./Signup/SignupS.js";
+import Signup from "./Signup/Signup.js";
 import ComContractSubmit from "./Company/ComContractSubmit.js";
 import ViewContracts from "./Admin/ViewContracts.js";
 import Challenge from "./Admin/Challenge.js";
@@ -16,6 +17,7 @@ export default class Routes extends React.Component {
       <main>
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/signupa" component={SignupA} />
           <Route exact path="/signupc" component={SignupC} />
           <Route exact path="/signups" component={SignupS} />

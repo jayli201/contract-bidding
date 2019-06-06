@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import firebase from "../firebase.js";
 import { Redirect, withRouter } from "react-router-dom";
 import {
@@ -10,7 +11,8 @@ import {
   Layout,
   Icon,
   Card,
-  PageHeader
+  PageHeader,
+  Menu
 } from "antd";
 
 class Login extends Component {
@@ -20,6 +22,7 @@ class Login extends Component {
     this.signupa = this.signupa.bind(this);
     this.signupc = this.signupc.bind(this);
     this.signups = this.signups.bind(this);
+    this.signup = this.signup.bind(this);
     this.state = {
       email: "",
       password: "",
@@ -40,46 +43,51 @@ class Login extends Component {
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch(error => {
         alert(error.message);
-      });
+        this.setState({
+          email: "",
+          password: ""
+        });
+      })
+      .then(success => {
+        //pass email and password user enters in form
 
-    //pass email and password user enters in form
+        //gets database of users
+        const usersRef = firebase.database().ref("users");
 
-    //gets database of users
-    const usersRef = firebase.database().ref("users");
+        //gets user currently logged in
+        const user = firebase.auth().currentUser
+          ? firebase.auth().currentUser
+          : "Reload the Page";
 
-    //gets user currently logged in
-    const user = firebase.auth().currentUser
-      ? firebase.auth().currentUser
-      : "Reload the Page";
+        //on the values of the database of users, get the matching user id to currently logged in user
+        usersRef.on("value", snapshot => {
+          let items = snapshot.val() || []; //get values of database entry
+          const entries = Object.entries(items); //entries gets [uid, array of items]
 
-    //on the values of the database of users, get the matching user id to currently logged in user
-    usersRef.on("value", snapshot => {
-      let items = snapshot.val() || []; //get values of database entry
-      const entries = Object.entries(items); //entries gets [uid, array of items]
-
-      //finds if current user id matches any id, if so, appends
-      //true/false array of type (admin, student, company)
-      for (const [id, fields] of entries) {
-        if (id === user.uid) {
-          const fieldArray = Object.values(fields);
-          console.log(fieldArray);
-          this.setState({ type: fieldArray }, () => {
-            //sets state to equal true/false array
-            if (this.state.type[0] === true) {
-              //if company
-              this.setState({ admin: true });
-            } else if (this.state.type[1] === true) {
-              //if admin
-              this.setState({ company: true });
-            } else if (this.state.type[3] === true) {
-              //if student
-              this.setState({ student: true });
+          //finds if current user id matches any id, if so, appends
+          //true/false array of type (admin, student, company)
+          for (const [id, fields] of entries) {
+            if (id === user.uid) {
+              const fieldArray = Object.values(fields);
+              console.log(fieldArray);
+              this.setState({ type: fieldArray }, () => {
+                //sets state to equal true/false array
+                if (this.state.type[0] === true) {
+                  //if company
+                  this.setState({ admin: true });
+                } else if (this.state.type[1] === true) {
+                  //if admin
+                  this.setState({ company: true });
+                } else if (this.state.type[3] === true) {
+                  //if student
+                  this.setState({ student: true });
+                }
+              });
+              console.log(this.state.type);
             }
-          });
-          console.log(this.state.type);
-        }
-      }
-    });
+          }
+        });
+      });
   }
 
   //pushes path if signup button is pressed to lead user to signup page
@@ -95,6 +103,11 @@ class Login extends Component {
 
   signups() {
     let path = "signups";
+    this.props.history.push(path);
+  }
+
+  signup() {
+    let path = "signup";
     this.props.history.push(path);
   }
 
@@ -118,19 +131,55 @@ class Login extends Component {
       this.props.history.push("/marketplace");
     }
 
-    const { Header } = Layout;
+    const { Header, Sider } = Layout;
 
     //normal rendering for login page
     return (
       <div class="login">
         <Row>
-          <Col span={2} />
-          <Col span={20}>
-            <PageHeader style={{ background: "#d9f7be", textAlign: "left" }}>
+          <Col span={3} />
+          <Col span={15}>
+            <PageHeader
+              style={{
+                background: "white",
+                textAlign: "left"
+                // border: "solid",
+                // borderTopColor: "white",
+                // borderLeftColor: "white",
+                // borderRightColor: "white",
+                // borderBottomColor: "#389e0d",
+                // borderBottomWidth: 4
+              }}
+            >
               <img src="images/logo.png" width="175" height="50" />
             </PageHeader>
           </Col>
-          <Col span={2} />
+          <Col span={3}>
+            <PageHeader style={{ background: "white" }}>
+              <br />
+              <Menu>
+                <Menu.Item>
+                  <NavLink
+                    to="/signup"
+                    style={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Go to sign up
+                  </NavLink>
+                </Menu.Item>
+              </Menu>
+            </PageHeader>
+          </Col>
+          <Col span={3} />
+        </Row>
+        <Row>
+          <Col span={3} />
+          <Col span={18}>
+            <PageHeader style={{ background: "#389e0d" }} />
+          </Col>
+          <Col span={3} />
         </Row>
         <Row>
           <Col span={2} />
@@ -179,14 +228,15 @@ class Login extends Component {
               <h3>New to Revtek?</h3>
               <br />
               <div>
-                <Button onClick={this.signupa}>Sign up as admin</Button>
+                {/* <Button onClick={this.signupa}>Sign up as admin</Button>
                 <br />
                 <br />
                 <Button onClick={this.signupc}>Sign up as company</Button>
                 <br />
                 <br />
                 <Button onClick={this.signups}>Sign up as student</Button>
-                <br />
+                <br /> */}
+                <Button onClick={this.signup}>Sign up</Button>
               </div>
             </Form>
           </Col>

@@ -49,9 +49,6 @@ class Challenge extends Component {
 
     return (
       <div className="dc">
-        <Header style={{ background: "white", textAlign: "left" }}>
-          Revtek
-        </Header>
         <NavbarAd />
         <label className="submitPage"> Daily Challenge Submission </label>
         <p className="progress">

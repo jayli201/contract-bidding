@@ -127,9 +127,6 @@ class StudentProfile extends React.Component {
     const { Header } = Layout;
     return (
       <div>
-        <Header style={{ background: "white", textAlign: "left" }}>
-          Revtek
-        </Header>
         <NavbarSt />
         {this.printEntries()}
         {/* <ul key={this.state.info.name}>Photo : {this.state.info.photo}, 

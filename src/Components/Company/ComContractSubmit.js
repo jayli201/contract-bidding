@@ -6,11 +6,12 @@ import NavbarCo from "./NavbarCo";
 export default class ComContractSubmit extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       codename: "",
       codecompany: "",
-      codedetails: ""
+      codedetails: "",
+      loading: false,
+      iconLoading: false
     };
     let classes = null;
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -25,6 +26,15 @@ export default class ComContractSubmit extends React.Component {
       name: this.state.codename,
       company: this.state.codecompany,
       details: this.state.codedetails
+    });
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 500);
+    this.setState({
+      codename: "",
+      codecompany: "",
+      codedetails: ""
     });
   }
 
@@ -52,17 +62,15 @@ export default class ComContractSubmit extends React.Component {
   render() {
     const { Header, Footer } = Layout;
     const { TextArea } = Input;
+    const { confirmLoading } = this.state;
 
     return (
       <div className="all">
-        <Header style={{ background: "white", textAlign: "left" }}>
-          Revtek
-        </Header>
         <NavbarCo />
         <br />
         <br />
         <Row style={{ textAlign: "left" }}>
-          <Col span={3} />
+          <Col span={5} />
           <Col span={9}>
             <h2 style={{ textAlign: "left" }}>Submit a new contract:</h2>
             <br />
@@ -94,7 +102,11 @@ export default class ComContractSubmit extends React.Component {
             <br />
             <br />
             <br />
-            <Button onClick={this.handleSubmit} type="primary">
+            <Button
+              type="primary"
+              loading={this.state.loading}
+              onClick={this.handleSubmit}
+            >
               Submit
             </Button>
           </Col>

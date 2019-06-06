@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import NavbarAd from "./NavbarAd.js";
-import { Modal, Button, Row, Col, Layout, Input, Icon } from "antd";
+import { Modal, Button, Row, Col, Layout, Input, Icon, PageHeader } from "antd";
 
 class ViewContracts extends Component {
   constructor() {
@@ -78,13 +78,10 @@ class ViewContracts extends Component {
 
     return (
       <div>
-        <Header style={{ background: "white", textAlign: "left" }}>
-          Revtek
-        </Header>
         <NavbarAd />
         <Row>
-          <Col span={3} />
-          <Col span={18} style={{ textAlign: "left" }}>
+          <Col span={5} />
+          <Col span={16} style={{ textAlign: "left" }}>
             <br />
             <br />
             <h2>Pending contracts</h2>
@@ -141,7 +138,7 @@ class ViewContracts extends Component {
                             this.setState({ loading: true });
                             setTimeout(() => {
                               this.setState({ loading: false, visible: false });
-                            }, 1000);
+                            }, 250);
                             const contract = firebase
                               .database()
                               .ref("Contracts/" + this.state.editId);

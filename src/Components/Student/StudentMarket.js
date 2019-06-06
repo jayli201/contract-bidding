@@ -9,9 +9,6 @@ class StudentMarket extends React.Component {
     const { Header } = Layout;
     return (
       <div>
-        <Header style={{ background: "white", textAlign: "left" }}>
-          Revtek
-        </Header>
         <NavbarSt />
         student marketplace
       </div>
