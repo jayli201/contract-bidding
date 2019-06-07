@@ -89,8 +89,8 @@ class ViewContracts extends Component {
       <div>
         <NavbarAd />
         <Row>
-          <Col span={5} />
-          <Col span={16} style={{ textAlign: "left" }}>
+          <Col span={6} />
+          <Col span={12} style={{ textAlign: "left" }}>
             <br />
             <br />
             <h2>Pending contracts</h2>
@@ -98,7 +98,7 @@ class ViewContracts extends Component {
             {this.state.contracts.map(contract => {
               return (
                 <div>
-                  <p>Name: {contract.name}</p>
+                  <p style={{ fontWeight: "bold" }}>Name: {contract.name}</p>
                   <p>Company: {contract.company}</p>
                   <p>Details: {contract.contract}</p>
                   <div>
@@ -118,6 +118,7 @@ class ViewContracts extends Component {
                       Approve
                     </Button>
                     <Button
+                      style={{ marginLeft: 8 }}
                       icon="edit"
                       type="primary"
                       onClick={() => {
@@ -203,7 +204,7 @@ class ViewContracts extends Component {
                       okText="Yes"
                       cancelText="No"
                     >
-                      <Button icon="delete">Delete</Button>
+                      <Button style={{ marginLeft: 8 }} icon="delete" />
                     </Popconfirm>
                   </div>
                   <br />

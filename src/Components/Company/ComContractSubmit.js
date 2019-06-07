@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "firebase";
-import { Row, Col, Button, Input, Layout } from "antd";
+import { Row, Col, Button, Input, Layout, Divider } from "antd";
 import NavbarCo from "./NavbarCo";
 
 export default class ComContractSubmit extends React.Component {
@@ -62,7 +62,6 @@ export default class ComContractSubmit extends React.Component {
   render() {
     const { Header, Footer } = Layout;
     const { TextArea } = Input;
-    const { confirmLoading } = this.state;
 
     return (
       <div className="all">
@@ -70,11 +69,14 @@ export default class ComContractSubmit extends React.Component {
         <br />
         <br />
         <Row style={{ textAlign: "left" }}>
-          <Col span={5} />
-          <Col span={9}>
+          <Col span={6} />
+          <Col span={8}>
             <h2 style={{ textAlign: "left" }}>Submit a new contract:</h2>
-            <br />
-            <h3 style={{ textAlign: "left" }}>Enter title of contract: </h3>
+            <Row>
+              <Col span={24}>
+                <Divider orientation="left">Title</Divider>
+              </Col>
+            </Row>
             <Input
               style={{ textAlign: "left" }}
               onChange={this.handleNameChange}
@@ -83,7 +85,11 @@ export default class ComContractSubmit extends React.Component {
             />
             <br />
             <br />
-            <h3 style={{ textAlign: "left" }}>Enter company name: </h3>
+            <Row>
+              <Col span={24}>
+                <Divider orientation="left">Company</Divider>
+              </Col>
+            </Row>
             <Input
               style={{ textAlign: "left" }}
               onChange={this.handleCompanyChange}
@@ -92,7 +98,11 @@ export default class ComContractSubmit extends React.Component {
             />
             <br />
             <br />
-            <h3 style={{ textAlign: "left" }}>Enter contract details: </h3>
+            <Row>
+              <Col span={24}>
+                <Divider orientation="left">Details</Divider>
+              </Col>
+            </Row>
             <TextArea
               rows={5}
               onChange={this.handleDetailChange}

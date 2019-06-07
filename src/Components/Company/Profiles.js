@@ -1,12 +1,10 @@
 import React from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col } from "antd";
+import { Drawer, List, Avatar, Divider, Col, Row, Layout } from "antd";
 
-class CompanyMarket extends React.Component {
-  state = {};
+class Profiles extends React.Component {
   render() {
-    const { Header } = Layout;
     return (
       <div>
         <NavbarCo />
@@ -15,7 +13,7 @@ class CompanyMarket extends React.Component {
         <Row>
           <Col span={6} />
           <Col span={12}>
-            <h2 style={{ textAlign: "left" }}>Marketplace</h2>
+            <h2 style={{ textAlign: "left" }}>All student profiles</h2>
             <br />
           </Col>
         </Row>
@@ -24,4 +22,4 @@ class CompanyMarket extends React.Component {
   }
 }
 
-export default CompanyMarket;
+export default Profiles;

@@ -3,7 +3,7 @@ import filepic from "./filepic.svg";
 import CustomUploadButton from "react-firebase-file-uploader/lib/CustomUploadButton";
 import FileUploader from "react-firebase-file-uploader";
 import firebase from "firebase";
-import { Progress, Button, Layout } from "antd";
+import { Progress, Button, Layout, Row, Col } from "antd";
 import NavbarAd from "./NavbarAd.js";
 import "./Challenge.css";
 
@@ -49,8 +49,18 @@ class Challenge extends Component {
 
     return (
       <div className="dc">
-        <NavbarAd />
-        <label className="submitPage"> Daily Challenge Submission </label>
+        <div>
+          <NavbarAd />
+          <br />
+          <br />
+          <Row>
+            <Col span={6} />
+            <Col span={12}>
+              <h2 style={{ textAlign: "left" }}>Daily challenge submission</h2>
+              <br />
+            </Col>
+          </Row>
+        </div>
         <p className="progress">
           <Progress type="circle" percent={this.state.percent} />
         </p>

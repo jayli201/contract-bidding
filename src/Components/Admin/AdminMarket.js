@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarAd from "./NavbarAd";
 import firebase from "../firebase.js";
-import { Layout, Button } from "antd";
+import { Layout, Button, Row, Col } from "antd";
 
 class AdminMarket extends React.Component {
   state = {};
@@ -10,7 +10,15 @@ class AdminMarket extends React.Component {
     return (
       <div>
         <NavbarAd />
-        admin marketplace
+        <br />
+        <br />
+        <Row>
+          <Col span={6} />
+          <Col span={12}>
+            <h2 style={{ textAlign: "left" }}>Marketplace</h2>
+            <br />
+          </Col>
+        </Row>
       </div>
     );
   }
