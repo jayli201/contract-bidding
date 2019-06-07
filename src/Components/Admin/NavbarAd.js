@@ -15,15 +15,28 @@ class NavbarAd extends Component {
       <div>
         <Row>
           <Col span={3} />
-          <Col span={8}>
+          <Col span={6}>
             <PageHeader style={{ background: "white", textAlign: "left" }}>
-              <img src="images/logo.png" width="175" height="50" />
+              <NavLink to="/approve">
+                <img src="images/logo.png" width="175" height="50" />
+              </NavLink>
             </PageHeader>
           </Col>
-          <Col span={8}>
+          <Col span={10}>
             <PageHeader style={{ background: "white" }}>
               <br />
               <Menu mode="horizontal" style={{ background: "white" }}>
+                <Menu.Item>
+                  <NavLink
+                    to="/amarket"
+                    activeStyle={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Marketplace
+                  </NavLink>
+                </Menu.Item>
                 <Menu.Item>
                   <NavLink
                     to="/approve"

@@ -17,7 +17,9 @@ class NavbarCo extends Component {
           <Col span={3} />
           <Col span={6}>
             <PageHeader style={{ background: "white", textAlign: "left" }}>
-              <img src="images/logo.png" width="175" height="50" />
+              <NavLink to="/contract">
+                <img src="images/logo.png" width="175" height="50" />
+              </NavLink>
             </PageHeader>
           </Col>
           <Col span={10}>
@@ -26,7 +28,7 @@ class NavbarCo extends Component {
               <Menu mode="horizontal">
                 <Menu.Item>
                   <NavLink
-                    to="/marketplace"
+                    to="/cmarket"
                     activeStyle={{
                       color: "green",
                       fontWeight: "bold"

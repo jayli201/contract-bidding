@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
-import { Button, Menu, Input, Layout, Icon, Row, Col, PageHeader } from "antd";
+import {
+  Button,
+  Menu,
+  Input,
+  Layout,
+  Icon,
+  Row,
+  Col,
+  PageHeader,
+  Divider,
+  message
+} from "antd";
 import { NavLink, withRouter } from "react-router-dom";
 
 class Signup extends Component {
@@ -25,7 +36,6 @@ class Signup extends Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(user => {
-        console.log(user.user);
         const userRef = user.user;
         //set data into user database
         firebase
@@ -42,6 +52,9 @@ class Signup extends Component {
             console.log(userRef);
             this.props.history.push("/approve");
           });
+      })
+      .catch(error => {
+        message.error(error.message);
       });
   }
 
@@ -68,6 +81,9 @@ class Signup extends Component {
             console.log(userRef);
             this.props.history.push("/contract");
           });
+      })
+      .catch(error => {
+        message.error(error.message);
       });
   }
 
@@ -94,6 +110,9 @@ class Signup extends Component {
             console.log(userRef);
             this.props.history.push("/marketplace");
           });
+      })
+      .catch(error => {
+        message.error(error.message);
       });
   }
 
@@ -110,19 +129,19 @@ class Signup extends Component {
   }
 
   back = () => {
-    this.props.history.push("/");
+    this.props.history.push("/login");
   };
 
   render() {
-    const { Header } = Layout;
-
     return (
       <div>
         <Row>
           <Col span={3} />
           <Col span={15}>
             <PageHeader style={{ background: "white", textAlign: "left" }}>
-              <img src="images/logo.png" width="175" height="50" />
+              <NavLink to="/login">
+                <img src="images/logo.png" width="175" height="50" />
+              </NavLink>
             </PageHeader>
           </Col>
           <Col span={3}>
@@ -131,13 +150,13 @@ class Signup extends Component {
               <Menu>
                 <Menu.Item>
                   <NavLink
-                    to="/"
-                    activeStyle={{
+                    to="/login"
+                    style={{
                       color: "green",
                       fontWeight: "bold"
                     }}
                   >
-                    Back to login
+                    LOGIN
                   </NavLink>
                 </Menu.Item>
               </Menu>
@@ -152,29 +171,47 @@ class Signup extends Component {
           </Col>
           <Col span={3} />
         </Row>
-        <br />
-        <br />
-        <h1>Register as a new user</h1>
-        <br />
-        <Input
-          prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-          style={{ width: 280 }}
-          onChange={this.handleChange}
-          value={this.state.email}
-          type="email"
-          placeholder="enter email"
-        />
-        <br />
-        <br />
-        <Input
-          prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-          style={{ width: 280 }}
-          onChange={this.handleChangep}
-          value={this.state.password}
-          type="password"
-          placeholder="enter password"
-        />
-        <br />
+        <Row>
+          <Col span={2} />
+          <Col span={20}>
+            <br />
+            <br />
+            <h1>Register as a new user</h1>
+            <br />
+            <Row>
+              <Col span={9} />
+              <Col span={6}>
+                <Divider orientation="left">Email</Divider>
+              </Col>
+              <Col span={6} />
+            </Row>
+            <Input
+              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+              style={{ width: 280 }}
+              onChange={this.handleChange}
+              value={this.state.email}
+              type="email"
+              placeholder="enter email"
+            />
+            <br />
+            <Row>
+              <Col span={9} />
+              <Col span={6}>
+                <Divider orientation="left">Password</Divider>
+              </Col>
+              <Col span={6} />
+            </Row>
+            <Input
+              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+              style={{ width: 280 }}
+              onChange={this.handleChangep}
+              value={this.state.password}
+              type="password"
+              placeholder="enter password"
+            />
+          </Col>
+          <Col span={2} />
+        </Row>
         <br />
         <br />
         <div>

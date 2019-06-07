@@ -10,9 +10,10 @@ import {
   Input,
   Layout,
   Icon,
-  Card,
+  message,
   PageHeader,
-  Menu
+  Menu,
+  Divider
 } from "antd";
 
 class Login extends Component {
@@ -42,11 +43,11 @@ class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch(error => {
-        alert(error.message);
         this.setState({
           email: "",
           password: ""
         });
+        message.error(error.message);
       })
       .then(success => {
         //pass email and password user enters in form
@@ -128,7 +129,7 @@ class Login extends Component {
       this.setState({
         student: false
       });
-      this.props.history.push("/marketplace");
+      this.props.history.push("/smarket");
     }
 
     const { Header, Sider } = Layout;
@@ -143,15 +144,11 @@ class Login extends Component {
               style={{
                 background: "white",
                 textAlign: "left"
-                // border: "solid",
-                // borderTopColor: "white",
-                // borderLeftColor: "white",
-                // borderRightColor: "white",
-                // borderBottomColor: "#389e0d",
-                // borderBottomWidth: 4
               }}
             >
-              <img src="images/logo.png" width="175" height="50" />
+              <NavLink to="/">
+                <img src="images/logo.png" width="175" height="50" />
+              </NavLink>
             </PageHeader>
           </Col>
           <Col span={3}>
@@ -166,7 +163,7 @@ class Login extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Go to sign up
+                    SIGN UP
                   </NavLink>
                 </Menu.Item>
               </Menu>
@@ -191,6 +188,13 @@ class Login extends Component {
             <h3>Welcome back! Login to access your dashboard.</h3>
             <br />
             <Form onSubmit={this.login}>
+              <Row>
+                <Col span={9} />
+                <Col span={6}>
+                  <Divider orientation="left">Email</Divider>
+                </Col>
+                <Col span={6} />
+              </Row>
               <Input
                 prefix={
                   <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
@@ -203,7 +207,13 @@ class Login extends Component {
                 placeholder="enter email"
               />
               <br />
-              <br />
+              <Row>
+                <Col span={9} />
+                <Col span={6}>
+                  <Divider orientation="left">Password</Divider>
+                </Col>
+                <Col span={6} />
+              </Row>
               <Input
                 prefix={
                   <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />

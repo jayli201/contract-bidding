@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import firebase from "../firebase.js";
 import NavbarAd from "./NavbarAd.js";
-import { Modal, Button, Row, Col, Layout, Input, Icon, PageHeader } from "antd";
+import {
+  Modal,
+  Button,
+  Row,
+  Col,
+  Layout,
+  Input,
+  Popconfirm,
+  message
+} from "antd";
 
 class ViewContracts extends Component {
   constructor() {
@@ -103,6 +112,7 @@ class ViewContracts extends Component {
                         contractRef.update({
                           approved: true
                         });
+                        message.success("Approved contract");
                       }}
                     >
                       Approve
@@ -138,7 +148,7 @@ class ViewContracts extends Component {
                             this.setState({ loading: true });
                             setTimeout(() => {
                               this.setState({ loading: false, visible: false });
-                            }, 250);
+                            }, 500);
                             const contract = firebase
                               .database()
                               .ref("Contracts/" + this.state.editId);
@@ -179,18 +189,22 @@ class ViewContracts extends Component {
                         placeholder="enter contract details"
                       />
                     </Modal>
-                    <Button
-                      icon="delete"
-                      onClick={() => {
+                    <Popconfirm
+                      title="Are you sure you want to delete this contract?"
+                      onConfirm={() => {
                         const id = contract.id;
                         const contractRef = firebase
                           .database()
                           .ref("Contracts/" + id);
                         contractRef.remove();
+                        message.success("Deleted contract");
                       }}
+                      // onCancel={cancel}
+                      okText="Yes"
+                      cancelText="No"
                     >
-                      Delete
-                    </Button>
+                      <Button icon="delete">Delete</Button>
+                    </Popconfirm>
                   </div>
                   <br />
                   <br />

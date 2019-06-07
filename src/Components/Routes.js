@@ -10,13 +10,17 @@ import ViewContracts from "./Admin/ViewContracts.js";
 import Challenge from "./Admin/Challenge.js";
 import StudentProfile from "./Student/StudentProfile.js";
 import StudentMarket from "./Student/StudentMarket.js";
+import CompanyMarket from "./Company/CompanyMarket.js";
+import Welcome from "./Login/Welcome.js";
+import AdminMarket from "./Admin/AdminMarket.js";
 
 export default class Routes extends React.Component {
   render() {
     return (
       <main>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Welcome} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signupa" component={SignupA} />
           <Route exact path="/signupc" component={SignupC} />
@@ -25,7 +29,9 @@ export default class Routes extends React.Component {
           <Route exact path="/approve" component={ViewContracts} />
           <Route exact path="/subchallenge" component={Challenge} />
           <Route exact path="/profile" component={StudentProfile} />
-          <Route exact path="/marketplace" component={StudentMarket} />
+          <Route exact path="/smarket" component={StudentMarket} />
+          <Route exact path="/cmarket" component={CompanyMarket} />
+          <Route exact path="/amarket" component={AdminMarket} />
         </Switch>
       </main>
     );
