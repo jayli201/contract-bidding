@@ -5,6 +5,7 @@ import { Input, Button, PageHeader } from 'antd';
 
 const { TextArea } = Input;
 
+var date = new Date().getUTCMilliseconds
 
 
 class Challenge extends React.Component {
@@ -15,6 +16,7 @@ class Challenge extends React.Component {
             name: '',
             contact: '',
             challenge: '',
+            id: { date }
 
 
 
@@ -31,6 +33,7 @@ class Challenge extends React.Component {
         const challengeRef = firebase.database().ref('challenges/');
 
         this.setState(state => ({
+            id: state.id,
             name: state.name,
             company: state.company,
             contact: state.contact,
@@ -60,7 +63,7 @@ class Challenge extends React.Component {
                 <Input value={this.state.name} name='name' placeholder="Please Enter Challenge Name" onChange={this.handleChange} />
                 <Input value={this.state.contact} name='contact' placeholder="Please Enter Contact Info" onChange={this.handleChange} />
                 <TextArea value={this.state.challenge} rows={6} name='challenge' placeholder="Please Enter Challenge" onChange={this.handleChange} />
-                <Button onClick={this.handleClick}>Submit Daily Challenge Information</Button>
+                <Button key={this.state.id} onClick={this.handleClick}>Submit Daily Challenge Information</Button>
             </div>
 
         )

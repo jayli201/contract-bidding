@@ -44,7 +44,7 @@ class DailyChallengeView extends Component {
 
         return eachChallenge.map(
             (challenge) => {
-                return <div>
+                return <div key={this.state.id}>
                     <Row gutter={16}>
                         <Col span={8}>
                             <Card title={challenge.name} bordered={false}>

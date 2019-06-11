@@ -8,7 +8,6 @@ const { TextArea } = Input;
 
 
 class Challenge extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -29,8 +28,11 @@ class Challenge extends React.Component {
 
     handleClick() {
         const challengeRef = firebase.database().ref('challenges/');
+        var date = new Date();
+        var time = date.getUTCMilliseconds();
 
         this.setState(state => ({
+            id: time,
             name: state.name,
             company: state.company,
             contact: state.contact,
@@ -45,9 +47,6 @@ class Challenge extends React.Component {
     }
     render() {
 
-
-
-
         return (
             <div>
                 <PageHeader onBack={() => null} title="Daily Challenge Submission" />
@@ -60,7 +59,7 @@ class Challenge extends React.Component {
                 <Input value={this.state.name} name='name' placeholder="Please Enter Challenge Name" onChange={this.handleChange} />
                 <Input value={this.state.contact} name='contact' placeholder="Please Enter Contact Info" onChange={this.handleChange} />
                 <TextArea value={this.state.challenge} rows={6} name='challenge' placeholder="Please Enter Challenge" onChange={this.handleChange} />
-                <Button onClick={this.handleClick}>Submit Daily Challenge Information</Button>
+                <Button key={this.state.id} onClick={this.handleClick}>Submit Daily Challenge Information</Button>
             </div>
 
         )

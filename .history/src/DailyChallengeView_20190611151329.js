@@ -9,14 +9,14 @@ class DailyChallengeView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            key: ''
+            data: []
         };
         this.mapChallenges = this.mapChallenges.bind(this);
 
     }
     componentDidMount() {
-
+        var date = new Date();
+        var time = date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds();
 
 
         const challengeRef = firebase.database().ref('challenges/');
@@ -25,7 +25,7 @@ class DailyChallengeView extends Component {
             let newState = [];
             for (let challenge in challenges) {
                 newState.push({
-                    id: challenge,
+                    key: challenges[challenge].time,
                     company: challenges[challenge].company,
                     contact: challenges[challenge].contact,
                     name: challenges[challenge].name,

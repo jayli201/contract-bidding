@@ -25,7 +25,7 @@ class DailyChallengeView extends Component {
             let newState = [];
             for (let challenge in challenges) {
                 newState.push({
-                    id: challenge,
+                    id: challenges[challenge].id,
                     company: challenges[challenge].company,
                     contact: challenges[challenge].contact,
                     name: challenges[challenge].name,
