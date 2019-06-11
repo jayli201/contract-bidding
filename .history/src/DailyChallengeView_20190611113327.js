@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
 import { Table, Divider, Tag } from 'antd';
-import { Card, Col, Row } from 'antd';
+import { Card } from 'antd';
 
 
 
@@ -44,15 +44,22 @@ class DailyChallengeView extends Component {
                     <Row gutter={16}>
                         <Col span={8}>
                             <Card title={challenge.name} bordered={false}>
-                                <p>Company: {challenge.company}</p>
+                                <p>{challenge.company}</p>
                                 <p>Contact: {challenge.contact}</p>
-                                <p>Challenge: {challenge.challenge}</p>
+                                <p>{challenge.challenge}</p>
                             </Card>
-
                         </Col>
-
+                        <Col span={8}>
+                            <Card title={challenge.name} bordered={false}>
+                                Card content
+        </Card>
+                        </Col>
+                        <Col span={8}>
+                            <Card title={challenge.name} bordered={false}>
+                                Card content
+        </Card>
+                        </Col>
                     </Row>
-                    <br />
                     {/* <Card title={challenge.name} style={{ width: 300 }}>
                         <p>{challenge.company}</p>
                         <p>Contact: {challenge.contact}</p>

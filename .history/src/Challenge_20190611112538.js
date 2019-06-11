@@ -46,11 +46,6 @@ class Challenge extends React.Component {
         return (
             <div>
                 <PageHeader onBack={() => null} title="Daily Challenge Submission" />
-                <br />
-                <br />
-                <br />
-
-
                 <Input value={this.state.company} name='company' placeholder="Please Enter Company Name" onChange={this.handleChange} />
                 <Input value={this.state.name} name='name' placeholder="Please Enter Challenge Name" onChange={this.handleChange} />
                 <Input value={this.state.contact} name='contact' placeholder="Please Enter Contact Info" onChange={this.handleChange} />

@@ -37,32 +37,33 @@ class DailyChallengeView extends Component {
     }
     mapChallenges = () => {
         let eachChallenge = this.state.data
+        for (x in eachChallenge) {
+            return eachChallenge.map(
+                (challenge) => {
+                    return <div>
+                        <Row gutter={16}>
+                            <Col span={8}>
+                                <Card title={challenge.name} bordered={false}>
+                                    <p>{challenge.company}</p>
+                                    <p>Contact: {challenge.contact}</p>
+                                    <p>{challenge.challenge}</p>
+                                </Card>
+                            </Col>
 
-        return eachChallenge.map(
-            (challenge) => {
-                return <div>
-                    <Row gutter={16}>
-                        <Col span={8}>
-                            <Card title={challenge.name} bordered={false}>
-                                <p>Company: {challenge.company}</p>
-                                <p>Contact: {challenge.contact}</p>
-                                <p>Challenge: {challenge.challenge}</p>
-                            </Card>
+                        </Row>
 
-                        </Col>
 
-                    </Row>
-                    <br />
-                    {/* <Card title={challenge.name} style={{ width: 300 }}>
+                        {/* <Card title={challenge.name} style={{ width: 300 }}>
                         <p>{challenge.company}</p>
                         <p>Contact: {challenge.contact}</p>
                         <p>{challenge.challenge}</p>
                     </Card>  */}
 
 
-                </div>
-            }
-        )
+                    </div>
+                }
+            )
+        }
     }
 
 

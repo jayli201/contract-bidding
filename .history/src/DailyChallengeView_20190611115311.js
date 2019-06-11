@@ -48,9 +48,7 @@ class DailyChallengeView extends Component {
                                 <p>Contact: {challenge.contact}</p>
                                 <p>Challenge: {challenge.challenge}</p>
                             </Card>
-
                         </Col>
-
                     </Row>
                     <br />
                     {/* <Card title={challenge.name} style={{ width: 300 }}>

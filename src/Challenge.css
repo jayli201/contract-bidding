@@ -2,7 +2,7 @@
   
 }
 .submitPage{
-font-size: 200px, ;
+font: 200px, ;
 
 }
 .progress{
@@ -11,7 +11,4 @@ font-size: 200px, ;
   justify-content: center;
   
 
-}
-.button{
-    font-size: 40px;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
 import { Table, Divider, Tag } from 'antd';
-import { Card, Col, Row } from 'antd';
+import { Card } from 'antd';
 
 
 
@@ -11,8 +11,6 @@ class DailyChallengeView extends Component {
         this.state = {
             data: []
         };
-        this.mapChallenges = this.mapChallenges.bind(this);
-
     }
     componentDidMount() {
 
@@ -41,24 +39,11 @@ class DailyChallengeView extends Component {
         return eachChallenge.map(
             (challenge) => {
                 return <div>
-                    <Row gutter={16}>
-                        <Col span={8}>
-                            <Card title={challenge.name} bordered={false}>
-                                <p>Company: {challenge.company}</p>
-                                <p>Contact: {challenge.contact}</p>
-                                <p>Challenge: {challenge.challenge}</p>
-                            </Card>
-
-                        </Col>
-
-                    </Row>
-                    <br />
-                    {/* <Card title={challenge.name} style={{ width: 300 }}>
-                        <p>{challenge.company}</p>
-                        <p>Contact: {challenge.contact}</p>
-                        <p>{challenge.challenge}</p>
-                    </Card>  */}
-
+                    <Card title={this.state.data.name} extra={<a href="#">More</a>} style={{ width: 300 }}>
+                        <p>{this.state.data.company}</p>
+                        <p>{this.state.data.contact}</p>
+                        <p>{this.state.data.challenge}</p>
+                    </Card>
 
                 </div>
             }
@@ -74,8 +59,10 @@ class DailyChallengeView extends Component {
     render() {
         return (
             <div>
+                {/* <Table columns={columns} dataSource={data} /> */}
 
-                {this.mapChallenges()}
+
+
 
 
             </div>

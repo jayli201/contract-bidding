@@ -3,13 +3,13 @@ import './App.css';
 import firebase from 'firebase'
 import Challenge from "./Challenge"
 import DailyChallenge from "./DailyChallengeView"
-import DailyChallengeView from './DailyChallengeView';
 
 class App extends Component {
   state = {
     user: {}
   }
   componentDidMount() {
+    this.authListener()
   }
 
   render() {
@@ -17,7 +17,6 @@ class App extends Component {
       <div className="App">
 
         <Challenge />
-        <DailyChallengeView />
       </div>
     );
   }

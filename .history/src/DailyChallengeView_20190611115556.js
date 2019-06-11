@@ -41,16 +41,14 @@ class DailyChallengeView extends Component {
         return eachChallenge.map(
             (challenge) => {
                 return <div>
-                    <Row gutter={16}>
+                    <Row >
                         <Col span={8}>
                             <Card title={challenge.name} bordered={false}>
                                 <p>Company: {challenge.company}</p>
                                 <p>Contact: {challenge.contact}</p>
                                 <p>Challenge: {challenge.challenge}</p>
                             </Card>
-
                         </Col>
-
                     </Row>
                     <br />
                     {/* <Card title={challenge.name} style={{ width: 300 }}>

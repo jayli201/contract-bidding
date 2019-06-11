@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import firebase from './firebase'
-import { Input, Button, PageHeader } from 'antd';
-
+import { Input, Col, Row, Button } from 'antd';
 
 const { TextArea } = Input;
 
 
+var database = firebase.database()
 
 class Challenge extends React.Component {
     constructor(props) {
@@ -13,29 +13,29 @@ class Challenge extends React.Component {
         this.state = {
             name: '',
             contact: '',
-            challenge: '',
-            id: ''
+            challenge: ''
 
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.clear = this.clear.bind(this);
 
 
 
     }
 
     handleClick() {
-        const challengeRef = firebase.database().ref('challenges/');
-
         this.setState(state => ({
-            name: state.name,
             company: state.company,
             contact: state.contact,
-            challenge: state.challenge,
+            challenge: state.challenge
 
         }));
-        challengeRef.push(this.state)
+    }
+    clear() {
+        document.getElementById("output").value = '';
+
     }
 
     handleChange(e) {
@@ -45,16 +45,8 @@ class Challenge extends React.Component {
 
         return (
             <div>
-                <PageHeader onBack={() => null} title="Daily Challenge Submission" />
-                <br />
-                <br />
-                <br />
-
-
                 <Input value={this.state.company} name='company' placeholder="Please Enter Company Name" onChange={this.handleChange} />
-                <Input value={this.state.name} name='name' placeholder="Please Enter Challenge Name" onChange={this.handleChange} />
-                <Input value={this.state.contact} name='contact' placeholder="Please Enter Contact Info" onChange={this.handleChange} />
-                <TextArea value={this.state.challenge} rows={6} name='challenge' placeholder="Please Enter Challenge" onChange={this.handleChange} />
+                <Input value={this.state.contact} name='contact' placeholder="Please Enter Company Contact Info" onChange={this.handleChange} />                <TextArea value={this.state.challenge} rows={6} name='challenge' placeholder="Please Enter Challenge" onChange={this.handleChange} />
                 <Button onClick={this.handleClick}>Submit Daily Challenge Information</Button>
             </div>
 

@@ -32,7 +32,7 @@ class Challenge extends React.Component {
             name: state.name,
             company: state.company,
             contact: state.contact,
-            challenge: state.challenge,
+            challenge: state.challenge
 
         }));
         challengeRef.push(this.state)
@@ -46,12 +46,7 @@ class Challenge extends React.Component {
         return (
             <div>
                 <PageHeader onBack={() => null} title="Daily Challenge Submission" />
-                <br />
-                <br />
-                <br />
-
-
-                <Input value={this.state.company} name='company' placeholder="Please Enter Company Name" onChange={this.handleChange} />
+                <Input key={this.state.id} value={this.state.company} name='company' placeholder="Please Enter Company Name" onChange={this.handleChange} />
                 <Input value={this.state.name} name='name' placeholder="Please Enter Challenge Name" onChange={this.handleChange} />
                 <Input value={this.state.contact} name='contact' placeholder="Please Enter Contact Info" onChange={this.handleChange} />
                 <TextArea value={this.state.challenge} rows={6} name='challenge' placeholder="Please Enter Challenge" onChange={this.handleChange} />
