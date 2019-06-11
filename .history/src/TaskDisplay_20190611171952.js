@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Checkbox, PageHeader } from 'antd';
+import { Checkbox } from 'antd';
 import firebase from './firebase'
 import { Table } from 'antd'
 import DailyChallengeView from './DailyChallengeView'
@@ -33,10 +33,7 @@ class TaskDisplay extends Component {
                     company: challenges[challenge].company,
                     contact: challenges[challenge].contact,
                     name: challenges[challenge].name,
-                    challenge: challenges[challenge].challenge,
-                    date: challenges[challenge].date,
-                    time: challenges[challenge].time
-
+                    challenge: challenges[challenge].challenge
                 });
 
             }
@@ -64,12 +61,8 @@ class TaskDisplay extends Component {
             },
             {
                 title: 'Due Date',
-                dataIndex: 'date',
+                dataIndex: 'duedate',
             },
-            {
-                title: 'Time',
-                dataIndex: 'time',
-            }
         ];
 
         const rowSelection = {
@@ -83,7 +76,7 @@ class TaskDisplay extends Component {
 
         return (
             <div>
-                <PageHeader> My Tasks</PageHeader>>
+                <header> My Tasks</header>
 
 
                 <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />

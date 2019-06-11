@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Checkbox, PageHeader } from 'antd';
+import { Checkbox } from 'antd';
 import firebase from './firebase'
 import { Table } from 'antd'
 import DailyChallengeView from './DailyChallengeView'
@@ -83,7 +83,7 @@ class TaskDisplay extends Component {
 
         return (
             <div>
-                <PageHeader> My Tasks</PageHeader>>
+                <header> My Tasks</header>
 
 
                 <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />

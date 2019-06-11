@@ -83,7 +83,7 @@ class TaskDisplay extends Component {
 
         return (
             <div>
-                <PageHeader> My Tasks</PageHeader>>
+                <PageHeader> My Tasks/</PageHeader>>
 
 
                 <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />

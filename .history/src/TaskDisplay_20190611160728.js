@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Checkbox, PageHeader } from 'antd';
+import { Checkbox } from 'antd';
 import firebase from './firebase'
 import { Table } from 'antd'
-import DailyChallengeView from './DailyChallengeView'
 
 
 
@@ -10,8 +9,7 @@ class TaskDisplay extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
-
+            data: []
         }
 
     }
@@ -23,19 +21,13 @@ class TaskDisplay extends Component {
     componentDidMount() {
 
         const challengeRef = firebase.database().ref('challenges/');
-        challengeRef.on('value', (snapshot) => {
-            let challenges = snapshot.val();
-            console.log(challenges)
+        challengeRef.on('value', function (snapshot) {
+            const ids = snapshot.value();
             let newState = [];
-            for (let challenge in challenges) {
+            for (let challenge in ids) {
                 newState.push({
-                    key: challenge,
-                    company: challenges[challenge].company,
-                    contact: challenges[challenge].contact,
-                    name: challenges[challenge].name,
-                    challenge: challenges[challenge].challenge,
-                    date: challenges[challenge].date,
-                    time: challenges[challenge].time
+                    company: ids[challenge].company,
+                    name: ids[challenge].name,
 
                 });
 
@@ -50,7 +42,6 @@ class TaskDisplay extends Component {
 
 
     render() {
-        console.log(this.state.data)
 
         const columns = [
             {
@@ -64,14 +55,35 @@ class TaskDisplay extends Component {
             },
             {
                 title: 'Due Date',
-                dataIndex: 'date',
+                dataIndex: 'duedate',
+            },
+        ];
+        const data = [
+            {
+                key: '1',
+                name: 'John Brown',
+                age: 32,
+                address: 'New York No. 1 Lake Park',
             },
             {
-                title: 'Time',
-                dataIndex: 'time',
-            }
+                key: '2',
+                name: 'Jim Green',
+                age: 42,
+                address: 'London No. 1 Lake Park',
+            },
+            {
+                key: '3',
+                name: 'Joe Black',
+                age: 32,
+                address: 'Sidney No. 1 Lake Park',
+            },
+            {
+                key: '4',
+                name: 'Disabled User',
+                age: 99,
+                address: 'Sidney No. 1 Lake Park',
+            },
         ];
-
         const rowSelection = {
             onChange: (selectedRowKeys, selectedRows) => {
                 console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -83,14 +95,12 @@ class TaskDisplay extends Component {
 
         return (
             <div>
-                <PageHeader> My Tasks</PageHeader>>
+                <header> My Tasks</header>
+                <p>
 
-
-                <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
-                <br />
-
-                {console.log(this.state.data)}
-            </div >
+                    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />                    <br />
+                </p>
+            </div>
 
 
         )
