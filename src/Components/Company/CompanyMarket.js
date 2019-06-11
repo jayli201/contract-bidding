@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Drawer } from "antd";
+import { Layout, Button, Row, Col, Modal, Divider } from "antd";
 
 class CompanyMarket extends React.Component {
   constructor() {
@@ -9,9 +9,9 @@ class CompanyMarket extends React.Component {
     this.state = {
       contracts: [],
       students: [],
+      studentInfo: [],
       visible: false
     };
-    // this.handleClick = this.handleClick.bind(this);
   }
 
   showDrawer = () => {
@@ -54,55 +54,49 @@ class CompanyMarket extends React.Component {
     });
   };
 
-  // students = () => {
-  // let studentList = [];
-  //   const userRef = firebase.database().ref("contracts/");
-  //   userRef.on("value", snapshot => {
-  //     let contracts = snapshot.val();
-  //     let contractsList = [];
-  //     let studentList = [];
-  //     for (let contract in contracts) {
-  //       if (contracts[contract].students != undefined) {
-  //         const students = Object.values(contracts[contract].students);
-  //         console.log(students);
-  //         for (let i = 0; i < students.length; i++) {
-  //           console.log(students[i]);
-  //           console.log(students[i].student);
-  //           studentList.push(students[i].student);
-  //         }
-  //       }
-  //       this.setState({
-  //         contracts: contractsList,
-  //         students: studentList
-  //       });
-  //     }
-  //   });
-  // };
+  students = () => {
+    console.log(this.state.students);
+    let studentInfo = [];
+    this.state.students.map(student => {
+      console.log(student);
+      firebase
+        .database()
+        .ref("users/" + student)
+        .on("value", snapshot => {
+          let info = snapshot.val();
+          console.log(info);
+          console.log(info.name);
+          studentInfo.push({
+            name: info.name,
+            email: info.email,
+            phone: info.phone,
+            github: info.github,
+            linkedin: info.linkedin,
+            skills: info.skills
+          });
+          console.log(studentInfo);
+        });
+    });
+    this.setState({
+      studentInfo: studentInfo
+    });
+    console.log(studentInfo);
+    console.log(this.state.studentInfo);
+  };
 
-  // handleClick = () => {
-  //   this.setState({
-  //     visible: true
-  //   });
-  //   const userRef = firebase.database().ref("contracts/");
-  //   userRef.on("value", snapshot => {
-  //     let contracts = snapshot.val();
-  //     let studentList = [];
-  //     for (let contract in contracts) {
-  //       if (contracts[contract].students != undefined) {
-  //         const students = Object.values(contracts[contract].students);
-  //         console.log(students);
-  //         for (let i = 0; i < students.length; i++) {
-  //           console.log(students[i]);
-  //           console.log(students[i].student);
-  //           studentList.push(students[i].student);
-  //         }
-  //       }
-  //       this.setState({
-  //         students: studentList
-  //       });
-  //     }
-  //   });
-  // };
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
 
   render() {
     const { Header } = Layout;
@@ -131,7 +125,6 @@ class CompanyMarket extends React.Component {
                         this.setState({
                           visible: true
                         });
-                        console.log(contract.students);
                         let studentList = [];
                         if (contract.students != undefined) {
                           const students = Object.values(contract.students);
@@ -144,26 +137,55 @@ class CompanyMarket extends React.Component {
                             console.log(studentList);
                           }
                         }
-
+                        let studentInfo = [];
+                        studentList.map(student => {
+                          console.log(student);
+                          firebase
+                            .database()
+                            .ref("users/" + student)
+                            .on("value", snapshot => {
+                              let info = snapshot.val();
+                              console.log(info);
+                              console.log(info.name);
+                              studentInfo.push({
+                                name: info.name,
+                                email: info.email,
+                                phone: info.phone,
+                                github: info.github,
+                                linkedin: info.linkedin,
+                                skills: info.skills
+                              });
+                              console.log(studentInfo);
+                            });
+                        });
                         this.setState({
-                          students: studentList,
-                          visible: true
+                          studentInfo: studentInfo
                         });
                       }}
                     >
                       View students
                     </Button>
-                    <Drawer
-                      title="Bidding students"
-                      placement="right"
-                      closable={false}
-                      onClose={this.onClose}
+                    <Modal
+                      mask={false}
+                      title="Students"
                       visible={this.state.visible}
+                      onOk={this.handleOk}
+                      onCancel={this.handleCancel}
                     >
-                      {this.state.students.map(student => {
-                        return <div>Student: {student}</div>;
-                      })}
-                    </Drawer>
+                      <div>
+                        {this.state.studentInfo.map(student => {
+                          console.log(Object.values(student));
+                          return (
+                            <div>
+                              <p>Student: {student.name}</p>
+                              <p>Skills: {student.skills}</p>
+                              <p>Email: {student.email}</p>
+                              <Divider />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </Modal>
                   </div>
                   <br />
                 </div>

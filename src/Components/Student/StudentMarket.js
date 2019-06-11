@@ -1,12 +1,12 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col } from "antd";
+import { Layout, Button, Row, Col, message } from "antd";
 
 class StudentMarket extends React.Component {
   constructor() {
     super();
-    this.state = { contracts: [] };
+    this.state = { contracts: [], students: [], disabled: false };
 
     this.bid = this.bid.bind(this);
   }
@@ -26,19 +26,76 @@ class StudentMarket extends React.Component {
             company: contracts[contract].company,
             contract: contracts[contract].details,
             date: contracts[contract].date,
-            time: contracts[contract].time
+            time: contracts[contract].time,
+            students: contracts[contract].students
           });
         }
         this.setState({
           contracts: contractsList
         });
-        console.log(contractsList);
       }
     });
   }
 
+  generateButton = () => {
+    this.state.contracts.map(contract => {
+      let studentList = [];
+      if (contract.students != undefined) {
+        const students = Object.values(contract.students);
+        for (let i = 0; i < students.length; i++) {
+          const student = students[i].student;
+          studentList.push(student);
+        }
+      }
+      for (let i = 0; i < studentList.length; i++) {
+        const uid = firebase.auth().currentUser.uid;
+        if (studentList[i] === uid) {
+          console.log("hi");
+          this.setState({
+            disabled: false
+          });
+        } else {
+          this.setState({
+            disabled: true
+          });
+        }
+      }
+    });
+  };
+
   render() {
     const { Header } = Layout;
+
+    const contracts = this.state.contracts.map(contract => {
+      return (
+        <div>
+          <p style={{ fontWeight: "bold" }}>Name: {contract.name}</p>
+          <p>Company: {contract.company}</p>
+          <p>Details: {contract.contract}</p>
+          <p>Date submitted: {contract.date}</p>
+          <p>Time submitted: {contract.time}</p>
+          {this.state.disabled ? null : (
+            <Button
+              onClick={() => {
+                const userRef = firebase
+                  .database()
+                  .ref("contracts/" + contract.id + "/students/");
+                userRef.push({
+                  student: firebase.auth().currentUser.uid
+                });
+                message.success("Successfully bid!");
+              }}
+              type="primary"
+            >
+              Bid
+            </Button>
+          )}
+          <br />
+          <br />
+        </div>
+      );
+    });
+
     return (
       <div>
         <NavbarSt />
@@ -49,32 +106,7 @@ class StudentMarket extends React.Component {
             <br />
             <h2>Available contracts</h2>
             <br />
-            {this.state.contracts.map(contract => {
-              return (
-                <div>
-                  <p style={{ fontWeight: "bold" }}>Name: {contract.name}</p>
-                  <p>Company: {contract.company}</p>
-                  <p>Details: {contract.contract}</p>
-                  <p>Date submitted: {contract.date}</p>
-                  <p>Time submitted: {contract.time}</p>
-                  <Button
-                    onClick={() => {
-                      const userRef = firebase
-                        .database()
-                        .ref("contracts/" + contract.id + "/students/");
-                      userRef.push({
-                        student: firebase.auth().currentUser.uid
-                      });
-                    }}
-                    type="primary"
-                  >
-                    Bid
-                  </Button>
-                  <br />
-                  <br />
-                </div>
-              );
-            })}
+            {contracts}
           </Col>
         </Row>
       </div>
