@@ -66,8 +66,18 @@ class AllStudents extends React.Component {
                   <p style={{ fontWeight: "bold" }}>Name: {student.name}</p>
                   <p>Email: {student.email}</p>
                   <p>Phone: {student.phone}</p>
-                  <p>Github: {student.github}</p>
-                  <p>LinkedIn: {student.linkedin}</p>
+                  <p>
+                    Github:{" "}
+                    <a href={student.github} target="_blank">
+                      {student.github}
+                    </a>
+                  </p>
+                  <p>
+                    LinkedIn:{" "}
+                    <a href={student.linkedin} target="_blank">
+                      {student.linkedin}
+                    </a>
+                  </p>
                   <p>Skills: {student.skills}</p>
                   <Divider />
                 </div>

@@ -107,22 +107,14 @@ class StudentProfile extends React.Component {
             <p style={{ fontWeight: "bold" }}>Name: {this.state.info.name}</p>
             <p>Phone: {this.state.info.phone}</p>
             <p>
-              Github:
-              <a
-                style={{ display: "table-cell" }}
-                href={this.state.info.github}
-                target="_blank"
-              >
+              Github:{" "}
+              <a href={this.state.info.github} target="_blank">
                 {this.state.info.github}
               </a>
             </p>
             <p>
-              LinkedIn:
-              <a
-                style={{ display: "table-cell" }}
-                href={this.state.info.linkedin}
-                target="_blank"
-              >
+              LinkedIn:{" "}
+              <a href={this.state.info.linkedin} target="_blank">
                 {this.state.info.linkedin}
               </a>
             </p>
