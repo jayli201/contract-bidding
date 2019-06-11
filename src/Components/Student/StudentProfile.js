@@ -1,146 +1,198 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button } from "antd";
+import { Layout, Button, Row, Col, Modal, Input } from "antd";
 
-//Profile page for students in the RevTek Dashboard
-//Displays individual's photo, name, skill level, skills, and contact info
-
-//if nothing stored yet (new student), prompt to add information
-//get current user --> a student object has everything stored
-//store info in state
-//display state
 class StudentProfile extends React.Component {
-  state = {
-    info: [],
-    userID: "",
-    key: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      info: [],
+      visible: false,
+      loading: false,
+      name: "",
+      phone: "",
+      github: "",
+      linkedin: "",
+      skills: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  componentDidMount() {
-    const usersRef = firebase.database().ref("users");
-
-    const user = firebase.auth().currentUser
-      ? firebase.auth().currentUser
-      : "Reload the Page";
-
-    usersRef.on("value", snapshot => {
-      let items = snapshot.val() || []; //get values of database entry
-
-      const entries = Object.entries(items); //entries gets [uid, array of items]
-      console.log(entries);
-      //finds if current user id matches any id, if so, appends
-      //true/false array of type (admin, student, company)
-      for (const [id, fields] of entries) {
-        if (id === user.uid) {
-          console.log(Object.entries(fields));
-          const keyHolder = Object.entries(fields);
-          console.log(keyHolder[1][0]);
-          const fieldArray = Object.values(fields);
-          console.log(fieldArray);
-          console.log(user.uid);
-          this.setState({
-            info: fieldArray,
-            userID: user.uid,
-            key: keyHolder[1][0]
-          });
-          /*  this.setState({userID : user.uid})
-                console.log(this.state.userID)
-                this.setState({key : keyHolder[1][0]}) */
-        }
-      }
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     });
-  }
-
-  updatePhoto() {
-    console.log("photo!");
-    firebase
-      .database()
-      .ref("users/" + this.state.userID + "/" + this.state.key)
-      .update({ photoID: "Poopy butthole" });
-  }
-
-  updateName() {
-    console.log("name!");
-    firebase
-      .database()
-      .ref("users/" + this.state.userID + "/" + this.state.key)
-      .update({ name: "Poopy butthole" });
-  }
-
-  updateSkill() {
-    console.log("skills!");
-    firebase
-      .database()
-      .ref("users/" + this.state.userID + "/" + this.state.key)
-      .child("skills")
-      .push("butter");
-  }
-
-  updateskillLevel() {
-    console.log("skillLevel!");
-    firebase
-      .database()
-      .ref("users/" + this.state.userID + "/" + this.state.key)
-      .update({ skillLevel: "Poopy buttskill" });
-  }
-
-  updatePhone() {
-    console.log("Phone!");
-    firebase
-      .database()
-      .ref("users/" + this.state.userID + "/" + this.state.key)
-      .update({ phone: "Poopy buttphone" });
-  }
-
-  printEntries = () => {
-    const entries = Object.entries(this.state.info);
-    console.log(entries[1]);
-    const entriesReal = entries[1];
-    console.log(entriesReal);
-
-    for (const [id, fields] of entries) {
-      const fieldArray = Object.values(fields);
-      console.log(id);
-      console.log(fieldArray);
-
-      return (
-        <ul key={fieldArray[0]}>
-          {" "}
-          Photo : {fieldArray[1]}, Name: {fieldArray[0]}, Skill Level:{" "}
-          {fieldArray[3]}, Phone Number: {fieldArray[2]}
-        </ul>
-      );
-    }
   };
 
-  /* for (const [id2, fields2] of fieldArray[4]) {
-            const fieldArray2 = Object.values(fields2);
-            console.log("fieldArray2 : " + fieldArray2) */
+  handleOk = e => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 500);
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        const usersRef = firebase.database().ref("users/" + user.uid);
+        usersRef.update({
+          name: this.state.name,
+          phone: this.state.phone,
+          github: this.state.github,
+          linkedin: this.state.linkedin,
+          skills: this.state.skills
+        });
+      }
+      this.setState({
+        name: "",
+        phone: "",
+        github: "",
+        linkedin: "",
+        skills: ""
+      });
+      this.setState({
+        visible: false
+      });
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  componentDidMount = () => {
+    firebase
+      .auth()
+      .onAuthStateChanged(user => {
+        if (user) {
+          const usersRef = firebase.database().ref("users/" + user.uid);
+          usersRef.on("value", snapshot => {
+            let infos = snapshot.val();
+            console.log(infos);
+            this.setState({
+              info: infos
+            });
+            let infoList = [];
+            for (let info in infos) {
+              infoList.push({
+                name: infos[info].name,
+                phone: infos[info].phone,
+                github: infos[info].github,
+                linkedin: infos[info].linkedin,
+                skills: infos[info].skills
+              });
+            }
+          });
+        }
+      })
+      .bind(this);
+  };
 
   render() {
-    console.log("Below render: ");
-    console.log(this.state.userID);
-    console.log(this.state.key);
-    console.log(this.state.info);
-
+    const { visible, loading } = this.state;
+    const { TextArea } = Input;
     const { Header } = Layout;
+
     return (
       <div>
         <NavbarSt />
-        {this.printEntries()}
-        {/* <ul key={this.state.info.name}>Photo : {this.state.info.photo}, 
-            Name: {this.state.info.name}, Skills: {this.state.info.skills}, 
-            Skill Level: {this.state.info.skillLevel}, 
-            Phone Number: {this.state.info.phone}</ul> */}
-
-        <Button onClick={this.updatePhoto.bind(this)}> Update Photo </Button>
-        <Button onClick={this.updateName.bind(this)}> Update Name </Button>
-        <Button onClick={this.updateSkill.bind(this)}> Update Skills </Button>
-        <Button onClick={this.updateskillLevel.bind(this)}>
-          Update Skill Level
-        </Button>
-        <Button onClick={this.updatePhone.bind(this)}> Update Phone </Button>
+        <Row style={{ textAlign: "left" }}>
+          <Col span={6} />
+          <Col span={12}>
+            <br />
+            <br />
+            <h2>Your profile</h2>
+            <br />
+            <p style={{ fontWeight: "bold" }}>Name: {this.state.info.name}</p>
+            <p>Phone: {this.state.info.phone}</p>
+            <p>
+              Github:
+              <a
+                style={{ display: "table-cell" }}
+                href={this.state.info.github}
+                target="_blank"
+              >
+                {this.state.info.github}
+              </a>
+            </p>
+            <p>
+              LinkedIn:
+              <a
+                style={{ display: "table-cell" }}
+                href={this.state.info.linkedin}
+                target="_blank"
+              >
+                {this.state.info.linkedin}
+              </a>
+            </p>
+            <p>Skills: {this.state.info.skills}</p>
+            <br />
+            <Button
+              style={{ marginLeft: 8 }}
+              icon="edit"
+              type="primary"
+              onClick={() => {
+                this.setState({
+                  visible: true
+                });
+              }}
+            >
+              Edit
+            </Button>
+            <Modal
+              title="Edit profile"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
+              <Input
+                type="text"
+                name="name"
+                onChange={this.handleChange}
+                value={this.state.name}
+                placeholder="enter name"
+              />
+              <br />
+              <br />
+              <Input
+                type="text"
+                name="phone"
+                onChange={this.handleChange}
+                value={this.state.phone}
+                placeholder="enter phone"
+              />
+              <br />
+              <br />
+              <Input
+                type="text"
+                name="github"
+                onChange={this.handleChange}
+                value={this.state.github}
+                placeholder="enter github"
+              />
+              <br />
+              <br />
+              <Input
+                type="text"
+                name="linkedin"
+                onChange={this.handleChange}
+                value={this.state.linkedin}
+                placeholder="enter linkedin"
+              />
+              <br />
+              <br />
+              <TextArea
+                rows={5}
+                type="text"
+                name="skills"
+                onChange={this.handleChange}
+                value={this.state.skills}
+                placeholder="enter skills"
+              />
+            </Modal>
+          </Col>
+        </Row>
       </div>
     );
   }

@@ -20,10 +20,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
-    this.signupa = this.signupa.bind(this);
-    this.signupc = this.signupc.bind(this);
-    this.signups = this.signups.bind(this);
     this.signup = this.signup.bind(this);
+    this.signups = this.signups.bind(this);
     this.state = {
       email: "",
       password: "",
@@ -79,7 +77,7 @@ class Login extends Component {
                 } else if (this.state.type[1] === true) {
                   //if admin
                   this.setState({ company: true });
-                } else if (this.state.type[3] === true) {
+                } else if (this.state.type[8] === true) {
                   //if student
                   this.setState({ student: true });
                 }
@@ -92,23 +90,13 @@ class Login extends Component {
   }
 
   //pushes path if signup button is pressed to lead user to signup page
-  signupa() {
-    let path = `signupa`;
-    this.props.history.push(path);
-  }
-
-  signupc() {
-    let path = "signupc";
+  signup() {
+    let path = `signup`;
     this.props.history.push(path);
   }
 
   signups() {
     let path = "signups";
-    this.props.history.push(path);
-  }
-
-  signup() {
-    let path = "signup";
     this.props.history.push(path);
   }
 
@@ -151,7 +139,7 @@ class Login extends Component {
               </NavLink>
             </PageHeader>
           </Col>
-          <Col span={3}>
+          {/* <Col span={3}>
             <PageHeader style={{ background: "white" }}>
               <br />
               <Menu>
@@ -168,7 +156,7 @@ class Login extends Component {
                 </Menu.Item>
               </Menu>
             </PageHeader>
-          </Col>
+          </Col> */}
           <Col span={3} />
         </Row>
         <Row>
@@ -184,9 +172,7 @@ class Login extends Component {
             <br />
             <br />
             <h1>Login</h1>
-            <br />
             <h3>Welcome back! Login to access your dashboard.</h3>
-            <br />
             <Form onSubmit={this.login}>
               <Row>
                 <Col span={9} />
@@ -234,19 +220,16 @@ class Login extends Component {
               </div>
               <br />
               <br />
-              <br />
               <h3>New to Revtek?</h3>
               <br />
               <div>
-                {/* <Button onClick={this.signupa}>Sign up as admin</Button>
-                <br />
-                <br />
-                <Button onClick={this.signupc}>Sign up as company</Button>
-                <br />
-                <br />
+                <Button onClick={this.signup}>
+                  Sign up as admin or company
+                </Button>
+              </div>
+              <br />
+              <div>
                 <Button onClick={this.signups}>Sign up as student</Button>
-                <br /> */}
-                <Button onClick={this.signup}>Sign up</Button>
               </div>
             </Form>
           </Col>

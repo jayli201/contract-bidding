@@ -45,17 +45,19 @@ class ViewContracts extends Component {
   };
 
   componentDidMount() {
-    const contractsRef = firebase.database().ref("Contracts");
+    const contractsRef = firebase.database().ref("contracts");
     contractsRef.on("value", snapshot => {
       let contracts = snapshot.val();
       let contractsList = [];
       for (let contract in contracts) {
-        if (contracts[contract].approved === false) {
+        if (contracts[contract].approved === "false") {
           contractsList.push({
             id: contract,
             name: contracts[contract].name,
             company: contracts[contract].company,
-            contract: contracts[contract].details
+            contract: contracts[contract].details,
+            date: contracts[contract].date,
+            time: contracts[contract].time
           });
         }
         this.setState({
@@ -101,6 +103,8 @@ class ViewContracts extends Component {
                   <p style={{ fontWeight: "bold" }}>Name: {contract.name}</p>
                   <p>Company: {contract.company}</p>
                   <p>Details: {contract.contract}</p>
+                  <p>Date submitted: {contract.date}</p>
+                  <p>Time submitted: {contract.time}</p>
                   <div>
                     <Button
                       icon="check-circle"
@@ -108,9 +112,9 @@ class ViewContracts extends Component {
                         const id = contract.id;
                         const contractRef = firebase
                           .database()
-                          .ref("Contracts/" + id);
+                          .ref("contracts/" + id);
                         contractRef.update({
-                          approved: true
+                          approved: "true"
                         });
                         message.success("Approved contract");
                       }}
@@ -152,7 +156,7 @@ class ViewContracts extends Component {
                             }, 500);
                             const contract = firebase
                               .database()
-                              .ref("Contracts/" + this.state.editId);
+                              .ref("contracts/" + this.state.editId);
                             contract.update({
                               name: this.state.name,
                               company: this.state.company,
@@ -196,7 +200,7 @@ class ViewContracts extends Component {
                         const id = contract.id;
                         const contractRef = firebase
                           .database()
-                          .ref("Contracts/" + id);
+                          .ref("contracts/" + id);
                         contractRef.remove();
                         message.success("Deleted contract");
                       }}

@@ -144,7 +144,7 @@ class Signup extends Component {
               </NavLink>
             </PageHeader>
           </Col>
-          <Col span={3}>
+          {/* <Col span={3}>
             <PageHeader style={{ background: "white" }}>
               <br />
               <Menu>
@@ -161,7 +161,7 @@ class Signup extends Component {
                 </Menu.Item>
               </Menu>
             </PageHeader>
-          </Col>
+          </Col> */}
           <Col span={3} />
         </Row>
         <Row>
@@ -225,11 +225,6 @@ class Signup extends Component {
             <br />
             <br />
           </div>
-          <div>
-            <Button onClick={this.signupSt}>Sign up as student</Button>
-          </div>
-          <br />
-          <br />
           <div>
             <Button onClick={this.back} type="primary">
               Cancel

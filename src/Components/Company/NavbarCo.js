@@ -34,7 +34,7 @@ class NavbarCo extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Marketplace
+                    Your contracts
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>

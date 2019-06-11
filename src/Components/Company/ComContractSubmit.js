@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "firebase";
-import { Row, Col, Button, Input, Layout, Divider } from "antd";
+import { Row, Col, Button, Input, Layout, Divider, message } from "antd";
 import NavbarCo from "./NavbarCo";
 
 export default class ComContractSubmit extends React.Component {
@@ -9,11 +9,8 @@ export default class ComContractSubmit extends React.Component {
     this.state = {
       codename: "",
       codecompany: "",
-      codedetails: "",
-      loading: false,
-      iconLoading: false
+      codedetails: ""
     };
-    let classes = null;
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCompanyChange = this.handleCompanyChange.bind(this);
     this.handleDetailChange = this.handleDetailChange.bind(this);
@@ -21,22 +18,58 @@ export default class ComContractSubmit extends React.Component {
   }
 
   handleSubmit() {
-    var contractRef = firebase.database().ref("Contracts");
-    var userPosted = contractRef.push({
+    const userRef = firebase.database().ref("contracts/");
+    console.log(userRef);
+    let info = {
+      approved: "false",
       name: this.state.codename,
       company: this.state.codecompany,
-      details: this.state.codedetails
-    });
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 500);
+      details: this.state.codedetails,
+      date: this.getDate(),
+      time: this.getTime(),
+      id: firebase.auth().currentUser.uid,
+      students: []
+    };
+    console.log(info);
+    userRef.push(info);
     this.setState({
       codename: "",
       codecompany: "",
       codedetails: ""
     });
+    message.success("Submitted contract!");
   }
+
+  getDate = () => {
+    var tempDate = new Date();
+    var date =
+      tempDate.getMonth() +
+      1 +
+      "/" +
+      tempDate.getDate() +
+      "/" +
+      tempDate.getFullYear();
+    const currDate = date;
+    return currDate;
+  };
+
+  getTime = () => {
+    var tempDate = new Date();
+    var hour = tempDate.getHours();
+    var time = "AM";
+    if (hour > 12) {
+      hour = hour - 12;
+      time = "PM";
+    }
+    var time =
+      hour +
+      ":" +
+      ((tempDate.getMinutes() < 10 ? "0" : "") + tempDate.getMinutes()) +
+      " " +
+      time;
+    const currTime = time;
+    return currTime;
+  };
 
   handleNameChange(event) {
     this.setState({
@@ -112,11 +145,7 @@ export default class ComContractSubmit extends React.Component {
             <br />
             <br />
             <br />
-            <Button
-              type="primary"
-              loading={this.state.loading}
-              onClick={this.handleSubmit}
-            >
+            <Button type="primary" onClick={this.handleSubmit}>
               Submit
             </Button>
           </Col>

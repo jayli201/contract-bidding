@@ -24,8 +24,6 @@ export default class Routes extends React.Component {
           <Route exact path="/" component={Welcome} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signupa" component={SignupA} />
-          <Route exact path="/signupc" component={SignupC} />
           <Route exact path="/signups" component={SignupS} />
           <Route exact path="/contract" component={ComContractSubmit} />
           <Route exact path="/approve" component={ViewContracts} />

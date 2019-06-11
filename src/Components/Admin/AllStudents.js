@@ -1,10 +1,10 @@
 import React from "react";
 import NavbarAd from "./NavbarAd";
 import firebase from "../firebase.js";
-import { Drawer, List, Avatar, Divider, Col, Row, Layout } from "antd";
+import { Divider, Col, Row, Layout } from "antd";
 
 class AllStudents extends React.Component {
-  state = { visible: false };
+  state = { visible: false, info: [] };
 
   showDrawer = () => {
     this.setState({
@@ -18,37 +18,33 @@ class AllStudents extends React.Component {
     });
   };
 
-  render() {
-    const { Header } = Layout;
-    const pStyle = {
-      fontSize: 16,
-      color: "rgba(0,0,0,0.85)",
-      lineHeight: "24px",
-      display: "block",
-      marginBottom: 16
-    };
+  componentDidMount() {
+    const usersRef = firebase.database().ref("users");
+    usersRef.on("value", snapshot => {
+      let users = snapshot.val();
+      let students = [];
+      for (let user in users) {
+        if (users[user].student === true) {
+          students.push({
+            name: users[user].name,
+            phone: users[user].phone,
+            email: users[user].email,
+            github: users[user].github,
+            linkedin: users[user].linkedin,
+            skills: users[user].skills
+          });
+        }
+        this.setState({
+          info: students
+        });
+      }
+    });
+  }
 
-    const DescriptionItem = ({ title, content }) => (
-      <div
-        style={{
-          fontSize: 14,
-          lineHeight: "22px",
-          marginBottom: 7,
-          color: "rgba(0,0,0,0.65)"
-        }}
-      >
-        <p
-          style={{
-            marginRight: 8,
-            display: "inline-block",
-            color: "rgba(0,0,0,0.85)"
-          }}
-        >
-          {title}:
-        </p>
-        {content}
-      </div>
-    );
+  render() {
+    console.log(this.state.info);
+
+    const { Header } = Layout;
 
     return (
       <div>
@@ -60,92 +56,23 @@ class AllStudents extends React.Component {
           <Col span={12}>
             <h2 style={{ textAlign: "left" }}>All student profiles</h2>
             <br />
-            <List
-              dataSource={[
-                {
-                  name: "Lily"
-                },
-                {
-                  name: "Lily"
-                }
-              ]}
-              bordered
-              renderItem={item => (
-                <List.Item
-                  key={item.id}
-                  actions={[<a onClick={this.showDrawer}>View Profile</a>]}
+            {this.state.info.map(student => {
+              return (
+                <div
+                  style={{
+                    textAlign: "left"
+                  }}
                 >
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                    }
-                    title={
-                      <a href="https://ant.design/index-cn">{item.name}</a>
-                    }
-                    description="Progresser AFX"
-                  />
-                </List.Item>
-              )}
-            />
-            <Drawer
-              width={640}
-              placement="right"
-              closable={false}
-              onClose={this.onClose}
-              visible={this.state.visible}
-            >
-              <h1 style={{ ...pStyle, marginBottom: 24 }}>Student Profile</h1>
-              <Divider />
-              <p style={pStyle}>Personal</p>
-              <Row>
-                <Col span={24}>
-                  <DescriptionItem title="Name" content="Lily" />
-                </Col>
-              </Row>
-              <Row>
-                <Col span={24}>
-                  <DescriptionItem
-                    title="Skills"
-                    content="C / C + +, data structures, software engineering, operating systems, computer networks, databases, react, sql, nosql"
-                  />
-                </Col>
-              </Row>
-              <Divider />
-              <p style={pStyle}>Contacts</p>
-              <Row>
-                <Col span={12}>
-                  <DescriptionItem
-                    title="Email"
-                    content="AntDesign@example.com"
-                  />
-                </Col>
-                <Col span={12}>
-                  <DescriptionItem
-                    title="Phone number"
-                    content="+86 181 0000 0000"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col span={12}>
-                  <DescriptionItem
-                    title="Github"
-                    content={
-                      <a href="http://github.com/ant-design/ant-design/">
-                        github.com/ant-design/ant-design/
-                      </a>
-                    }
-                  />
-                </Col>
-                <Col span={12}>
-                  <DescriptionItem
-                    title="LinkedIn"
-                    content={<a href="http://linkedin.com/">linkedin.com/</a>}
-                  />
-                </Col>
-              </Row>
-              <Divider />
-            </Drawer>
+                  <p style={{ fontWeight: "bold" }}>Name: {student.name}</p>
+                  <p>Email: {student.email}</p>
+                  <p>Phone: {student.phone}</p>
+                  <p>Github: {student.github}</p>
+                  <p>LinkedIn: {student.linkedin}</p>
+                  <p>Skills: {student.skills}</p>
+                  <Divider />
+                </div>
+              );
+            })}
           </Col>
         </Row>
       </div>
