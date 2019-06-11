@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarAd from "./NavbarAd";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Divider } from "antd";
+import { Layout, Button, Row, Col, Card } from "antd";
 
 class AdminMarket extends React.Component {
   state = { contracts: [] };
@@ -44,11 +44,12 @@ class AdminMarket extends React.Component {
             {this.state.contracts.map(contract => {
               return (
                 <div style={{ textAlign: "left" }}>
-                  <p style={{ fontWeight: "bold" }}>Name: {contract.name}</p>
-                  <p>Company: {contract.company}</p>
-                  <p>Details: {contract.contract}</p>
-                  <p>Date submitted: {contract.date}</p>
-                  <p>Time submitted: {contract.time}</p> <Divider />
+                  <Card title={contract.name} bordered={false}>
+                    <p>Company: {contract.company}</p>
+                    <p>Details: {contract.contract}</p>
+                    <p>Date submitted: {contract.date}</p>
+                    <p>Time submitted: {contract.time}</p>
+                  </Card>
                 </div>
               );
             })}

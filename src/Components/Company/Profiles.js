@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
-import { Divider, Col, Row, Layout } from "antd";
+import { Card, Col, Row, Layout } from "antd";
 
 class Profiles extends React.Component {
   state = { visible: false, info: [] };
@@ -63,23 +63,23 @@ class Profiles extends React.Component {
                     textAlign: "left"
                   }}
                 >
-                  <p style={{ fontWeight: "bold" }}>Name: {student.name}</p>
-                  <p>Email: {student.email}</p>
-                  <p>Phone: {student.phone}</p>
-                  <p>
-                    Github:{" "}
-                    <a href={student.github} target="_blank">
-                      {student.github}
-                    </a>
-                  </p>
-                  <p>
-                    LinkedIn:{" "}
-                    <a href={student.linkedin} target="_blank">
-                      {student.linkedin}
-                    </a>
-                  </p>
-                  <p>Skills: {student.skills}</p>
-                  <Divider />
+                  <Card title={student.name} bordered={false}>
+                    <p>Email: {student.email}</p>
+                    <p>Phone: {student.phone}</p>
+                    <p>
+                      Github:{" "}
+                      <a href={student.github} target="_blank">
+                        {student.github}
+                      </a>
+                    </p>
+                    <p>
+                      LinkedIn:{" "}
+                      <a href={student.linkedin} target="_blank">
+                        {student.linkedin}
+                      </a>
+                    </p>
+                    <p>Skills: {student.skills}</p>
+                  </Card>
                 </div>
               );
             })}

@@ -45,7 +45,7 @@ class NavbarSt extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Daily challenge
+                    Challenges
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>

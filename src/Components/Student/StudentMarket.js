@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, message } from "antd";
+import { Layout, Button, Row, Col, message, Card } from "antd";
 
 class StudentMarket extends React.Component {
   constructor() {
@@ -69,11 +69,12 @@ class StudentMarket extends React.Component {
     const contracts = this.state.contracts.map(contract => {
       return (
         <div>
-          <p style={{ fontWeight: "bold" }}>Name: {contract.name}</p>
-          <p>Company: {contract.company}</p>
-          <p>Details: {contract.contract}</p>
-          <p>Date submitted: {contract.date}</p>
-          <p>Time submitted: {contract.time}</p>
+          <Card title={contract.name} bordered={false}>
+            <p>Company: {contract.company}</p>
+            <p>Details: {contract.contract}</p>
+            <p>Date submitted: {contract.date}</p>
+            <p>Time submitted: {contract.time}</p>
+          </Card>
           {this.state.disabled ? null : (
             <Button
               onClick={() => {

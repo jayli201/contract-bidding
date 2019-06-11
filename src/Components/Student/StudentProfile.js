@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Modal, Input } from "antd";
+import { Layout, Button, Row, Col, Modal, Input, Card } from "antd";
 
 class StudentProfile extends React.Component {
   constructor() {
@@ -104,22 +104,23 @@ class StudentProfile extends React.Component {
             <br />
             <h2>Your profile</h2>
             <br />
-            <p style={{ fontWeight: "bold" }}>Name: {this.state.info.name}</p>
-            <p>Phone: {this.state.info.phone}</p>
-            <p>
-              Github:{" "}
-              <a href={this.state.info.github} target="_blank">
-                {this.state.info.github}
-              </a>
-            </p>
-            <p>
-              LinkedIn:{" "}
-              <a href={this.state.info.linkedin} target="_blank">
-                {this.state.info.linkedin}
-              </a>
-            </p>
-            <p>Skills: {this.state.info.skills}</p>
-            <br />
+            <Card title={this.state.info.name} bordered={false}>
+              <p>Email: {this.state.info.email}</p>
+              <p>Phone: {this.state.info.phone}</p>
+              <p>
+                Github:{" "}
+                <a href={this.state.info.github} target="_blank">
+                  {this.state.info.github}
+                </a>
+              </p>
+              <p>
+                LinkedIn:{" "}
+                <a href={this.state.info.linkedin} target="_blank">
+                  {this.state.info.linkedin}
+                </a>
+              </p>
+              <p>Skills: {this.state.info.skills}</p>
+            </Card>
             <Button
               style={{ marginLeft: 8 }}
               icon="edit"

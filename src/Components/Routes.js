@@ -15,6 +15,7 @@ import Profiles from "./Company/Profiles.js";
 import CompanyMarket from "./Company/CompanyMarket.js";
 import Welcome from "./Login/Welcome.js";
 import AdminMarket from "./Admin/AdminMarket.js";
+import DailyChallengeView from "./Student/DailyChallengeView.js";
 
 export default class Routes extends React.Component {
   render() {
@@ -34,6 +35,7 @@ export default class Routes extends React.Component {
           <Route exact path="/smarket" component={StudentMarket} />
           <Route exact path="/cmarket" component={CompanyMarket} />
           <Route exact path="/amarket" component={AdminMarket} />
+          <Route exact path="/challenge" component={DailyChallengeView} />
         </Switch>
       </main>
     );
