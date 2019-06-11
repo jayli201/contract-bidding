@@ -23,13 +23,13 @@ class TaskDisplay extends Component {
     componentDidMount() {
 
         const challengeRef = firebase.database().ref('challenges/');
-        challengeRef.on('value', function (snapshot) {
-            const ids = snapshot.key();
+        challengeRef.on('value', (snapshot) => {
+            let challenges = snapshot.key();
             let newState = [];
-            for (let challenge in ids) {
+            for (let challenge in challenges) {
                 newState.push({
-                    company: ids[challenge].company,
-                    name: ids[challenge].name,
+                    company: challenges[challenge].company,
+                    name: challenges[challenge].name,
 
                 });
 
