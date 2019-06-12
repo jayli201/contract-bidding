@@ -1,7 +1,17 @@
 import React from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Modal, Divider, Card } from "antd";
+import {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Modal,
+  Card,
+  Input,
+  Popconfirm,
+  message
+} from "antd";
 
 class CompanyMarket extends React.Component {
   constructor() {
@@ -10,41 +20,42 @@ class CompanyMarket extends React.Component {
       contracts: [],
       students: [],
       studentInfo: [],
-      visible: false
+      visible: false,
+      force: false,
+      task: "",
+      currentContract: "",
+      name: "",
+      company: "",
+      contract: "",
+      date: "",
+      time: "",
+      pushId: ""
     };
+    this.handleChange = this.handleChange.bind(this);
   }
-
-  showDrawer = () => {
-    this.setState({
-      visible: true
-    });
-  };
-
-  onClose = () => {
-    this.setState({
-      visible: false
-    });
-  };
 
   componentDidMount = () => {
     const contractsRef = firebase.database().ref("contracts");
-    let contractsList = [];
     contractsRef.on("value", snapshot => {
       let contracts = snapshot.val();
+      let contractsList = [];
       for (let contract in contracts) {
         if (
           contracts[contract].id === firebase.auth().currentUser.uid &&
-          contracts[contract].approved === "true"
+          contracts[contract].approved === "true" &&
+          contracts[contract].closed === "false"
         ) {
           contractsList.push({
             approved: contracts[contract].approved,
+            closed: contracts[contract].closed,
             name: contracts[contract].name,
             company: contracts[contract].company,
             contract: contracts[contract].details,
             date: contracts[contract].date,
             time: contracts[contract].time,
             id: contracts[contract].id,
-            students: contracts[contract].students
+            students: contracts[contract].students,
+            pushId: contracts[contract].pushId
           });
         }
         this.setState({
@@ -52,36 +63,6 @@ class CompanyMarket extends React.Component {
         });
       }
     });
-  };
-
-  students = () => {
-    console.log(this.state.students);
-    let studentInfo = [];
-    this.state.students.map(student => {
-      console.log(student);
-      firebase
-        .database()
-        .ref("users/" + student)
-        .on("value", snapshot => {
-          let info = snapshot.val();
-          console.log(info);
-          console.log(info.name);
-          studentInfo.push({
-            name: info.name,
-            email: info.email,
-            phone: info.phone,
-            github: info.github,
-            linkedin: info.linkedin,
-            skills: info.skills
-          });
-          console.log(studentInfo);
-        });
-    });
-    this.setState({
-      studentInfo: studentInfo
-    });
-    console.log(studentInfo);
-    console.log(this.state.studentInfo);
   };
 
   handleOk = e => {
@@ -94,12 +75,21 @@ class CompanyMarket extends React.Component {
   handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false
+      visible: false,
+      task: ""
+    });
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     });
   };
 
   render() {
     const { Header } = Layout;
+    const { TextArea } = Input;
+
     return (
       <div>
         <NavbarCo />
@@ -108,9 +98,10 @@ class CompanyMarket extends React.Component {
         <Row>
           <Col span={6} />
           <Col span={12}>
-            <h2 style={{ textAlign: "left" }}>Your approved contracts</h2>
+            <h2 style={{ textAlign: "left" }}>
+              Your approved and open contracts
+            </h2>
             <br />
-            {console.log(this.state.contracts)}
             {this.state.contracts.map(contract => {
               return (
                 <div style={{ textAlign: "left" }}>
@@ -119,9 +110,8 @@ class CompanyMarket extends React.Component {
                     <p>Details: {contract.contract}</p>
                     <p>Date submitted: {contract.date}</p>
                     <p>Time submitted: {contract.time}</p>
-                  </Card>
-                  <div>
                     <Button
+                      type="primary"
                       onClick={() => {
                         this.setState({
                           visible: true
@@ -130,37 +120,40 @@ class CompanyMarket extends React.Component {
                         if (contract.students != undefined) {
                           const students = Object.values(contract.students);
                           console.log(students);
-                          // console.log(Object.values(contract.students[0]));
                           for (let i = 0; i < students.length; i++) {
                             const student = students[i].student;
-                            console.log(student);
                             studentList.push(student);
-                            console.log(studentList);
                           }
                         }
+                        console.log(studentList);
                         let studentInfo = [];
                         studentList.map(student => {
-                          console.log(student);
                           firebase
                             .database()
                             .ref("users/" + student)
                             .on("value", snapshot => {
                               let info = snapshot.val();
                               console.log(info);
-                              console.log(info.name);
                               studentInfo.push({
                                 name: info.name,
                                 email: info.email,
                                 phone: info.phone,
                                 github: info.github,
                                 linkedin: info.linkedin,
-                                skills: info.skills
+                                skills: info.skills,
+                                pushId: info.pushId
                               });
-                              console.log(studentInfo);
                             });
                         });
                         this.setState({
-                          studentInfo: studentInfo
+                          studentInfo: studentInfo,
+                          currentContract: contract.pushId,
+                          name: contract.name,
+                          company: contract.company,
+                          contract: contract.contract,
+                          date: contract.date,
+                          time: contract.time,
+                          pushId: contract.pushId
                         });
                       }}
                     >
@@ -175,20 +168,100 @@ class CompanyMarket extends React.Component {
                     >
                       <div>
                         {this.state.studentInfo.map(student => {
-                          console.log(Object.values(student));
+                          console.log(this.state.contract);
                           return (
-                            <div>
-                              <p>Student: {student.name}</p>
-                              <p>Skills: {student.skills}</p>
+                            <Card title={student.name} bordered={false}>
                               <p>Email: {student.email}</p>
-                              <Divider />
-                            </div>
+                              <p>Phone: {student.phone}</p>
+                              <p>
+                                Github:{" "}
+                                <a href={student.github} target="_blank">
+                                  {student.github}
+                                </a>
+                              </p>
+                              <p>
+                                LinkedIn:{" "}
+                                <a href={student.linkedin} target="_blank">
+                                  {student.linkedin}
+                                </a>
+                              </p>
+                              <p>Skills: {student.skills}</p>
+                              <TextArea
+                                rows={5}
+                                name="task"
+                                value={this.state.task}
+                                onChange={this.handleChange}
+                              />
+                              <br />
+                              <br />
+                              <Button
+                                onClick={() => {
+                                  console.log(this.state.task);
+                                  console.log(this.state.currentContract);
+                                  const studentRef = firebase
+                                    .database()
+                                    .ref("users/" + student.pushId + "/tasks/");
+                                  console.log(contract);
+                                  console.log(contract.name);
+                                  console.log(contract.pushId);
+                                  let info = {
+                                    task: this.state.task,
+                                    contract: this.state.currentContract,
+                                    name: this.state.name,
+                                    company: this.state.company,
+                                    details: this.state.contract,
+                                    date: this.state.date,
+                                    time: this.state.time,
+                                    pushId: this.state.pushId,
+                                    finished: 0,
+                                    taskId: ""
+                                  };
+                                  var pushed = studentRef.push(info);
+                                  var taskId = pushed.key;
+                                  const specificRef = firebase
+                                    .database()
+                                    .ref(
+                                      "users/" +
+                                        student.pushId +
+                                        "/tasks/" +
+                                        taskId
+                                    );
+                                  specificRef.update({
+                                    taskId: taskId
+                                  });
+                                  this.setState({
+                                    visible: false,
+                                    task: ""
+                                  });
+                                }}
+                              >
+                                Assign task
+                              </Button>
+                            </Card>
                           );
                         })}
                       </div>
                     </Modal>
-                  </div>
-                  <br />
+                    <Popconfirm
+                      title="Are you sure you want to close this contract?"
+                      onConfirm={() => {
+                        console.log(contract);
+                        firebase
+                          .database()
+                          .ref("contracts/" + contract.pushId)
+                          .update({
+                            closed: "true"
+                          });
+                        this.setState({ force: true });
+                        message.success("Closed contract");
+                      }}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button style={{ marginLeft: 8 }} icon="delete" />
+                    </Popconfirm>
+                    <br />
+                  </Card>
                 </div>
               );
             })}

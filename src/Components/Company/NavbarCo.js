@@ -50,7 +50,7 @@ class NavbarCo extends Component {
                 </Menu.Item>
                 <Menu.Item>
                   <NavLink
-                    to="/task"
+                    to="/taskstatus"
                     activeStyle={{ color: "green", fontWeight: "bold" }}
                   >
                     Task manager

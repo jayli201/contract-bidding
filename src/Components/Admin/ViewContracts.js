@@ -106,112 +106,111 @@ class ViewContracts extends Component {
                     <p>Details: {contract.contract}</p>
                     <p>Date submitted: {contract.date}</p>
                     <p>Time submitted: {contract.time}</p>
+                    <Button
+                      icon="check-circle"
+                      onClick={() => {
+                        const id = contract.id;
+                        const contractRef = firebase
+                          .database()
+                          .ref("contracts/" + id);
+                        contractRef.update({
+                          approved: "true"
+                        });
+                        message.success("Approved contract");
+                      }}
+                    >
+                      Approve
+                    </Button>
+                    <Button
+                      style={{ marginLeft: 8 }}
+                      icon="edit"
+                      type="primary"
+                      onClick={() => {
+                        const id = contract.id;
+                        this.setState({
+                          visible: true,
+                          editId: id
+                        });
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Modal
+                      mask={false}
+                      title="Edit contract"
+                      visible={this.state.visible}
+                      onOk={this.handleOk}
+                      onCancel={this.handleCancel}
+                      footer={[
+                        <Button key="cancel" onClick={this.handleCancel}>
+                          Cancel
+                        </Button>,
+                        <Button
+                          key="submit"
+                          type="primary"
+                          loading={loading}
+                          onClick={() => {
+                            this.setState({ loading: true });
+                            setTimeout(() => {
+                              this.setState({ loading: false, visible: false });
+                            }, 500);
+                            const contract = firebase
+                              .database()
+                              .ref("contracts/" + this.state.editId);
+                            contract.update({
+                              name: this.state.name,
+                              company: this.state.company,
+                              details: this.state.details
+                            });
+                            this.setState({
+                              name: "",
+                              company: "",
+                              details: ""
+                            });
+                          }}
+                        >
+                          Submit
+                        </Button>
+                      ]}
+                    >
+                      <Input
+                        onChange={this.handleChangeN}
+                        value={this.state.name}
+                        placeholder="enter contract title"
+                      />
+                      <br />
+                      <br />
+                      <Input
+                        onChange={this.handleChangeC}
+                        value={this.state.company}
+                        placeholder="enter company name"
+                      />
+                      <br />
+                      <br />
+                      <TextArea
+                        rows={5}
+                        onChange={this.handleChangeD}
+                        value={this.state.details}
+                        placeholder="enter contract details"
+                      />
+                    </Modal>
+                    <Popconfirm
+                      title="Are you sure you want to delete this contract?"
+                      onConfirm={() => {
+                        const id = contract.id;
+                        const contractRef = firebase
+                          .database()
+                          .ref("contracts/" + id);
+                        contractRef.remove();
+                        message.success("Deleted contract");
+                      }}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button style={{ marginLeft: 8 }} icon="delete" />
+                    </Popconfirm>
+                    <br />
                   </Card>
-                  <Button
-                    icon="check-circle"
-                    onClick={() => {
-                      const id = contract.id;
-                      const contractRef = firebase
-                        .database()
-                        .ref("contracts/" + id);
-                      contractRef.update({
-                        approved: "true"
-                      });
-                      message.success("Approved contract");
-                    }}
-                  >
-                    Approve
-                  </Button>
-                  <Button
-                    style={{ marginLeft: 8 }}
-                    icon="edit"
-                    type="primary"
-                    onClick={() => {
-                      const id = contract.id;
-                      this.setState({
-                        visible: true,
-                        editId: id
-                      });
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Modal
-                    mask={false}
-                    title="Edit contract"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={[
-                      <Button key="cancel" onClick={this.handleCancel}>
-                        Cancel
-                      </Button>,
-                      <Button
-                        key="submit"
-                        type="primary"
-                        loading={loading}
-                        onClick={() => {
-                          this.setState({ loading: true });
-                          setTimeout(() => {
-                            this.setState({ loading: false, visible: false });
-                          }, 500);
-                          const contract = firebase
-                            .database()
-                            .ref("contracts/" + this.state.editId);
-                          contract.update({
-                            name: this.state.name,
-                            company: this.state.company,
-                            details: this.state.details
-                          });
-                          this.setState({
-                            name: "",
-                            company: "",
-                            details: ""
-                          });
-                        }}
-                      >
-                        Submit
-                      </Button>
-                    ]}
-                  >
-                    <Input
-                      onChange={this.handleChangeN}
-                      value={this.state.name}
-                      placeholder="enter contract title"
-                    />
-                    <br />
-                    <br />
-                    <Input
-                      onChange={this.handleChangeC}
-                      value={this.state.company}
-                      placeholder="enter company name"
-                    />
-                    <br />
-                    <br />
-                    <TextArea
-                      rows={5}
-                      onChange={this.handleChangeD}
-                      value={this.state.details}
-                      placeholder="enter contract details"
-                    />
-                  </Modal>
-                  <Popconfirm
-                    title="Are you sure you want to delete this contract?"
-                    onConfirm={() => {
-                      const id = contract.id;
-                      const contractRef = firebase
-                        .database()
-                        .ref("contracts/" + id);
-                      contractRef.remove();
-                      message.success("Deleted contract");
-                    }}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <Button style={{ marginLeft: 8 }} icon="delete" />
-                  </Popconfirm>
-                  <br />
-                  <br />
                 </div>
               );
             })}

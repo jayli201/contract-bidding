@@ -77,7 +77,7 @@ class Login extends Component {
                 } else if (this.state.type[1] === true) {
                   //if admin
                   this.setState({ company: true });
-                } else if (this.state.type[8] === true) {
+                } else if (this.state.type[9] === true) {
                   //if student
                   this.setState({ student: true });
                 }
@@ -220,7 +220,7 @@ class Login extends Component {
               </div>
               <br />
               <br />
-              <h3>New to Revtek?</h3>
+              <h3>New to RevTek?</h3>
               <br />
               <div>
                 <Button onClick={this.signup}>

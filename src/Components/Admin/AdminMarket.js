@@ -12,7 +12,10 @@ class AdminMarket extends React.Component {
       let contracts = snapshot.val();
       let contractsList = [];
       for (let contract in contracts) {
-        if (contracts[contract].approved === "true") {
+        if (
+          contracts[contract].approved === "true" &&
+          contracts[contract].closed === "false"
+        ) {
           contractsList.push({
             id: contract,
             name: contracts[contract].name,
@@ -39,7 +42,7 @@ class AdminMarket extends React.Component {
         <Row>
           <Col span={6} />
           <Col span={12}>
-            <h2 style={{ textAlign: "left" }}>Marketplace</h2>
+            <h2 style={{ textAlign: "left" }}>Approved and open contracts</h2>
             <br />
             {this.state.contracts.map(contract => {
               return (

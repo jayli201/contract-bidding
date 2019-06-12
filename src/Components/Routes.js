@@ -1,8 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Login from "./Login/Login.js";
-import SignupC from "./Signup/SignupC.js";
-import SignupA from "./Signup/SignupA.js";
 import SignupS from "./Signup/SignupS.js";
 import Signup from "./Signup/Signup.js";
 import ComContractSubmit from "./Company/ComContractSubmit.js";
@@ -16,6 +14,8 @@ import CompanyMarket from "./Company/CompanyMarket.js";
 import Welcome from "./Login/Welcome.js";
 import AdminMarket from "./Admin/AdminMarket.js";
 import DailyChallengeView from "./Student/DailyChallengeView.js";
+import TaskManager from "./Student/TaskManager.js";
+import TaskStatus from "./Company/TaskStatus.js";
 
 export default class Routes extends React.Component {
   render() {
@@ -36,6 +36,8 @@ export default class Routes extends React.Component {
           <Route exact path="/cmarket" component={CompanyMarket} />
           <Route exact path="/amarket" component={AdminMarket} />
           <Route exact path="/challenge" component={DailyChallengeView} />
+          <Route exact path="/task" component={TaskManager} />
+          <Route exact path="/taskstatus" component={TaskStatus} />
         </Switch>
       </main>
     );
