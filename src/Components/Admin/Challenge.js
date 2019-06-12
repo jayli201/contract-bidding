@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import firebase from "../firebase";
-import { Input, Button, message, Row, Col, Divider, Checkbox } from "antd";
+import {
+  Input,
+  Button,
+  message,
+  Row,
+  Col,
+  Divider,
+  Card,
+  Popconfirm
+} from "antd";
 import NavbarAd from "./NavbarAd";
 
 const { TextArea } = Input;
@@ -8,10 +17,67 @@ const { TextArea } = Input;
 class Challenge extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      data: []
+    };
+    this.mapChallenges = this.mapChallenges.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
+
+  componentDidMount() {
+    const challengeRef = firebase.database().ref("challenges/");
+    challengeRef.on("value", snapshot => {
+      let challenges = snapshot.val();
+
+      let newState = [];
+      for (let challenge in challenges) {
+        newState.push({
+          company: challenges[challenge].company,
+          contact: challenges[challenge].contact,
+          name: challenges[challenge].name,
+          challenge: challenges[challenge].challenge,
+          date: challenges[challenge].date,
+          time: challenges[challenge].time,
+          pushId: challenges[challenge].pushId
+        });
+      }
+      console.log(newState);
+      this.setState({ data: newState });
+    });
+  }
+
+  mapChallenges = () => {
+    let eachChallenge = this.state.data;
+
+    return eachChallenge.map(challenge => {
+      return (
+        <div>
+          <Card title={challenge.name} bordered={false}>
+            <p>Company: {challenge.company}</p>
+            <p>Contact info: {challenge.contact}</p>
+            <p>Challenge details: {challenge.challenge}</p>
+            <p>Date submitted: {challenge.date}</p>
+            <p>Time submitted: {challenge.time}</p>
+            <Popconfirm
+              title="Are you sure you want to delete this contract?"
+              onConfirm={() => {
+                const challengeRef = firebase
+                  .database()
+                  .ref("challenges/" + challenge.pushId);
+                challengeRef.remove();
+                message.success("Deleted contract");
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button style={{ marginLeft: 8 }} icon="delete" />
+            </Popconfirm>{" "}
+          </Card>
+        </div>
+      );
+    });
+  };
 
   handleClick() {
     const challengeRef = firebase.database().ref("challenges/");
@@ -21,15 +87,21 @@ class Challenge extends React.Component {
       contact: this.state.contact,
       challenge: this.state.challenge,
       date: this.getDate(),
-      time: this.getTime()
+      time: this.getTime(),
+      pushId: ""
     };
-    challengeRef.push(info);
+    var pushed = challengeRef.push(info);
+    var pushId = pushed.key;
+    console.log(pushId);
+    const specificRef = firebase.database().ref("challenges/" + pushId);
+    specificRef.update({
+      pushId: pushId
+    });
     this.setState({
       name: "",
       company: "",
       contact: "",
       challenge: "",
-      id: "",
       date: "",
       time: ""
     });
@@ -70,10 +142,6 @@ class Challenge extends React.Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
-  onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
-  };
 
   render() {
     return (
@@ -144,6 +212,9 @@ class Challenge extends React.Component {
             </Button>
             <br />
             <br />
+            <br />
+            <h2 style={{ textAlign: "left" }}>Current challenges</h2>
+            {this.mapChallenges()}
           </Col>
         </Row>
       </div>

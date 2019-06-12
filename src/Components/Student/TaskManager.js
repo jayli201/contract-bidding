@@ -22,7 +22,10 @@ class StudentProfile extends React.Component {
       console.log(users);
       for (let user in users) {
         if (users[user].pushId === firebase.auth().currentUser.uid) {
-          if (Object.values(user.tasks != undefined)) {
+          if (
+            Object.values(user.tasks != undefined) &&
+            users[user].tasks != undefined
+          ) {
             const tasks = Object.values(users[user].tasks);
             console.log(tasks);
             for (let task in tasks) {
@@ -33,7 +36,10 @@ class StudentProfile extends React.Component {
                 company: tasks[task].company,
                 contract: tasks[task].details,
                 date: tasks[task].date,
-                time: tasks[task].time
+                time: tasks[task].time,
+                pushId: tasks[task].pushId,
+                taskId: tasks[task].taskId,
+                finished: tasks[task].finished
               });
               console.log(contractInfo);
               this.setState({
@@ -46,29 +52,51 @@ class StudentProfile extends React.Component {
     });
   };
 
-  onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
-  };
-
   render() {
     const { visible, loading } = this.state;
     const { TextArea } = Input;
     const { Header } = Layout;
 
     const contracts = this.state.contracts.map(contract => {
-      return (
-        <div>
-          <Card title={contract.task} bordered={false}>
-            <p>Name: {contract.name}</p>
-            <p>Company: {contract.company}</p>
-            <p>Details: {contract.contract}</p>
-            <Checkbox onChange={this.onChange}>Finished!</Checkbox>
-
-            {/* <p>Date submitted: {contract.date}</p> */}
-            {/* <p>Time submitted: {contract.time}</p> */}
-          </Card>
-        </div>
-      );
+      console.log(contract.finished);
+      if (contract.finished != "true") {
+        return (
+          <div>
+            <Card title={contract.task} bordered={false}>
+              <p>Name: {contract.name}</p>
+              <p>Company: {contract.company}</p>
+              <p>Details: {contract.contract}</p>
+              <Checkbox
+                onChange={() => {
+                  console.log(firebase.auth().currentUser.uid);
+                  const taskRef = firebase
+                    .database()
+                    .ref(
+                      "users/" +
+                        firebase.auth().currentUser.uid +
+                        "/tasks/" +
+                        contract.taskId
+                    );
+                  console.log(contract.taskId);
+                  taskRef.update({
+                    finished: "true"
+                  });
+                  const contractRef = firebase
+                    .database()
+                    .ref("contracts/" + contract.pushId + "/updates");
+                  contractRef.push({
+                    finished: "true",
+                    student: firebase.auth().currentUser.uid,
+                    task: contract.task
+                  });
+                }}
+              >
+                Finished!
+              </Checkbox>
+            </Card>
+          </div>
+        );
+      }
     });
 
     return (
