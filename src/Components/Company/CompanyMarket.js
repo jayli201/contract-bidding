@@ -1,7 +1,17 @@
 import React from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Modal, Card, Input } from "antd";
+import {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Modal,
+  Card,
+  Input,
+  Popconfirm,
+  message
+} from "antd";
 
 class CompanyMarket extends React.Component {
   constructor() {
@@ -32,7 +42,8 @@ class CompanyMarket extends React.Component {
 
   onClose = () => {
     this.setState({
-      visible: false
+      visible: false,
+      task: ""
     });
   };
 
@@ -77,13 +88,14 @@ class CompanyMarket extends React.Component {
   handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false
+      visible: false,
+      task: ""
     });
   };
 
   handleChange = e => {
     this.setState({
-      task: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -190,6 +202,7 @@ class CompanyMarket extends React.Component {
                               <p>Skills: {student.skills}</p>
                               <TextArea
                                 rows={5}
+                                name="task"
                                 value={this.state.task}
                                 onChange={this.handleChange}
                               />
@@ -224,8 +237,9 @@ class CompanyMarket extends React.Component {
                         })}
                       </div>
                     </Modal>
-                    <Button
-                      onClick={() => {
+                    <Popconfirm
+                      title="Are you sure you want to close this contract?"
+                      onConfirm={() => {
                         console.log(contract);
                         firebase
                           .database()
@@ -234,10 +248,13 @@ class CompanyMarket extends React.Component {
                             closed: "true"
                           });
                         this.setState({ force: true });
+                        message.success("Closed contract");
                       }}
+                      okText="Yes"
+                      cancelText="No"
                     >
-                      Close contract
-                    </Button>
+                      <Button style={{ marginLeft: 8 }} icon="delete" />
+                    </Popconfirm>
                   </div>
                   <br />
                 </div>
