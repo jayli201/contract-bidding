@@ -72,7 +72,7 @@ class Challenge extends React.Component {
               cancelText="No"
             >
               <Button style={{ marginLeft: 8 }} icon="delete" />
-            </Popconfirm>{" "}
+            </Popconfirm>
           </Card>
         </div>
       );

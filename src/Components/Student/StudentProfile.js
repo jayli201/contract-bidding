@@ -120,70 +120,69 @@ class StudentProfile extends React.Component {
                 </a>
               </p>
               <p>Skills: {this.state.info.skills}</p>
+              <Button
+                icon="edit"
+                type="primary"
+                onClick={() => {
+                  this.setState({
+                    visible: true
+                  });
+                }}
+              >
+                Edit
+              </Button>
+              <Modal
+                title="Edit profile"
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+              >
+                <Input
+                  type="text"
+                  name="name"
+                  onChange={this.handleChange}
+                  value={this.state.name}
+                  placeholder="enter name"
+                />
+                <br />
+                <br />
+                <Input
+                  type="text"
+                  name="phone"
+                  onChange={this.handleChange}
+                  value={this.state.phone}
+                  placeholder="enter phone"
+                />
+                <br />
+                <br />
+                <Input
+                  type="text"
+                  name="github"
+                  onChange={this.handleChange}
+                  value={this.state.github}
+                  placeholder="enter github"
+                />
+                <br />
+                <br />
+                <Input
+                  type="text"
+                  name="linkedin"
+                  onChange={this.handleChange}
+                  value={this.state.linkedin}
+                  placeholder="enter linkedin"
+                />
+                <br />
+                <br />
+                <TextArea
+                  rows={5}
+                  type="text"
+                  name="skills"
+                  onChange={this.handleChange}
+                  value={this.state.skills}
+                  placeholder="enter skills"
+                />
+              </Modal>
             </Card>
-            <Button
-              style={{ marginLeft: 8 }}
-              icon="edit"
-              type="primary"
-              onClick={() => {
-                this.setState({
-                  visible: true
-                });
-              }}
-            >
-              Edit
-            </Button>
-            <Modal
-              title="Edit profile"
-              visible={this.state.visible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
-            >
-              <Input
-                type="text"
-                name="name"
-                onChange={this.handleChange}
-                value={this.state.name}
-                placeholder="enter name"
-              />
-              <br />
-              <br />
-              <Input
-                type="text"
-                name="phone"
-                onChange={this.handleChange}
-                value={this.state.phone}
-                placeholder="enter phone"
-              />
-              <br />
-              <br />
-              <Input
-                type="text"
-                name="github"
-                onChange={this.handleChange}
-                value={this.state.github}
-                placeholder="enter github"
-              />
-              <br />
-              <br />
-              <Input
-                type="text"
-                name="linkedin"
-                onChange={this.handleChange}
-                value={this.state.linkedin}
-                placeholder="enter linkedin"
-              />
-              <br />
-              <br />
-              <TextArea
-                rows={5}
-                type="text"
-                name="skills"
-                onChange={this.handleChange}
-                value={this.state.skills}
-                placeholder="enter skills"
-              />
-            </Modal>
           </Col>
         </Row>
       </div>

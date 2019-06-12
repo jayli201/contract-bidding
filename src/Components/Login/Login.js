@@ -220,7 +220,7 @@ class Login extends Component {
               </div>
               <br />
               <br />
-              <h3>New to Revtek?</h3>
+              <h3>New to RevTek?</h3>
               <br />
               <div>
                 <Button onClick={this.signup}>

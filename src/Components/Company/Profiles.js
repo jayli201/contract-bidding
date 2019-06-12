@@ -58,29 +58,27 @@ class Profiles extends React.Component {
             <br />
             {this.state.info.map(student => {
               return (
-                <div
-                  style={{
-                    textAlign: "left"
-                  }}
+                <Card
+                  title={student.name}
+                  bordered={false}
+                  style={{ textAlign: "left" }}
                 >
-                  <Card title={student.name} bordered={false}>
-                    <p>Email: {student.email}</p>
-                    <p>Phone: {student.phone}</p>
-                    <p>
-                      Github:{" "}
-                      <a href={student.github} target="_blank">
-                        {student.github}
-                      </a>
-                    </p>
-                    <p>
-                      LinkedIn:{" "}
-                      <a href={student.linkedin} target="_blank">
-                        {student.linkedin}
-                      </a>
-                    </p>
-                    <p>Skills: {student.skills}</p>
-                  </Card>
-                </div>
+                  <p>Email: {student.email}</p>
+                  <p>Phone: {student.phone}</p>
+                  <p>
+                    Github:{" "}
+                    <a href={student.github} target="_blank">
+                      {student.github}
+                    </a>
+                  </p>
+                  <p>
+                    LinkedIn:{" "}
+                    <a href={student.linkedin} target="_blank">
+                      {student.linkedin}
+                    </a>
+                  </p>
+                  <p>Skills: {student.skills}</p>
+                </Card>
               );
             })}
           </Col>

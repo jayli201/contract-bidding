@@ -73,25 +73,23 @@ class StudentMarket extends React.Component {
             <p>Details: {contract.contract}</p>
             <p>Date submitted: {contract.date}</p>
             <p>Time submitted: {contract.time}</p>
+            {this.state.disabled ? null : (
+              <Button
+                onClick={() => {
+                  const userRef = firebase
+                    .database()
+                    .ref("contracts/" + contract.id + "/students/");
+                  userRef.push({
+                    student: firebase.auth().currentUser.uid
+                  });
+                  message.success("Successfully bid!");
+                }}
+                type="primary"
+              >
+                Bid
+              </Button>
+            )}
           </Card>
-          {this.state.disabled ? null : (
-            <Button
-              onClick={() => {
-                const userRef = firebase
-                  .database()
-                  .ref("contracts/" + contract.id + "/students/");
-                userRef.push({
-                  student: firebase.auth().currentUser.uid
-                });
-                message.success("Successfully bid!");
-              }}
-              type="primary"
-            >
-              Bid
-            </Button>
-          )}
-          <br />
-          <br />
         </div>
       );
     });

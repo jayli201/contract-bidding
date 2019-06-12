@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { Row, Col, Carousel, Layout, PageHeader, Menu } from "antd";
+import { Row, Col, Button, Layout, PageHeader, Menu } from "antd";
 
 class Welcome extends Component {
   constructor(props) {
@@ -27,12 +27,6 @@ class Welcome extends Component {
               style={{
                 background: "white",
                 textAlign: "left"
-                // border: "solid",
-                // borderTopColor: "white",
-                // borderLeftColor: "white",
-                // borderRightColor: "white",
-                // borderBottomColor: "#389e0d",
-                // borderBottomWidth: 4
               }}
             >
               <NavLink to="/">
@@ -40,25 +34,6 @@ class Welcome extends Component {
               </NavLink>
             </PageHeader>
           </Col>
-          <Col span={3}>
-            <PageHeader style={{ background: "white" }}>
-              <br />
-              <Menu>
-                <Menu.Item>
-                  <NavLink
-                    to="/login"
-                    style={{
-                      color: "green",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    LOGIN
-                  </NavLink>
-                </Menu.Item>
-              </Menu>
-            </PageHeader>
-          </Col>
-          <Col span={3} />
         </Row>
         <Row>
           <Col span={3} />
@@ -70,7 +45,18 @@ class Welcome extends Component {
         <Row>
           <Col span={3} />
           <Col span={18}>
-            <h1>Revtek message</h1>
+            <br />
+            <br />
+            <h1>Welcome to RevTek</h1>
+            <br />
+            <Button
+              type="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Login
+            </Button>
           </Col>
           <Col span={3} />
         </Row>

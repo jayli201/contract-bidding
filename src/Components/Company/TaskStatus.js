@@ -1,6 +1,16 @@
 import React from "react";
 import firebase from "firebase";
-import { Row, Col, Button, Input, Layout, Divider, message, Card } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Input,
+  Layout,
+  Modal,
+  message,
+  Card,
+  Progress
+} from "antd";
 import NavbarCo from "./NavbarCo";
 
 export default class TaskStatus extends React.Component {
@@ -8,9 +18,26 @@ export default class TaskStatus extends React.Component {
     super(props);
     this.state = {
       updates: [],
-      contracts: []
+      contracts: [],
+      visible: false
     };
   }
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+      updates: []
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false.task,
+      updates: []
+    });
+  };
 
   componentDidMount() {
     const contractsRef = firebase.database().ref("contracts");
@@ -24,8 +51,6 @@ export default class TaskStatus extends React.Component {
           contracts[contract].closed === "false"
         ) {
           contractsList.push({
-            approved: contracts[contract].approved,
-            closed: contracts[contract].closed,
             name: contracts[contract].name,
             company: contracts[contract].company,
             contract: contracts[contract].details,
@@ -33,7 +58,8 @@ export default class TaskStatus extends React.Component {
             time: contracts[contract].time,
             id: contracts[contract].id,
             students: contracts[contract].students,
-            pushId: contracts[contract].pushId
+            pushId: contracts[contract].pushId,
+            updates: contracts[contract].updates
           });
         }
         this.setState({
@@ -57,7 +83,6 @@ export default class TaskStatus extends React.Component {
           <Col span={8}>
             <h2 style={{ textAlign: "left" }}>Status of student tasks</h2>
             <br />
-            <br />
             {this.state.contracts.map(contract => {
               return (
                 <div style={{ textAlign: "left" }}>
@@ -66,11 +91,40 @@ export default class TaskStatus extends React.Component {
                     <p>Details: {contract.contract}</p>
                     <p>Date submitted: {contract.date}</p>
                     <p>Time submitted: {contract.time}</p>
-                    <Button type="primary" onClick={() => {}}>
-                      View updates
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        this.setState({
+                          visible: true
+                        });
+                        if (contract.updates != undefined) {
+                          this.setState({
+                            updates: Object.values(contract.updates)
+                          });
+                          console.log(contract.updates);
+                        }
+                      }}
+                    >
+                      View completed tasks
                     </Button>
+                    <Modal
+                      mask={false}
+                      title="Student updates"
+                      visible={this.state.visible}
+                      onOk={this.handleOk}
+                      onCancel={this.handleCancel}
+                    >
+                      {console.log(this.state.updates)}
+                      {this.state.updates.map(update => {
+                        return (
+                          <Card title={update.task} bordered={false}>
+                            <p>Student: {update.student}</p>
+                            <Progress percent={update.finished} />
+                          </Card>
+                        );
+                      })}
+                    </Modal>
                   </Card>
-                  <br />
                 </div>
               );
             })}

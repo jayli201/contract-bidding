@@ -113,6 +113,7 @@ export default class ComContractSubmit extends React.Component {
           <Col span={6} />
           <Col span={8}>
             <h2 style={{ textAlign: "left" }}>Submit a new contract:</h2>
+            <br />
             <Row>
               <Col span={24}>
                 <Divider orientation="left">Title</Divider>
