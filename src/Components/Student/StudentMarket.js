@@ -7,11 +7,7 @@ class StudentMarket extends React.Component {
   constructor() {
     super();
     this.state = { contracts: [], students: [], disabled: false };
-
-    this.bid = this.bid.bind(this);
   }
-
-  bid = () => {};
 
   componentDidMount() {
     const contractsRef = firebase.database().ref("contracts");
@@ -19,7 +15,10 @@ class StudentMarket extends React.Component {
       let contracts = snapshot.val();
       let contractsList = [];
       for (let contract in contracts) {
-        if (contracts[contract].approved === "true") {
+        if (
+          contracts[contract].approved === "true" &&
+          contracts[contract].closed === "false"
+        ) {
           contractsList.push({
             id: contract,
             name: contracts[contract].name,

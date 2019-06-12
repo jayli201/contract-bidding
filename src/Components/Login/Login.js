@@ -77,7 +77,7 @@ class Login extends Component {
                 } else if (this.state.type[1] === true) {
                   //if admin
                   this.setState({ company: true });
-                } else if (this.state.type[8] === true) {
+                } else if (this.state.type[9] === true) {
                   //if student
                   this.setState({ student: true });
                 }

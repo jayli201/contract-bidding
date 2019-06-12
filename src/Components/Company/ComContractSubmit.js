@@ -22,16 +22,24 @@ export default class ComContractSubmit extends React.Component {
     console.log(userRef);
     let info = {
       approved: "false",
+      closed: "false",
       name: this.state.codename,
       company: this.state.codecompany,
       details: this.state.codedetails,
       date: this.getDate(),
       time: this.getTime(),
       id: firebase.auth().currentUser.uid,
-      students: []
+      students: [],
+      pushId: ""
     };
     console.log(info);
-    userRef.push(info);
+    var pushed = userRef.push(info);
+    var pushId = pushed.key;
+    console.log(pushId);
+    const contractRef = firebase.database().ref("contracts/" + pushId);
+    contractRef.update({
+      pushId: pushId
+    });
     this.setState({
       codename: "",
       codecompany: "",

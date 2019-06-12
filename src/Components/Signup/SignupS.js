@@ -53,7 +53,8 @@ class SignupS extends Component {
             phone: this.state.phone,
             github: this.state.github,
             linkedin: this.state.linkedin,
-            skills: this.state.skills
+            skills: this.state.skills,
+            pushId: user.user.uid
           })
           .then(success => {
             console.log(userRef);
