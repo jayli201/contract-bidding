@@ -2,11 +2,12 @@ import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
 import { Layout, Button, Row, Col, message, Card } from "antd";
+import "./Student.css";
 
 class StudentMarket extends React.Component {
   constructor() {
     super();
-    this.state = { contracts: [], students: [], disabled: false };
+    this.state = { contracts: [], students: [] };
   }
 
   componentDidMount() {
@@ -67,15 +68,32 @@ class StudentMarket extends React.Component {
 
     const contracts = this.state.contracts.map(contract => {
       return (
-        <div>
-          <Card title={contract.name} bordered={false}>
+        <div className="cards" style={{ background: "#white" }}>
+          <Card title={contract.name} bordered={true} style={{ width: 315 }}>
             <p>Company: {contract.company}</p>
             <p>Details: {contract.contract}</p>
             <p>Date submitted: {contract.date}</p>
             <p>Time submitted: {contract.time}</p>
-            {this.state.disabled ? null : (
-              <Button
-                onClick={() => {
+            <Button
+              onClick={() => {
+                let studentList = [];
+                if (contract.students != undefined) {
+                  const students = Object.values(contract.students);
+                  for (let i = 0; i < students.length; i++) {
+                    const student = students[i].student;
+                    studentList.push(student);
+                  }
+                }
+                let count = 0;
+                for (let i = 0; i < studentList.length; i++) {
+                  console.log(studentList);
+                  console.log(firebase.auth().currentUser.uid);
+                  console.log(studentList[i]);
+                  if (studentList[i] === firebase.auth().currentUser.uid) {
+                    count++;
+                  }
+                }
+                if (count === 0) {
                   const userRef = firebase
                     .database()
                     .ref("contracts/" + contract.id + "/students/");
@@ -83,12 +101,14 @@ class StudentMarket extends React.Component {
                     student: firebase.auth().currentUser.uid
                   });
                   message.success("Successfully bid!");
-                }}
-                type="primary"
-              >
-                Bid
-              </Button>
-            )}
+                } else {
+                  message.error("Already bid for this contract");
+                }
+              }}
+              type="primary"
+            >
+              Bid
+            </Button>
           </Card>
         </div>
       );
@@ -98,13 +118,12 @@ class StudentMarket extends React.Component {
       <div>
         <NavbarSt />
         <Row>
-          <Col span={6} />
-          <Col span={12} style={{ textAlign: "left" }}>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
             <br />
             <h2>Available contracts</h2>
-            <br />
-            {contracts}
+            <div className="cards">{contracts}</div>
           </Col>
         </Row>
       </div>

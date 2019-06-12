@@ -11,6 +11,10 @@ class NavbarAd extends Component {
   };
 
   render() {
+    const styles = {
+      fontSize: "20px"
+    };
+
     return (
       <div>
         <Row>
@@ -28,24 +32,24 @@ class NavbarAd extends Component {
               <Menu mode="horizontal" style={{ background: "white" }}>
                 <Menu.Item>
                   <NavLink
-                    to="/amarket"
-                    activeStyle={{
-                      color: "green",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    Marketplace
-                  </NavLink>
-                </Menu.Item>
-                <Menu.Item>
-                  <NavLink
                     to="/approve"
                     activeStyle={{
                       color: "green",
                       fontWeight: "bold"
                     }}
                   >
-                    Edit contracts
+                    <div style={styles}>Edit contracts</div>
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item>
+                  <NavLink
+                    to="/amarket"
+                    activeStyle={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    <div style={styles}>Marketplace</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -56,7 +60,7 @@ class NavbarAd extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Challenges
+                    <div style={styles}>Challenges</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -67,7 +71,7 @@ class NavbarAd extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Profiles
+                    <div style={styles}>Profiles</div>
                   </NavLink>
                 </Menu.Item>
               </Menu>

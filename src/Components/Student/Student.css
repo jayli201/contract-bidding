@@ -1,0 +1,13 @@
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 15px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

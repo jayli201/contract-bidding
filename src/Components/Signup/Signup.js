@@ -133,6 +133,8 @@ class Signup extends Component {
   };
 
   render() {
+    const { Content } = Layout;
+
     return (
       <div>
         <Row>
@@ -176,7 +178,7 @@ class Signup extends Component {
           <Col span={20}>
             <br />
             <br />
-            <h1>Register as a new user</h1>
+            <h1>Create account</h1>
             <br />
             <Row>
               <Col span={9} />
@@ -212,6 +214,7 @@ class Signup extends Component {
           </Col>
           <Col span={2} />
         </Row>
+
         <br />
         <br />
         <div>

@@ -11,6 +11,10 @@ class NavbarSt extends Component {
   };
 
   render() {
+    const styles = {
+      fontSize: "20px"
+    };
+
     return (
       <div>
         <Row>
@@ -34,7 +38,7 @@ class NavbarSt extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Marketplace
+                    <div style={styles}>Marketplace</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -45,7 +49,7 @@ class NavbarSt extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Challenges
+                    <div style={styles}>Challenges</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -53,7 +57,7 @@ class NavbarSt extends Component {
                     to="/task"
                     activeStyle={{ color: "green", fontWeight: "bold" }}
                   >
-                    Task manager
+                    <div style={styles}>Company tasks</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -64,7 +68,7 @@ class NavbarSt extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Profile
+                    <div style={styles}>Profile</div>
                   </NavLink>
                 </Menu.Item>
               </Menu>

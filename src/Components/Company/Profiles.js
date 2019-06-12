@@ -2,6 +2,7 @@ import React from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
 import { Card, Col, Row, Layout } from "antd";
+import "./Company.css";
 
 class Profiles extends React.Component {
   state = { visible: false, info: [] };
@@ -49,38 +50,41 @@ class Profiles extends React.Component {
     return (
       <div>
         <NavbarCo />
-        <br />
-        <br />
         <Row>
-          <Col span={6} />
-          <Col span={12}>
-            <h2 style={{ textAlign: "left" }}>All student profiles</h2>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {this.state.info.map(student => {
-              return (
-                <Card
-                  title={student.name}
-                  bordered={false}
-                  style={{ textAlign: "left" }}
-                >
-                  <p>Email: {student.email}</p>
-                  <p>Phone: {student.phone}</p>
-                  <p>
-                    Github:{" "}
-                    <a href={student.github} target="_blank">
-                      {student.github}
-                    </a>
-                  </p>
-                  <p>
-                    LinkedIn:{" "}
-                    <a href={student.linkedin} target="_blank">
-                      {student.linkedin}
-                    </a>
-                  </p>
-                  <p>Skills: {student.skills}</p>
-                </Card>
-              );
-            })}
+            <br />
+            <h2>Your students</h2>
+            <div className="cards">
+              {this.state.info.map(student => {
+                return (
+                  <div className="cards">
+                    <Card
+                      title={student.name}
+                      bordered={true}
+                      style={{ width: 315 }}
+                    >
+                      <p>Email: {student.email}</p>
+                      <p>Phone: {student.phone}</p>
+                      <p>
+                        Github:{" "}
+                        <a href={student.github} target="_blank">
+                          {student.github}
+                        </a>
+                      </p>
+                      <p>
+                        LinkedIn:{" "}
+                        <a href={student.linkedin} target="_blank">
+                          {student.linkedin}
+                        </a>
+                      </p>
+                      <p>Skills: {student.skills}</p>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
           </Col>
         </Row>
       </div>

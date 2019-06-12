@@ -20,7 +20,6 @@ class Challenge extends React.Component {
     this.state = {
       data: []
     };
-    this.mapChallenges = this.mapChallenges.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -33,8 +32,6 @@ class Challenge extends React.Component {
       let newState = [];
       for (let challenge in challenges) {
         newState.push({
-          company: challenges[challenge].company,
-          contact: challenges[challenge].contact,
           name: challenges[challenge].name,
           challenge: challenges[challenge].challenge,
           date: challenges[challenge].date,
@@ -47,44 +44,10 @@ class Challenge extends React.Component {
     });
   }
 
-  mapChallenges = () => {
-    let eachChallenge = this.state.data;
-
-    return eachChallenge.map(challenge => {
-      return (
-        <div>
-          <Card title={challenge.name} bordered={false}>
-            <p>Company: {challenge.company}</p>
-            <p>Contact info: {challenge.contact}</p>
-            <p>Challenge details: {challenge.challenge}</p>
-            <p>Date submitted: {challenge.date}</p>
-            <p>Time submitted: {challenge.time}</p>
-            <Popconfirm
-              title="Are you sure you want to delete this contract?"
-              onConfirm={() => {
-                const challengeRef = firebase
-                  .database()
-                  .ref("challenges/" + challenge.pushId);
-                challengeRef.remove();
-                message.success("Deleted contract");
-              }}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button style={{ marginLeft: 8 }} icon="delete" />
-            </Popconfirm>
-          </Card>
-        </div>
-      );
-    });
-  };
-
   handleClick() {
     const challengeRef = firebase.database().ref("challenges/");
     let info = {
       name: this.state.name,
-      company: this.state.company,
-      contact: this.state.contact,
       challenge: this.state.challenge,
       date: this.getDate(),
       time: this.getTime(),
@@ -99,8 +62,6 @@ class Challenge extends React.Component {
     });
     this.setState({
       name: "",
-      company: "",
-      contact: "",
       challenge: "",
       date: "",
       time: ""
@@ -144,77 +105,79 @@ class Challenge extends React.Component {
   }
 
   render() {
+    const challenges = this.state.data.map(challenge => {
+      return (
+        <div className="cards">
+          <Card title={challenge.name} bordered={true} style={{ width: 315 }}>
+            <p>Challenge details: {challenge.challenge}</p>
+            <p>Date submitted: {challenge.date}</p>
+            <p>Time submitted: {challenge.time}</p>
+            <Popconfirm
+              title="Are you sure you want to delete this contract?"
+              onConfirm={() => {
+                const challengeRef = firebase
+                  .database()
+                  .ref("challenges/" + challenge.pushId);
+                challengeRef.remove();
+                message.success("Deleted contract");
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button style={{ marginLeft: 8 }} icon="delete" />
+            </Popconfirm>
+          </Card>
+        </div>
+      );
+    });
+
     return (
       <div>
         <NavbarAd />
         <br />
         <br />
+        <h2 style={{ textAlign: "center" }}>Submit a challenge</h2>
+        <div className="submit">
+          <Row>
+            <Col span={12}>
+              <Divider orientation="left">Title</Divider>
+            </Col>
+          </Row>
+          <Input
+            style={{ width: 315 }}
+            value={this.state.name}
+            name="name"
+            placeholder="challenge name"
+            onChange={this.handleChange}
+          />
+          <br />
+          <Row>
+            <Col span={24}>
+              <Divider orientation="left">Challenge details</Divider>
+            </Col>
+          </Row>
+          <TextArea
+            style={{ width: 315 }}
+            value={this.state.challenge}
+            rows={6}
+            name="challenge"
+            placeholder="challenge details"
+            onChange={this.handleChange}
+          />
+          <br />
+          <Button onClick={this.handleClick} type="primary">
+            Submit
+          </Button>
+          <br />
+          <br />
+        </div>
         <Row>
-          <Col span={6} />
-          <Col span={8} style={{ textAlign: "left" }}>
-            <h2 style={{ textAlign: "left" }}>Submit a challenge</h2>
-            <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Company name</Divider>
-              </Col>
-            </Row>
-            <Input
-              value={this.state.company}
-              name="company"
-              placeholder="company name"
-              onChange={this.handleChange}
-            />
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
             <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Challenge name</Divider>
-              </Col>
-            </Row>
-            <Input
-              value={this.state.name}
-              name="name"
-              placeholder="challenge name"
-              onChange={this.handleChange}
-            />
-            <br />
-            <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Contact info</Divider>
-              </Col>
-            </Row>
-            <Input
-              value={this.state.contact}
-              name="contact"
-              placeholder="contact info"
-              onChange={this.handleChange}
-            />
-            <br />
-            <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Challenge details</Divider>
-              </Col>
-            </Row>
-            <TextArea
-              value={this.state.challenge}
-              rows={6}
-              name="challenge"
-              placeholder="challenge details"
-              onChange={this.handleChange}
-            />
-            <br />
-            <br />
-            <Button onClick={this.handleClick} type="primary">
-              Submit
-            </Button>
-            <br />
-            <br />
-            <br />
-            <h2 style={{ textAlign: "left" }}>Current challenges</h2>
-            {this.mapChallenges()}
+            <h2>Current challenges</h2>
+            <div className="cards">{challenges}</div>
           </Col>
         </Row>
       </div>

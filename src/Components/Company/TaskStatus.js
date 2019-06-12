@@ -76,58 +76,63 @@ export default class TaskStatus extends React.Component {
     return (
       <div className="all">
         <NavbarCo />
-        <br />
-        <br />
-        <Row style={{ textAlign: "left" }}>
-          <Col span={6} />
-          <Col span={8}>
-            <h2 style={{ textAlign: "left" }}>Status of student tasks</h2>
+        <Row>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {this.state.contracts.map(contract => {
-              return (
-                <div style={{ textAlign: "left" }}>
-                  <Card title={contract.name} bordered={false}>
-                    <p>Company: {contract.company}</p>
-                    <p>Details: {contract.contract}</p>
-                    <p>Date submitted: {contract.date}</p>
-                    <p>Time submitted: {contract.time}</p>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        this.setState({
-                          visible: true
-                        });
-                        if (contract.updates != undefined) {
+            <br />
+            <h2>Completed student tasks</h2>
+            <div className="cards">
+              {this.state.contracts.map(contract => {
+                return (
+                  <div className="cards" style={{ textAlign: "center" }}>
+                    <Card
+                      title={contract.name}
+                      bordered={true}
+                      style={{ width: 315 }}
+                    >
+                      <p>Company: {contract.company}</p>
+                      <p>Details: {contract.contract}</p>
+                      <p>Date submitted: {contract.date}</p>
+                      <p>Time submitted: {contract.time}</p>
+                      <Button
+                        type="primary"
+                        onClick={() => {
                           this.setState({
-                            updates: Object.values(contract.updates)
+                            visible: true
                           });
-                          console.log(contract.updates);
-                        }
-                      }}
-                    >
-                      View completed tasks
-                    </Button>
-                    <Modal
-                      mask={false}
-                      title="Student updates"
-                      visible={this.state.visible}
-                      onOk={this.handleOk}
-                      onCancel={this.handleCancel}
-                    >
-                      {console.log(this.state.updates)}
-                      {this.state.updates.map(update => {
-                        return (
-                          <Card title={update.task} bordered={false}>
-                            <p>Student: {update.student}</p>
-                            <Progress percent={update.finished} />
-                          </Card>
-                        );
-                      })}
-                    </Modal>
-                  </Card>
-                </div>
-              );
-            })}
+                          if (contract.updates != undefined) {
+                            this.setState({
+                              updates: Object.values(contract.updates)
+                            });
+                            console.log(contract.updates);
+                          }
+                        }}
+                      >
+                        View completed tasks
+                      </Button>
+                      <Modal
+                        mask={false}
+                        title="Student updates"
+                        visible={this.state.visible}
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel}
+                      >
+                        {console.log(this.state.updates)}
+                        {this.state.updates.map(update => {
+                          return (
+                            <Card title={update.task} bordered={false}>
+                              <p>Student: {update.student}</p>
+                              <Progress percent={update.finished} />
+                            </Card>
+                          );
+                        })}
+                      </Modal>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
           </Col>
         </Row>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
 import { Layout, Button, Row, Col, Modal, Input, Card, Checkbox } from "antd";
+import "./Student.css";
 
 const ButtonGroup = Button.Group;
 
@@ -74,8 +75,8 @@ class StudentProfile extends React.Component {
       console.log(contract.finished);
       if (contract.finished != 100) {
         return (
-          <div>
-            <Card title={contract.task} bordered={false}>
+          <div className="cards">
+            <Card title={contract.task} bordered={true} style={{ width: 315 }}>
               <p>Name: {contract.name}</p>
               <p>Company: {contract.company}</p>
               <p>Details: {contract.contract}</p>
@@ -116,14 +117,13 @@ class StudentProfile extends React.Component {
     return (
       <div>
         <NavbarSt />
-        <br />
-        <br />
-        <Row style={{ textAlign: "left" }}>
-          <Col span={6} />
-          <Col span={12}>
-            <h2>Company tasks</h2>
+        <Row>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {contracts}
+            <br />
+            <h2>Company tasks</h2>
+            <div className="cards">{contracts}</div>
           </Col>
         </Row>
       </div>

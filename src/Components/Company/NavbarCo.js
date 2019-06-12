@@ -11,6 +11,10 @@ class NavbarCo extends Component {
   };
 
   render() {
+    const styles = {
+      fontSize: "20px"
+    };
+
     return (
       <div>
         <Row>
@@ -28,24 +32,24 @@ class NavbarCo extends Component {
               <Menu mode="horizontal">
                 <Menu.Item>
                   <NavLink
-                    to="/cmarket"
-                    activeStyle={{
-                      color: "green",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    Your contracts
-                  </NavLink>
-                </Menu.Item>
-                <Menu.Item>
-                  <NavLink
                     to="/contract"
                     activeStyle={{
                       color: "green",
                       fontWeight: "bold"
                     }}
                   >
-                    Submit contracts
+                    <div style={styles}>Submit contracts</div>
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item>
+                  <NavLink
+                    to="/cmarket"
+                    activeStyle={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    <div style={styles}>Contracts</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -53,7 +57,7 @@ class NavbarCo extends Component {
                     to="/taskstatus"
                     activeStyle={{ color: "green", fontWeight: "bold" }}
                   >
-                    Task manager
+                    <div style={styles}>Tasks</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -64,7 +68,7 @@ class NavbarCo extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Student profiles
+                    <div style={styles}>Profiles</div>
                   </NavLink>
                 </Menu.Item>
               </Menu>
