@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Modal, Input, Card } from "antd";
+import { Layout, Button, Row, Col, Modal, Input, Card, Checkbox } from "antd";
 
 class StudentProfile extends React.Component {
   constructor() {
@@ -46,6 +46,10 @@ class StudentProfile extends React.Component {
     });
   };
 
+  onChange = e => {
+    console.log(`checked = ${e.target.checked}`);
+  };
+
   render() {
     const { visible, loading } = this.state;
     const { TextArea } = Input;
@@ -58,6 +62,8 @@ class StudentProfile extends React.Component {
             <p>Name: {contract.name}</p>
             <p>Company: {contract.company}</p>
             <p>Details: {contract.contract}</p>
+            <Checkbox onChange={this.onChange}>Finished!</Checkbox>
+
             {/* <p>Date submitted: {contract.date}</p> */}
             {/* <p>Time submitted: {contract.time}</p> */}
           </Card>

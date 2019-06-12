@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase";
-import { Input, Button, message, Row, Col, Divider } from "antd";
+import { Input, Button, message, Row, Col, Divider, Checkbox } from "antd";
 import NavbarAd from "./NavbarAd";
 
 const { TextArea } = Input;
@@ -70,6 +70,10 @@ class Challenge extends React.Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  onChange = e => {
+    console.log(`checked = ${e.target.checked}`);
+  };
 
   render() {
     return (

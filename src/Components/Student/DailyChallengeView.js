@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase";
-import { Table, Divider, Tag } from "antd";
+import { Table, Divider, Tag, Checkbox } from "antd";
 import { Card, Col, Row } from "antd";
 import NavbarSt from "./NavbarSt";
 
@@ -33,6 +33,10 @@ class DailyChallengeView extends Component {
     });
   }
 
+  onChange = e => {
+    console.log(`checked = ${e.target.checked}`);
+  };
+
   mapChallenges = () => {
     let eachChallenge = this.state.data;
 
@@ -45,6 +49,7 @@ class DailyChallengeView extends Component {
             <p>Challenge: {challenge.challenge}</p>
             <p>Date submitted: {challenge.date}</p>
             <p>Time submitted: {challenge.time}</p>
+            <Checkbox onChange={this.onChange}>Finished!</Checkbox>
           </Card>
         </div>
       );

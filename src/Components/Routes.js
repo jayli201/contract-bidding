@@ -15,6 +15,7 @@ import Welcome from "./Login/Welcome.js";
 import AdminMarket from "./Admin/AdminMarket.js";
 import DailyChallengeView from "./Student/DailyChallengeView.js";
 import TaskManager from "./Student/TaskManager.js";
+import TaskStatus from "./Company/TaskStatus.js";
 
 export default class Routes extends React.Component {
   render() {
@@ -36,6 +37,7 @@ export default class Routes extends React.Component {
           <Route exact path="/amarket" component={AdminMarket} />
           <Route exact path="/challenge" component={DailyChallengeView} />
           <Route exact path="/task" component={TaskManager} />
+          <Route exact path="/taskstatus" component={TaskStatus} />
         </Switch>
       </main>
     );
