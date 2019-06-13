@@ -9,9 +9,11 @@ import {
   Modal,
   message,
   Card,
-  Progress
+  Progress,
+  Checkbox
 } from "antd";
 import NavbarCo from "./NavbarCo";
+import TransferList from "antd/lib/transfer/list";
 
 export default class TaskStatus extends React.Component {
   constructor(props) {
@@ -19,7 +21,9 @@ export default class TaskStatus extends React.Component {
     this.state = {
       updates: [],
       contracts: [],
-      visible: false
+      visible: false,
+      currentCompany: "",
+      force: false
     };
   }
 
@@ -47,8 +51,7 @@ export default class TaskStatus extends React.Component {
       for (let contract in contracts) {
         if (
           contracts[contract].id === firebase.auth().currentUser.uid &&
-          contracts[contract].approved === "true" &&
-          contracts[contract].closed === "false"
+          contracts[contract].approved === "true"
         ) {
           contractsList.push({
             name: contracts[contract].name,
@@ -98,8 +101,10 @@ export default class TaskStatus extends React.Component {
                       <Button
                         type="primary"
                         onClick={() => {
+                          console.log(contract.pushId);
                           this.setState({
-                            visible: true
+                            visible: true,
+                            currentCompany: contract.pushId
                           });
                           if (contract.updates != undefined) {
                             this.setState({
@@ -120,10 +125,34 @@ export default class TaskStatus extends React.Component {
                       >
                         {console.log(this.state.updates)}
                         {this.state.updates.map(update => {
+                          console.log(update);
+                          console.log(contract);
                           return (
-                            <Card title={update.task} bordered={false}>
-                              <p>Student: {update.student}</p>
+                            <Card title={update.student} bordered={false}>
+                              <p>{update.task} </p>
                               <Progress percent={update.finished} />
+                              <br />
+                              <br />
+                              {/* <Checkbox
+                                onClick={() => {
+                                  const updateRef = firebase
+                                    .database()
+                                    .ref(
+                                      "contracts/" +
+                                        this.state.currentCompany +
+                                        "/updates/" +
+                                        update.pushId
+                                    );
+                                  console.log(this.state.currentCompany);
+                                  console.log(update.pushId);
+                                  updateRef.remove();
+                                  this.setState({
+                                    visible: false
+                                  });
+                                }}
+                              >
+                                Dismiss
+                              </Checkbox> */}
                             </Card>
                           );
                         })}

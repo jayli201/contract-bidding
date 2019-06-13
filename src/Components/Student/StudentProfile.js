@@ -106,7 +106,7 @@ class StudentProfile extends React.Component {
           <Card
             title={this.state.info.name}
             bordered={true}
-            style={{ width: 315, textAlign: "center" }}
+            style={{ width: 375, textAlign: "center" }}
           >
             <p>Email: {this.state.info.email}</p>
             <p>Phone: {this.state.info.phone}</p>

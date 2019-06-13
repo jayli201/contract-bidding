@@ -1,14 +1,8 @@
-.submit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .cards {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: baseline;
   padding: 15px;
 }

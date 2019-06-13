@@ -1,7 +1,17 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Modal, Input, Card, Checkbox } from "antd";
+import {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Modal,
+  Input,
+  Card,
+  Checkbox,
+  message
+} from "antd";
 import "./Student.css";
 
 const ButtonGroup = Button.Group;
@@ -14,7 +24,8 @@ class StudentProfile extends React.Component {
       loading: false,
       contracts: [],
       id: "",
-      studentName: ""
+      studentName: "",
+      currentTask: ""
     };
   }
 
@@ -66,6 +77,20 @@ class StudentProfile extends React.Component {
     });
   };
 
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
   render() {
     const { visible, loading } = this.state;
     const { TextArea } = Input;
@@ -77,9 +102,33 @@ class StudentProfile extends React.Component {
         return (
           <div className="cards">
             <Card title={contract.task} bordered={true} style={{ width: 315 }}>
-              <p>Name: {contract.name}</p>
+              <p style={{ fontWeight: "bold" }}>For contract:</p>
+              <p>Contract: {contract.name}</p>
               <p>Company: {contract.company}</p>
               <p>Details: {contract.contract}</p>
+              <Button
+                type="primary"
+                onClick={() => {
+                  console.log(contract.taskId);
+                  this.setState({
+                    visible: true,
+                    currentTask: contract.task
+                  });
+                }}
+              >
+                See task details
+              </Button>
+              <Modal
+                mask={false}
+                title={contract.name}
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+              >
+                <p>{this.state.currentTask}</p>
+              </Modal>
+              <br />
+              <br />
               <div>
                 <Checkbox
                   onChange={() => {
@@ -98,11 +147,22 @@ class StudentProfile extends React.Component {
                     const contractRef = firebase
                       .database()
                       .ref("contracts/" + contract.pushId + "/updates");
-                    contractRef.push({
+                    var pushed = contractRef.push({
                       finished: 100,
                       student: this.state.studentName,
-                      task: contract.task
+                      task: contract.task,
+                      pushId: ""
                     });
+                    var pushId = pushed.key;
+                    const specificRef = firebase
+                      .database()
+                      .ref(
+                        "contracts/" + contract.pushId + "/updates/" + pushId
+                      );
+                    specificRef.update({
+                      pushId: pushId
+                    });
+                    message.success("Finished task!");
                   }}
                 >
                   Finished!

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import NavbarCo from "./NavbarCo";
 import firebase from "../firebase.js";
 import {
@@ -14,7 +14,7 @@ import {
 } from "antd";
 import "./Company.css";
 
-class CompanyMarket extends React.Component {
+class CompanyMarket extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,7 +24,6 @@ class CompanyMarket extends React.Component {
       visible: false,
       force: false,
       task: "",
-      currentContract: "",
       name: "",
       company: "",
       contract: "",
@@ -99,7 +98,8 @@ class CompanyMarket extends React.Component {
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
             <br />
-            <h2>Your approved contracts</h2>
+            <h2>Your approved and open contracts</h2>
+
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (
@@ -150,7 +150,6 @@ class CompanyMarket extends React.Component {
                           });
                           this.setState({
                             studentInfo: studentInfo,
-                            currentContract: contract.pushId,
                             name: contract.name,
                             company: contract.company,
                             contract: contract.contract,
@@ -211,7 +210,6 @@ class CompanyMarket extends React.Component {
                                     console.log(contract.pushId);
                                     let info = {
                                       task: this.state.task,
-                                      contract: this.state.currentContract,
                                       name: this.state.name,
                                       company: this.state.company,
                                       details: this.state.contract,

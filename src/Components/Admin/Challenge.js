@@ -8,7 +8,8 @@ import {
   Col,
   Divider,
   Card,
-  Popconfirm
+  Popconfirm,
+  Modal
 } from "antd";
 import NavbarAd from "./NavbarAd";
 
@@ -18,7 +19,10 @@ class Challenge extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      name: "",
+      details: "",
+      currentChallenge: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -104,14 +108,85 @@ class Challenge extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handleCancel = e => {
+    this.setState({
+      visible: false,
+      name: "",
+      details: ""
+    });
+  };
+
   render() {
     const challenges = this.state.data.map(challenge => {
       return (
         <div className="cards">
           <Card title={challenge.name} bordered={true} style={{ width: 315 }}>
-            <p>Challenge details: {challenge.challenge}</p>
+            <p>Challenge: {challenge.challenge}</p>
             <p>Date submitted: {challenge.date}</p>
             <p>Time submitted: {challenge.time}</p>
+            <Button
+              style={{ marginLeft: 8 }}
+              icon="edit"
+              type="primary"
+              onClick={() => {
+                this.setState({
+                  visible: true,
+                  currentChallenge: challenge.pushId
+                });
+              }}
+            >
+              Edit
+            </Button>
+            <Modal
+              mask={false}
+              title="Edit challenge"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              footer={[
+                <Button key="cancel" onClick={this.handleCancel}>
+                  Cancel
+                </Button>,
+                <Button
+                  key="submit"
+                  type="primary"
+                  onClick={() => {
+                    const challengeRef = firebase
+                      .database()
+                      .ref("challenges/" + this.state.currentChallenge);
+                    console.log(this.state.currentChallenge);
+                    challengeRef.update({
+                      name: this.state.name,
+                      challenge: this.state.details
+                    });
+                    this.setState({
+                      name: "",
+                      details: "",
+                      visible: false
+                    });
+                    message.success("Edited challenge!");
+                  }}
+                >
+                  Submit
+                </Button>
+              ]}
+            >
+              <Input
+                onChange={this.handleChange}
+                name="name"
+                value={this.state.name}
+                placeholder="enter contract title"
+              />
+              <br />
+              <br />
+              <TextArea
+                rows={5}
+                onChange={this.handleChange}
+                name="details"
+                value={this.state.details}
+                placeholder="enter contract details"
+              />
+            </Modal>
             <Popconfirm
               title="Are you sure you want to delete this contract?"
               onConfirm={() => {
@@ -132,38 +207,44 @@ class Challenge extends React.Component {
     });
 
     return (
-      <div>
+      <div className="all">
         <NavbarAd />
         <br />
         <br />
         <h2 style={{ textAlign: "center" }}>Submit a challenge</h2>
         <div className="submit">
           <Row>
-            <Col span={12}>
+            <Col span={9} />
+            <Col span={6}>
               <Divider orientation="left">Title</Divider>
             </Col>
+            <Col span={6} />
           </Row>
           <Input
-            style={{ width: 315 }}
+            style={{ width: 330 }}
             value={this.state.name}
             name="name"
             placeholder="challenge name"
             onChange={this.handleChange}
           />
           <br />
+          <br />
           <Row>
-            <Col span={24}>
-              <Divider orientation="left">Challenge details</Divider>
+            <Col span={9} />
+            <Col span={6}>
+              <Divider orientation="left">Details</Divider>
             </Col>
+            <Col span={6} />
           </Row>
           <TextArea
-            style={{ width: 315 }}
+            style={{ width: 330 }}
             value={this.state.challenge}
             rows={6}
             name="challenge"
             placeholder="challenge details"
             onChange={this.handleChange}
           />
+          <br />
           <br />
           <Button onClick={this.handleClick} type="primary">
             Submit

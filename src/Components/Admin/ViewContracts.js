@@ -19,14 +19,11 @@ class ViewContracts extends Component {
     this.state = {
       contracts: [],
       visible: false,
-      loading: false,
       name: "",
-      company: "",
       details: "",
       editId: ""
     };
     this.handleChangeN = this.handleChangeN.bind(this);
-    this.handleChangeC = this.handleChangeC.bind(this);
     this.handleChangeD = this.handleChangeD.bind(this);
   }
 
@@ -40,7 +37,6 @@ class ViewContracts extends Component {
     this.setState({
       visible: false,
       name: "",
-      company: "",
       details: ""
     });
   };
@@ -73,11 +69,6 @@ class ViewContracts extends Component {
     this.setState({ name: evt.target.value });
   };
 
-  handleChangeC = evt => {
-    evt.preventDefault();
-    this.setState({ company: evt.target.value });
-  };
-
   handleChangeD = evt => {
     evt.preventDefault();
     this.setState({ details: evt.target.value });
@@ -85,7 +76,7 @@ class ViewContracts extends Component {
 
   render() {
     const { Header } = Layout;
-    const { visible, loading } = this.state;
+    const { visible } = this.state;
     const { TextArea } = Input;
 
     return (
@@ -152,28 +143,20 @@ class ViewContracts extends Component {
                           <Button
                             key="submit"
                             type="primary"
-                            loading={loading}
                             onClick={() => {
-                              this.setState({ loading: true });
-                              setTimeout(() => {
-                                this.setState({
-                                  loading: false,
-                                  visible: false
-                                });
-                              }, 500);
                               const contract = firebase
                                 .database()
                                 .ref("contracts/" + this.state.editId);
                               contract.update({
                                 name: this.state.name,
-                                company: this.state.company,
                                 details: this.state.details
                               });
                               this.setState({
                                 name: "",
-                                company: "",
-                                details: ""
+                                details: "",
+                                visible: false
                               });
+                              message.success("Edited contract!");
                             }}
                           >
                             Submit
@@ -184,13 +167,6 @@ class ViewContracts extends Component {
                           onChange={this.handleChangeN}
                           value={this.state.name}
                           placeholder="enter contract title"
-                        />
-                        <br />
-                        <br />
-                        <Input
-                          onChange={this.handleChangeC}
-                          value={this.state.company}
-                          placeholder="enter company name"
                         />
                         <br />
                         <br />

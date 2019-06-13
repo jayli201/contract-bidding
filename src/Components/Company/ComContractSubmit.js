@@ -106,48 +106,57 @@ export default class ComContractSubmit extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div className="all">
+      <div>
         <NavbarCo />
         <br />
         <br />
         <h2 style={{ textAlign: "center" }}>Submit a new contract</h2>
         <div className="submit">
           <Row>
-            <Col span={12}>
+            <Col span={9} />
+            <Col span={6}>
               <Divider orientation="left">Title</Divider>
             </Col>
+            <Col span={6} />
           </Row>
           <Input
-            style={{ textAlign: "left", width: 315 }}
+            style={{ textAlign: "left", width: 330 }}
             onChange={this.handleNameChange}
             value={this.state.codename}
             placeholder="title"
           />
           <br />
+          <br />
           <Row>
-            <Col span={12}>
+            <Col span={9} />
+            <Col span={6}>
               <Divider orientation="left">Company</Divider>
             </Col>
+            <Col span={6} />
           </Row>
           <Input
-            style={{ textAlign: "left", width: 315 }}
+            style={{ textAlign: "left", width: 330 }}
             onChange={this.handleCompanyChange}
             value={this.state.codecompany}
             placeholder="company"
           />
           <br />
+          <br />
           <Row>
-            <Col span={12}>
+            <Col span={9} />
+            <Col span={6}>
               <Divider orientation="left">Details</Divider>
             </Col>
+            <Col span={6} />
           </Row>
           <TextArea
-            style={{ width: 315 }}
+            style={{ width: 330 }}
             rows={5}
             onChange={this.handleDetailChange}
             value={this.state.codedetails}
             placeholder="details"
           />
+          <br />
           <br />
           <Button type="primary" onClick={this.handleSubmit}>
             Submit
