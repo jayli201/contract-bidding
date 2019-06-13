@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { Button, Row, Col, Layout, PageHeader, Menu } from "antd";
-
+import { Row, Col, Button, Layout, PageHeader, Menu } from "antd";
 
 class Welcome extends Component {
   constructor(props) {
@@ -15,15 +14,11 @@ class Welcome extends Component {
     this.history.props.push("/login");
   };
 
-
-
   render() {
     const { Header, Sider } = Layout;
 
-
     //normal rendering for login page
     return (
-
       <div>
         <Row>
           <Col span={3} />
@@ -69,9 +64,6 @@ class Welcome extends Component {
     );
   }
 }
-
-
-
 
 //uses withRouter for changing urls if signup page is clicked
 export default withRouter(Welcome);

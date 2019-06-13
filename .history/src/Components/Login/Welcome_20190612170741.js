@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import './App.css';
+import Landingpage from './Landingpage'
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { Button, Row, Col, Layout, PageHeader, Menu } from "antd";
-
+import { Row, Col, Button, PageHeader, Menu } from "antd";
+import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl'
 
 class Welcome extends Component {
   constructor(props) {
@@ -15,17 +17,31 @@ class Welcome extends Component {
     this.history.props.push("/login");
   };
 
-
-
   render() {
     const { Header, Sider } = Layout;
 
-
     //normal rendering for login page
     return (
+      <div className='big-content'>
+        <Layout>
+          <Header className='header-color' title="RevTek" scroll>
+            <Navigation>
+              <Button type="primary" onClick={() => { this.props.history.push("/login"); }}>
+                Login
+            </Button>
+            </Navigation>
+          </Header>
+          <Drawer title="Title"></Drawer>
+          <Content>
+            <Landingpage />
+            {/* <NavLink to="/"> */}
 
-      <div>
-        <Row>
+            {/* <img src="images/logo.png" width="175" height="50" /> */}
+            {/* </NavLink> */}
+          </Content>
+        </Layout>
+
+        {/* <Row>
           <Col span={3} />
           <Col span={15}>
             <PageHeader
@@ -64,14 +80,11 @@ class Welcome extends Component {
             </Button>
           </Col>
           <Col span={3} />
-        </Row>
+        </Row> */}
       </div>
     );
   }
 }
-
-
-
 
 //uses withRouter for changing urls if signup page is clicked
 export default withRouter(Welcome);

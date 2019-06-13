@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { Button, Row, Col, Layout, PageHeader, Menu } from "antd";
-
+import { Row, Col, Button, Layout, PageHeader, Menu } from "antd";
+imort { Layout, Header, Navigation, Drawer, Content } from 'react-mdl'
 
 class Welcome extends Component {
   constructor(props) {
@@ -15,17 +15,25 @@ class Welcome extends Component {
     this.history.props.push("/login");
   };
 
-
-
   render() {
     const { Header, Sider } = Layout;
 
-
     //normal rendering for login page
     return (
+      <div className='big-content'>
+        <Layout>
+          <Header className='header-color' title="RevTek" scroll>
+            <Navigation>
+              <Button type="primary" onClick={() => { this.props.history.push("/login"); }}>
+                Login
+            </Button>
+            </Navigation>
+          </Header>
+          <Drawer title="Title"
 
-      <div>
-        <Row>
+
+      </Layout>
+        {/* <Row>
           <Col span={3} />
           <Col span={15}>
             <PageHeader
@@ -64,14 +72,11 @@ class Welcome extends Component {
             </Button>
           </Col>
           <Col span={3} />
-        </Row>
+        </Row> */}
       </div>
-    );
-  }
-}
-
-
-
-
-//uses withRouter for changing urls if signup page is clicked
-export default withRouter(Welcome);
+        );
+      }
+    }
+    
+    //uses withRouter for changing urls if signup page is clicked
+    export default withRouter(Welcome);
