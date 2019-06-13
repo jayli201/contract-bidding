@@ -77,7 +77,7 @@ export default class TaskStatus extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div className="all" style={{ background: "#EDF5E0" }}>
+      <div className="all" style={{ background: "white" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />

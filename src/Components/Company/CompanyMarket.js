@@ -91,7 +91,7 @@ class CompanyMarket extends Component {
     const { TextArea } = Input;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
@@ -288,7 +288,7 @@ class CompanyMarket extends Component {
         <br />
         <br />
         <br />
-        {/* <Footer style={{ background: "#EDF5E0" }} /> */}
+        {/* <Footer style={{ background: "white" }} /> */}
       </div>
     );
   }

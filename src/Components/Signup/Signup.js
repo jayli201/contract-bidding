@@ -136,11 +136,11 @@ class Signup extends Component {
     const { Content } = Layout;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <Row>
           <Col span={3} />
           <Col span={15}>
-            <PageHeader style={{ background: "#EDF5E0", textAlign: "left" }}>
+            <PageHeader style={{ background: "white", textAlign: "left" }}>
               <NavLink to="/">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>

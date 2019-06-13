@@ -126,13 +126,13 @@ class Login extends Component {
 
     //normal rendering for login page
     return (
-      <div class="login" style={{ background: "#EDF5E0" }}>
+      <div class="login" style={{ background: "white" }}>
         <Row>
           <Col span={3} />
           <Col span={15}>
             <PageHeader
               style={{
-                background: "#EDF5E0",
+                background: "white",
                 textAlign: "left"
               }}
             >
@@ -224,7 +224,6 @@ class Login extends Component {
                 </Button>
               </div>
               <br />
-              <br />
               {/* <h3>New to RevTek?</h3>
               <br />
               <div>
@@ -236,13 +235,20 @@ class Login extends Component {
               <div>
                 <Button onClick={this.signups}>Sign up as student</Button>
               </div> */}
+              <Button
+                onClick={() => {
+                  this.props.history.push("/");
+                }}
+              >
+                Cancel
+              </Button>
             </Form>
           </Col>
           <Col span={2} />
         </Row>
         <br />
         <br />
-        {/* <Footer style={{ background: "#EDF5E0" }}>
+        {/* <Footer style={{ background: "white" }}>
           <br />
           <br />
           <br />

@@ -217,7 +217,7 @@ class Challenge extends React.Component {
     });
 
     return (
-      <div className="all" style={{ background: "#EDF5E0" }}>
+      <div className="all" style={{ background: "white" }}>
         <NavbarAd />
         <br />
         <br />

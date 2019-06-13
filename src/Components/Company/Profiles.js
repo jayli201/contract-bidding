@@ -48,7 +48,7 @@ class Profiles extends React.Component {
     const { Header } = Layout;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />

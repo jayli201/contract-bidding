@@ -3,12 +3,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-start;
   padding: 15px;
-}
-
-body {
-  background-color: #edf5e0;
 }
 
 .info {

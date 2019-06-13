@@ -106,7 +106,7 @@ export default class ComContractSubmit extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarCo />
         <br />
         <br />
@@ -162,7 +162,7 @@ export default class ComContractSubmit extends React.Component {
             Submit
           </Button>
         </div>
-        <Footer style={{ background: "#EDF5E0" }} />
+        <Footer style={{ background: "white" }} />
       </div>
     );
   }

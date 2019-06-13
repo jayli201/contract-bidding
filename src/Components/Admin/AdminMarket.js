@@ -81,7 +81,7 @@ class AdminMarket extends React.Component {
     const { visible } = this.state;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { Row, Col, Button, Layout, PageHeader, Menu } from "antd";
-import "./Welcome.css";
 
 class Welcome extends Component {
   constructor(props) {
@@ -20,14 +19,14 @@ class Welcome extends Component {
 
     //normal rendering for login page
     return (
-      <div className="welcome" style={{ background: "#EDF5E0" }}>
+      <div className="welcome" style={{ background: "white" }}>
         <Row className="welcome">
           <Col span={3} />
           <Col span={15}>
             <PageHeader
               className="welcome"
               style={{
-                background: "#EDF5E0",
+                background: "white",
                 textAlign: "left"
               }}
             >
@@ -63,10 +62,25 @@ class Welcome extends Component {
         </Row>
         <br />
         <br />
-        <br />
         <Row>
-          <Col span={4} />
+          <Col span={3} />
           <Col span={8}>
+            <h1
+              style={{
+                color: "#092b00"
+              }}
+            >
+              Thinking Together
+            </h1>
+            <h2
+              style={{
+                color: "#092b00",
+                fontFamily: "system-ui;"
+              }}
+            >
+              RevTek makes communicating easier so you can start focusing on
+              projects sooner
+            </h2>
             <br />
             <img
               style={{
@@ -77,11 +91,8 @@ class Welcome extends Component {
           </Col>
           <Col span={1} />
           <Col span={7}>
-            <h1>Thinking Together</h1>
-            <h2>
-              RevTek makes communicating easier so you can start focusing on
-              projects sooner
-            </h2>
+            <br />
+            <h2>Welcome back!</h2>
             <br />
             <Button
               type="primary"
@@ -121,10 +132,6 @@ class Welcome extends Component {
         </Row>
         <br />
         <br />
-        <Footer className="welcome" style={{ background: "#EDF5E0" }}>
-          <br />
-          <br />
-        </Footer>
       </div>
     );
   }
