@@ -2,6 +2,7 @@ import React from "react";
 import NavbarAd from "./NavbarAd";
 import firebase from "../firebase.js";
 import { Card, Col, Row, Layout } from "antd";
+import { ENOSPC } from "constants";
 
 class AllStudents extends React.Component {
   state = { visible: false, info: [] };
@@ -44,47 +45,62 @@ class AllStudents extends React.Component {
   render() {
     console.log(this.state.info);
 
-    const { Header } = Layout;
+    const { Header, Footer } = Layout;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarAd />
-        <br />
-        <br />
         <Row>
-          <Col span={6} />
-          <Col span={12}>
-            <h2 style={{ textAlign: "left" }}>All student profiles</h2>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {this.state.info.map(student => {
-              return (
-                <div
-                  style={{
-                    textAlign: "left"
-                  }}
-                >
-                  <Card title={student.name} bordered={false}>
-                    <p>Email: {student.email}</p>
-                    <p>Phone: {student.phone}</p>
-                    <p>
-                      Github:{" "}
-                      <a href={student.github} target="_blank">
-                        {student.github}
-                      </a>
-                    </p>
-                    <p>
-                      LinkedIn:{" "}
-                      <a href={student.linkedin} target="_blank">
-                        {student.linkedin}
-                      </a>
-                    </p>
-                    <p>Skills: {student.skills}</p>
-                  </Card>
-                </div>
-              );
-            })}
+            <br />
+            <h2>All student profiles</h2>
+            <div className="cards">
+              {this.state.info.map(student => {
+                return (
+                  <div className="cards">
+                    <Card
+                      title={student.name}
+                      bordered={true}
+                      style={{ width: 315 }}
+                    >
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Email:&ensp; </p>
+                        <p> {student.email}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Phone:&ensp; </p>
+                        <p> {student.phone}</p>
+                      </label>
+                      <p className="info">
+                        <a href={student.github} target="_blank">
+                          {student.github}
+                        </a>
+                      </p>
+                      <p>
+                        <a href={student.linkedin} target="_blank">
+                          {student.linkedin}
+                        </a>
+                      </p>
+                      <p>
+                        <p style={{ fontWeight: "bold" }}>Skills:&ensp; </p>
+                        <p> {student.skills}</p>
+                      </p>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
           </Col>
         </Row>
+        <br />
+        {/* <Footer style={{ background: "#EDF5E0" }}>
+          <br />
+          <br />
+          <br />
+          <br />
+        </Footer> */}
       </div>
     );
   }

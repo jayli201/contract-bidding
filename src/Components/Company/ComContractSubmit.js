@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "firebase";
 import { Row, Col, Button, Input, Layout, Divider, message } from "antd";
 import NavbarCo from "./NavbarCo";
+import "./Company.css";
 
 export default class ComContractSubmit extends React.Component {
   constructor(props) {
@@ -105,60 +106,63 @@ export default class ComContractSubmit extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div className="all">
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarCo />
         <br />
         <br />
-        <Row style={{ textAlign: "left" }}>
-          <Col span={6} />
-          <Col span={8}>
-            <h2 style={{ textAlign: "left" }}>Submit a new contract:</h2>
-            <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Title</Divider>
-              </Col>
-            </Row>
-            <Input
-              style={{ textAlign: "left" }}
-              onChange={this.handleNameChange}
-              value={this.state.codename}
-              placeholder="title"
-            />
-            <br />
-            <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Company</Divider>
-              </Col>
-            </Row>
-            <Input
-              style={{ textAlign: "left" }}
-              onChange={this.handleCompanyChange}
-              value={this.state.codecompany}
-              placeholder="company"
-            />
-            <br />
-            <br />
-            <Row>
-              <Col span={24}>
-                <Divider orientation="left">Details</Divider>
-              </Col>
-            </Row>
-            <TextArea
-              rows={5}
-              onChange={this.handleDetailChange}
-              value={this.state.codedetails}
-              placeholder="details"
-            />
-            <br />
-            <br />
-            <br />
-            <Button type="primary" onClick={this.handleSubmit}>
-              Submit
-            </Button>
-          </Col>
-        </Row>
+        <h2 style={{ textAlign: "center" }}>Submit a new contract</h2>
+        <div className="submit">
+          <Row>
+            <Col span={9} />
+            <Col span={6}>
+              <Divider orientation="left">Title</Divider>
+            </Col>
+            <Col span={6} />
+          </Row>
+          <Input
+            style={{ textAlign: "left", width: 330 }}
+            onChange={this.handleNameChange}
+            value={this.state.codename}
+            placeholder="title"
+          />
+          <br />
+          <br />
+          <Row>
+            <Col span={9} />
+            <Col span={6}>
+              <Divider orientation="left">Company</Divider>
+            </Col>
+            <Col span={6} />
+          </Row>
+          <Input
+            style={{ textAlign: "left", width: 330 }}
+            onChange={this.handleCompanyChange}
+            value={this.state.codecompany}
+            placeholder="company"
+          />
+          <br />
+          <br />
+          <Row>
+            <Col span={9} />
+            <Col span={6}>
+              <Divider orientation="left">Details</Divider>
+            </Col>
+            <Col span={6} />
+          </Row>
+          <TextArea
+            style={{ width: 330 }}
+            rows={5}
+            onChange={this.handleDetailChange}
+            value={this.state.codedetails}
+            placeholder="details"
+          />
+          <br />
+          <br />
+          <Button type="primary" onClick={this.handleSubmit}>
+            Submit
+          </Button>
+        </div>
+        <Footer style={{ background: "#EDF5E0" }} />
       </div>
     );
   }

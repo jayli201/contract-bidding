@@ -133,13 +133,15 @@ class Signup extends Component {
   };
 
   render() {
+    const { Content } = Layout;
+
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <Row>
           <Col span={3} />
           <Col span={15}>
-            <PageHeader style={{ background: "white", textAlign: "left" }}>
-              <NavLink to="/login">
+            <PageHeader style={{ background: "#EDF5E0", textAlign: "left" }}>
+              <NavLink to="/">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>
             </PageHeader>
@@ -176,7 +178,7 @@ class Signup extends Component {
           <Col span={20}>
             <br />
             <br />
-            <h1>Register as a new user</h1>
+            <h1>Create account</h1>
             <br />
             <Row>
               <Col span={9} />
@@ -230,6 +232,9 @@ class Signup extends Component {
               Cancel
             </Button>
           </div>
+          <br />
+          <br />
+          <br />
         </div>
       </div>
     );

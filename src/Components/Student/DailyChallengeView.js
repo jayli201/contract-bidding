@@ -3,6 +3,7 @@ import firebase from "firebase";
 import { Table, Divider, Tag, Checkbox } from "antd";
 import { Card, Col, Row } from "antd";
 import NavbarSt from "./NavbarSt";
+import "./Student.css";
 
 class DailyChallengeView extends Component {
   constructor(props) {
@@ -20,8 +21,6 @@ class DailyChallengeView extends Component {
       let newState = [];
       for (let challenge in challenges) {
         newState.push({
-          company: challenges[challenge].company,
-          contact: challenges[challenge].contact,
           name: challenges[challenge].name,
           challenge: challenges[challenge].challenge,
           date: challenges[challenge].date,
@@ -33,23 +32,27 @@ class DailyChallengeView extends Component {
     });
   }
 
-  onChange = e => {
-    console.log(`checked = ${e.target.checked}`);
-  };
-
   mapChallenges = () => {
     let eachChallenge = this.state.data;
 
     return eachChallenge.map(challenge => {
       return (
-        <div>
-          <Card title={challenge.name} bordered={false}>
-            <p>Company: {challenge.company}</p>
-            <p>Contact: {challenge.contact}</p>
-            <p>Challenge: {challenge.challenge}</p>
-            <p>Date submitted: {challenge.date}</p>
-            <p>Time submitted: {challenge.time}</p>
-            <Checkbox onChange={this.onChange}>Finished!</Checkbox>
+        <div className="cards">
+          <Card style={{ width: 315 }} title={challenge.name} bordered={true}>
+            <label className="info">
+              <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                {challenge.challenge}
+              </p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Date submitted:&ensp; </p>
+              <p> {challenge.date}</p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Time submitted:&ensp; </p>
+              <p> {challenge.time}</p>
+            </label>
+            {/* <Checkbox onChange={this.onChange}>Finished!</Checkbox> */}
           </Card>
         </div>
       );
@@ -58,18 +61,20 @@ class DailyChallengeView extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarSt />
-        <br />
-        <br />
-        <Row style={{ textAlign: "left" }}>
-          <Col span={6} />
-          <Col span={12}>
-            <h2>Challenges</h2>
+        <Row>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {this.mapChallenges()}
+            <br />
+            <h2>Challenges</h2>
+            <div className="cards">{this.mapChallenges()}</div>
           </Col>
         </Row>
+        <br />
+        <br />
+        <br />
       </div>
     );
   }

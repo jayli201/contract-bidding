@@ -10,7 +10,8 @@ import {
   Col,
   PageHeader,
   Divider,
-  message
+  message,
+  Card
 } from "antd";
 import { NavLink, withRouter } from "react-router-dom";
 
@@ -95,7 +96,7 @@ class SignupS extends Component {
           <Col span={3} />
           <Col span={15}>
             <PageHeader style={{ background: "white", textAlign: "left" }}>
-              <NavLink to="/login">
+              <NavLink to="/">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>
             </PageHeader>
@@ -132,7 +133,8 @@ class SignupS extends Component {
           <Col span={20}>
             <br />
             <br />
-            <h1>Register as a new student</h1>
+            <h1>Create student account</h1>
+            <br />
             <Row>
               <Col span={9} />
               <Col span={6}>
@@ -235,6 +237,7 @@ class SignupS extends Component {
           <Button onClick={this.back} type="primary">
             Cancel
           </Button>
+          <br />
           <br />
           <br />
         </div>

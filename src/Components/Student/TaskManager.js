@@ -1,7 +1,18 @@
 import React from "react";
 import NavbarSt from "./NavbarSt";
 import firebase from "../firebase.js";
-import { Layout, Button, Row, Col, Modal, Input, Card, Checkbox } from "antd";
+import {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Modal,
+  Input,
+  Card,
+  Checkbox,
+  message
+} from "antd";
+import "./Student.css";
 
 const ButtonGroup = Button.Group;
 
@@ -13,7 +24,8 @@ class StudentProfile extends React.Component {
       loading: false,
       contracts: [],
       id: "",
-      studentName: ""
+      studentName: "",
+      currentTask: ""
     };
   }
 
@@ -65,6 +77,20 @@ class StudentProfile extends React.Component {
     });
   };
 
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
   render() {
     const { visible, loading } = this.state;
     const { TextArea } = Input;
@@ -74,11 +100,40 @@ class StudentProfile extends React.Component {
       console.log(contract.finished);
       if (contract.finished != 100) {
         return (
-          <div>
-            <Card title={contract.task} bordered={false}>
-              <p>Name: {contract.name}</p>
-              <p>Company: {contract.company}</p>
-              <p>Details: {contract.contract}</p>
+          <div className="cards">
+            <Card title={contract.task} bordered={true} style={{ width: 315 }}>
+              <p style={{ fontWeight: "bold" }}>For contract:</p>
+              <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                {contract.contract}
+              </p>
+              <label className="info">
+                <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                <p> {contract.company}</p>
+              </label>
+
+              <Button
+                type="primary"
+                onClick={() => {
+                  console.log(contract.taskId);
+                  this.setState({
+                    visible: true,
+                    currentTask: contract.task
+                  });
+                }}
+              >
+                See task details
+              </Button>
+              <Modal
+                mask={false}
+                title={contract.name}
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+              >
+                <p>{this.state.currentTask}</p>
+              </Modal>
+              <br />
+              <br />
               <div>
                 <Checkbox
                   onChange={() => {
@@ -97,11 +152,22 @@ class StudentProfile extends React.Component {
                     const contractRef = firebase
                       .database()
                       .ref("contracts/" + contract.pushId + "/updates");
-                    contractRef.push({
+                    var pushed = contractRef.push({
                       finished: 100,
                       student: this.state.studentName,
-                      task: contract.task
+                      task: contract.task,
+                      pushId: ""
                     });
+                    var pushId = pushed.key;
+                    const specificRef = firebase
+                      .database()
+                      .ref(
+                        "contracts/" + contract.pushId + "/updates/" + pushId
+                      );
+                    specificRef.update({
+                      pushId: pushId
+                    });
+                    message.success("Finished task!");
                   }}
                 >
                   Finished!
@@ -114,18 +180,19 @@ class StudentProfile extends React.Component {
     });
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarSt />
-        <br />
-        <br />
-        <Row style={{ textAlign: "left" }}>
-          <Col span={6} />
-          <Col span={12}>
-            <h2>Company tasks</h2>
+        <Row>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {contracts}
+            <br />
+            <h2>Company tasks</h2>
+            <div className="cards">{contracts}</div>
           </Col>
         </Row>
+        <br />
+        <br />
       </div>
     );
   }

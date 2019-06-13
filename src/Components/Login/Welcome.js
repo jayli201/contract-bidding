@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+<<<<<<< HEAD
 import { Button, Row, Col, Layout, PageHeader, Menu } from "antd";
 
+=======
+import { Row, Col, Button, Layout, PageHeader, Menu } from "antd";
+import "./Welcome.css";
+>>>>>>> 0e26a2ee7ac59cdb3f6480a2785ce6be5df3701a
 
 class Welcome extends Component {
   constructor(props) {
@@ -18,19 +23,25 @@ class Welcome extends Component {
 
 
   render() {
-    const { Header, Sider } = Layout;
+    const { Header, Sider, Content, Footer } = Layout;
 
 
     //normal rendering for login page
     return (
+<<<<<<< HEAD
 
       <div>
         <Row>
+=======
+      <div className="welcome" style={{ background: "#EDF5E0" }}>
+        <Row className="welcome">
+>>>>>>> 0e26a2ee7ac59cdb3f6480a2785ce6be5df3701a
           <Col span={3} />
           <Col span={15}>
             <PageHeader
+              className="welcome"
               style={{
-                background: "white",
+                background: "#EDF5E0",
                 textAlign: "left"
               }}
             >
@@ -39,6 +50,23 @@ class Welcome extends Component {
               </NavLink>
             </PageHeader>
           </Col>
+          {/* <Col span={3}>
+            <PageHeader style={{ background: "white" }}>
+              <Menu>
+                <Menu.Item>
+                  <NavLink
+                    to="/login"
+                    style={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    LOGIN
+                  </NavLink>
+                </Menu.Item>
+              </Menu>
+            </PageHeader>
+          </Col> */}
         </Row>
         <Row>
           <Col span={3} />
@@ -47,12 +75,27 @@ class Welcome extends Component {
           </Col>
           <Col span={3} />
         </Row>
+        <br />
+        <br />
+        <br />
         <Row>
-          <Col span={3} />
-          <Col span={18}>
+          <Col span={4} />
+          <Col span={8}>
             <br />
-            <br />
-            <h1>Welcome to RevTek</h1>
+            <img
+              style={{
+                height: "45vh"
+              }}
+              src="/images/image.png"
+            />
+          </Col>
+          <Col span={1} />
+          <Col span={7}>
+            <h1>Thinking Together</h1>
+            <h2>
+              RevTek makes communicating easier so you can start focusing on
+              projects sooner
+            </h2>
             <br />
             <Button
               type="primary"
@@ -62,16 +105,50 @@ class Welcome extends Component {
             >
               Login
             </Button>
+            <br />
+            <br />
+            <br />
+            <br />
+            <h2>New to Revtek?</h2>
+            <br />
+            <div>
+              <Button
+                onClick={() => {
+                  this.props.history.push("/signup");
+                }}
+              >
+                Sign up as an admin or company
+              </Button>
+            </div>
+            <br />
+            <div>
+              <Button
+                onClick={() => {
+                  this.props.history.push("/signups");
+                }}
+              >
+                Sign up as a student
+              </Button>
+            </div>
           </Col>
           <Col span={3} />
         </Row>
+        <br />
+        <br />
+        <Footer className="welcome" style={{ background: "#EDF5E0" }}>
+          <br />
+          <br />
+        </Footer>
       </div>
     );
   }
 }
 
+<<<<<<< HEAD
 
 
 
 //uses withRouter for changing urls if signup page is clicked
+=======
+>>>>>>> 0e26a2ee7ac59cdb3f6480a2785ce6be5df3701a
 export default withRouter(Welcome);

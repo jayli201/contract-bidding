@@ -9,9 +9,11 @@ import {
   Modal,
   message,
   Card,
-  Progress
+  Progress,
+  Checkbox
 } from "antd";
 import NavbarCo from "./NavbarCo";
+import TransferList from "antd/lib/transfer/list";
 
 export default class TaskStatus extends React.Component {
   constructor(props) {
@@ -19,7 +21,9 @@ export default class TaskStatus extends React.Component {
     this.state = {
       updates: [],
       contracts: [],
-      visible: false
+      visible: false,
+      currentCompany: "",
+      force: false
     };
   }
 
@@ -47,8 +51,7 @@ export default class TaskStatus extends React.Component {
       for (let contract in contracts) {
         if (
           contracts[contract].id === firebase.auth().currentUser.uid &&
-          contracts[contract].approved === "true" &&
-          contracts[contract].closed === "false"
+          contracts[contract].approved === "true"
         ) {
           contractsList.push({
             name: contracts[contract].name,
@@ -74,62 +77,111 @@ export default class TaskStatus extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div className="all">
+      <div className="all" style={{ background: "#EDF5E0" }}>
         <NavbarCo />
-        <br />
-        <br />
-        <Row style={{ textAlign: "left" }}>
-          <Col span={6} />
-          <Col span={8}>
-            <h2 style={{ textAlign: "left" }}>Status of student tasks</h2>
+        <Row>
+          <Col span={3} />
+          <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            {this.state.contracts.map(contract => {
-              return (
-                <div style={{ textAlign: "left" }}>
-                  <Card title={contract.name} bordered={false}>
-                    <p>Company: {contract.company}</p>
-                    <p>Details: {contract.contract}</p>
-                    <p>Date submitted: {contract.date}</p>
-                    <p>Time submitted: {contract.time}</p>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        this.setState({
-                          visible: true
-                        });
-                        if (contract.updates != undefined) {
+            <br />
+            <h2>Completed student tasks</h2>
+            <div className="cards">
+              {this.state.contracts.map(contract => {
+                return (
+                  <div className="cards" style={{ textAlign: "center" }}>
+                    <Card
+                      title={contract.name}
+                      bordered={true}
+                      style={{ width: 315 }}
+                    >
+                      <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                        {contract.contract}
+                      </p>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                        <p> {contract.company}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Date submitted:&ensp;
+                        </p>
+                        <p> {contract.date}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Time submitted:&ensp;
+                        </p>
+                        <p> {contract.time}</p>
+                      </label>
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          console.log(contract.pushId);
                           this.setState({
-                            updates: Object.values(contract.updates)
+                            visible: true,
+                            currentCompany: contract.pushId
                           });
-                          console.log(contract.updates);
-                        }
-                      }}
-                    >
-                      View completed tasks
-                    </Button>
-                    <Modal
-                      mask={false}
-                      title="Student updates"
-                      visible={this.state.visible}
-                      onOk={this.handleOk}
-                      onCancel={this.handleCancel}
-                    >
-                      {console.log(this.state.updates)}
-                      {this.state.updates.map(update => {
-                        return (
-                          <Card title={update.task} bordered={false}>
-                            <p>Student: {update.student}</p>
-                            <Progress percent={update.finished} />
-                          </Card>
-                        );
-                      })}
-                    </Modal>
-                  </Card>
-                </div>
-              );
-            })}
+                          if (contract.updates != undefined) {
+                            this.setState({
+                              updates: Object.values(contract.updates)
+                            });
+                            console.log(contract.updates);
+                          }
+                        }}
+                      >
+                        View completed tasks
+                      </Button>
+                      <Modal
+                        mask={false}
+                        title="Student updates"
+                        visible={this.state.visible}
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel}
+                      >
+                        {console.log(this.state.updates)}
+                        {this.state.updates.map(update => {
+                          console.log(update);
+                          console.log(contract);
+                          return (
+                            <Card title={update.student} bordered={false}>
+                              <p>{update.task} </p>
+                              <Progress percent={update.finished} />
+                              <br />
+                              <br />
+                              {/* <Checkbox
+                                onClick={() => {
+                                  const updateRef = firebase
+                                    .database()
+                                    .ref(
+                                      "contracts/" +
+                                        this.state.currentCompany +
+                                        "/updates/" +
+                                        update.pushId
+                                    );
+                                  console.log(this.state.currentCompany);
+                                  console.log(update.pushId);
+                                  updateRef.remove();
+                                  this.setState({
+                                    visible: false
+                                  });
+                                }}
+                              >
+                                Dismiss
+                              </Checkbox> */}
+                            </Card>
+                          );
+                        })}
+                      </Modal>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
           </Col>
         </Row>
+        <br />
+        <br />
+        <br />
       </div>
     );
   }

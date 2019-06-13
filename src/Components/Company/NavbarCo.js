@@ -11,32 +11,25 @@ class NavbarCo extends Component {
   };
 
   render() {
+    const styles = {
+      fontSize: "20px"
+    };
+
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <Row>
           <Col span={3} />
           <Col span={6}>
-            <PageHeader style={{ background: "white", textAlign: "left" }}>
+            <PageHeader style={{ background: "#EDF5E0", textAlign: "left" }}>
               <NavLink to="/contract">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>
             </PageHeader>
           </Col>
           <Col span={10}>
-            <PageHeader style={{ background: "white" }}>
+            <PageHeader style={{ background: "#EDF5E0" }}>
               <br />
-              <Menu mode="horizontal">
-                <Menu.Item>
-                  <NavLink
-                    to="/cmarket"
-                    activeStyle={{
-                      color: "green",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    Your contracts
-                  </NavLink>
-                </Menu.Item>
+              <Menu mode="horizontal" style={{ background: "#EDF5E0" }}>
                 <Menu.Item>
                   <NavLink
                     to="/contract"
@@ -45,7 +38,18 @@ class NavbarCo extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Submit contracts
+                    <div style={styles}>Submit contracts</div>
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item>
+                  <NavLink
+                    to="/cmarket"
+                    activeStyle={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    <div style={styles}>Contracts</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -53,7 +57,7 @@ class NavbarCo extends Component {
                     to="/taskstatus"
                     activeStyle={{ color: "green", fontWeight: "bold" }}
                   >
-                    Task manager
+                    <div style={styles}>Tasks</div>
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
@@ -64,14 +68,14 @@ class NavbarCo extends Component {
                       fontWeight: "bold"
                     }}
                   >
-                    Student profiles
+                    <div style={styles}>Profiles</div>
                   </NavLink>
                 </Menu.Item>
               </Menu>
             </PageHeader>
           </Col>
           <Col span={2}>
-            <PageHeader style={{ background: "white" }}>
+            <PageHeader style={{ background: "#EDF5E0" }}>
               <br />
               <Button onClick={this.logout} type="primary">
                 Log out
