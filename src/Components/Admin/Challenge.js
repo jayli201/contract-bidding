@@ -121,9 +121,19 @@ class Challenge extends React.Component {
       return (
         <div className="cards">
           <Card title={challenge.name} bordered={true} style={{ width: 315 }}>
-            <p>Challenge: {challenge.challenge}</p>
-            <p>Date submitted: {challenge.date}</p>
-            <p>Time submitted: {challenge.time}</p>
+            <label className="info">
+              <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                {challenge.challenge}
+              </p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Date submitted:&ensp; </p>
+              <p> {challenge.date}</p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Time submitted:&ensp; </p>
+              <p> {challenge.time}</p>
+            </label>
             <Button
               style={{ marginLeft: 8 }}
               icon="edit"
@@ -207,7 +217,7 @@ class Challenge extends React.Component {
     });
 
     return (
-      <div className="all">
+      <div className="all" style={{ background: "#EDF5E0" }}>
         <NavbarAd />
         <br />
         <br />
@@ -261,6 +271,7 @@ class Challenge extends React.Component {
             <div className="cards">{challenges}</div>
           </Col>
         </Row>
+        <br />
       </div>
     );
   }

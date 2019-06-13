@@ -103,9 +103,14 @@ class StudentProfile extends React.Component {
           <div className="cards">
             <Card title={contract.task} bordered={true} style={{ width: 315 }}>
               <p style={{ fontWeight: "bold" }}>For contract:</p>
-              <p>Contract: {contract.name}</p>
-              <p>Company: {contract.company}</p>
-              <p>Details: {contract.contract}</p>
+              <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                {contract.contract}
+              </p>
+              <label className="info">
+                <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                <p> {contract.company}</p>
+              </label>
+
               <Button
                 type="primary"
                 onClick={() => {
@@ -175,7 +180,7 @@ class StudentProfile extends React.Component {
     });
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarSt />
         <Row>
           <Col span={3} />
@@ -186,6 +191,8 @@ class StudentProfile extends React.Component {
             <div className="cards">{contracts}</div>
           </Col>
         </Row>
+        <br />
+        <br />
       </div>
     );
   }

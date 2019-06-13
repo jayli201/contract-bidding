@@ -96,7 +96,7 @@ class StudentProfile extends React.Component {
     const { Header } = Layout;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarSt />
         <br />
         <br />
@@ -108,21 +108,28 @@ class StudentProfile extends React.Component {
             bordered={true}
             style={{ width: 375, textAlign: "center" }}
           >
-            <p>Email: {this.state.info.email}</p>
-            <p>Phone: {this.state.info.phone}</p>
-            <p>
-              Github:{" "}
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Email:&ensp; </p>
+              <p> {this.state.info.email}</p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Phone:&ensp; </p>
+              <p> {this.state.info.phone}</p>
+            </label>
+            <p className="info">
               <a href={this.state.info.github} target="_blank">
                 {this.state.info.github}
               </a>
             </p>
             <p>
-              LinkedIn:{" "}
               <a href={this.state.info.linkedin} target="_blank">
                 {this.state.info.linkedin}
               </a>
             </p>
-            <p>Skills: {this.state.info.skills}</p>
+            <p>
+              <p style={{ fontWeight: "bold" }}>Skills:&ensp; </p>
+              <p> {this.state.info.skills}</p>
+            </p>
             <Button
               icon="edit"
               type="primary"
@@ -187,6 +194,9 @@ class StudentProfile extends React.Component {
             </Modal>
           </Card>
         </div>
+        <br />
+        <br />
+        <br />
       </div>
     );
   }

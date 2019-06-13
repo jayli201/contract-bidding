@@ -6,3 +6,12 @@
   align-items: baseline;
   padding: 15px;
 }
+
+body {
+  background-color: #edf5e0;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+}

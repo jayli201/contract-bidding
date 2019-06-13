@@ -16,20 +16,20 @@ class NavbarCo extends Component {
     };
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <Row>
           <Col span={3} />
           <Col span={6}>
-            <PageHeader style={{ background: "white", textAlign: "left" }}>
+            <PageHeader style={{ background: "#EDF5E0", textAlign: "left" }}>
               <NavLink to="/contract">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>
             </PageHeader>
           </Col>
           <Col span={10}>
-            <PageHeader style={{ background: "white" }}>
+            <PageHeader style={{ background: "#EDF5E0" }}>
               <br />
-              <Menu mode="horizontal">
+              <Menu mode="horizontal" style={{ background: "#EDF5E0" }}>
                 <Menu.Item>
                   <NavLink
                     to="/contract"
@@ -75,7 +75,7 @@ class NavbarCo extends Component {
             </PageHeader>
           </Col>
           <Col span={2}>
-            <PageHeader style={{ background: "white" }}>
+            <PageHeader style={{ background: "#EDF5E0" }}>
               <br />
               <Button onClick={this.logout} type="primary">
                 Log out

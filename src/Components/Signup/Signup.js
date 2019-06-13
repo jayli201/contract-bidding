@@ -136,11 +136,11 @@ class Signup extends Component {
     const { Content } = Layout;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <Row>
           <Col span={3} />
           <Col span={15}>
-            <PageHeader style={{ background: "white", textAlign: "left" }}>
+            <PageHeader style={{ background: "#EDF5E0", textAlign: "left" }}>
               <NavLink to="/">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>
@@ -214,7 +214,6 @@ class Signup extends Component {
           </Col>
           <Col span={2} />
         </Row>
-
         <br />
         <br />
         <div>
@@ -233,6 +232,9 @@ class Signup extends Component {
               Cancel
             </Button>
           </div>
+          <br />
+          <br />
+          <br />
         </div>
       </div>
     );

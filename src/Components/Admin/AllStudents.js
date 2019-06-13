@@ -2,6 +2,7 @@ import React from "react";
 import NavbarAd from "./NavbarAd";
 import firebase from "../firebase.js";
 import { Card, Col, Row, Layout } from "antd";
+import { ENOSPC } from "constants";
 
 class AllStudents extends React.Component {
   state = { visible: false, info: [] };
@@ -44,10 +45,10 @@ class AllStudents extends React.Component {
   render() {
     console.log(this.state.info);
 
-    const { Header } = Layout;
+    const { Header, Footer } = Layout;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />
@@ -64,21 +65,28 @@ class AllStudents extends React.Component {
                       bordered={true}
                       style={{ width: 315 }}
                     >
-                      <p>Email: {student.email}</p>
-                      <p>Phone: {student.phone}</p>
-                      <p>
-                        Github:{" "}
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Email:&ensp; </p>
+                        <p> {student.email}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Phone:&ensp; </p>
+                        <p> {student.phone}</p>
+                      </label>
+                      <p className="info">
                         <a href={student.github} target="_blank">
                           {student.github}
                         </a>
                       </p>
                       <p>
-                        LinkedIn:{" "}
                         <a href={student.linkedin} target="_blank">
                           {student.linkedin}
                         </a>
                       </p>
-                      <p>Skills: {student.skills}</p>
+                      <p>
+                        <p style={{ fontWeight: "bold" }}>Skills:&ensp; </p>
+                        <p> {student.skills}</p>
+                      </p>
                     </Card>
                   </div>
                 );
@@ -86,6 +94,13 @@ class AllStudents extends React.Component {
             </div>
           </Col>
         </Row>
+        <br />
+        {/* <Footer style={{ background: "#EDF5E0" }}>
+          <br />
+          <br />
+          <br />
+          <br />
+        </Footer> */}
       </div>
     );
   }

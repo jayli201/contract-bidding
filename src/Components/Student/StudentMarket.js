@@ -70,10 +70,21 @@ class StudentMarket extends React.Component {
       return (
         <div className="cards" style={{ background: "#white" }}>
           <Card title={contract.name} bordered={true} style={{ width: 315 }}>
-            <p>Company: {contract.company}</p>
-            <p>Details: {contract.contract}</p>
-            <p>Date submitted: {contract.date}</p>
-            <p>Time submitted: {contract.time}</p>
+            <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+              {contract.contract}
+            </p>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+              <p> {contract.company}</p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Date submitted:&ensp;</p>
+              <p> {contract.date}</p>
+            </label>
+            <label className="info">
+              <p style={{ fontWeight: "bold" }}>Time submitted:&ensp;</p>
+              <p> {contract.time}</p>
+            </label>
             <Button
               onClick={() => {
                 let studentList = [];
@@ -115,7 +126,7 @@ class StudentMarket extends React.Component {
     });
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarSt />
         <Row>
           <Col span={3} />
@@ -126,6 +137,7 @@ class StudentMarket extends React.Component {
             <div className="cards">{contracts}</div>
           </Col>
         </Row>
+        <br />
       </div>
     );
   }

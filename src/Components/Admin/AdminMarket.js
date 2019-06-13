@@ -81,7 +81,7 @@ class AdminMarket extends React.Component {
     const { visible } = this.state;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />
@@ -98,10 +98,27 @@ class AdminMarket extends React.Component {
                       bordered={true}
                       style={{ width: 315 }}
                     >
-                      <p>Company: {contract.company}</p>
-                      <p>Details: {contract.contract}</p>
-                      <p>Date submitted: {contract.date}</p>
-                      <p>Time submitted: {contract.time}</p>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                          {contract.contract}
+                        </p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                        <p> {contract.company}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Date submitted:&ensp;
+                        </p>
+                        <p> {contract.date}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Time submitted:&ensp;
+                        </p>
+                        <p> {contract.time}</p>
+                      </label>
                       <Button
                         style={{ marginLeft: 8 }}
                         icon="edit"

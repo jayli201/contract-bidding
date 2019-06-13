@@ -75,16 +75,16 @@ class ViewContracts extends Component {
   };
 
   render() {
-    const { Header } = Layout;
+    const { Header, Footer } = Layout;
     const { visible } = this.state;
     const { TextArea } = Input;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />
-          <Col span={18} style={{ textAlign: "center" }}>
+          <Col span={18} style={{ textAlign: "center", background: "#EDF5E0" }}>
             <br />
             <br />
             <h2>Pending contracts</h2>
@@ -97,10 +97,25 @@ class ViewContracts extends Component {
                       bordered={true}
                       style={{ width: 315 }}
                     >
-                      <p>Company: {contract.company}</p>
-                      <p>Details: {contract.contract}</p>
-                      <p>Date submitted: {contract.date}</p>
-                      <p>Time submitted: {contract.time}</p>
+                      <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                        {contract.contract}
+                      </p>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                        <p> {contract.company}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Date submitted:&ensp;
+                        </p>
+                        <p> {contract.date}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Time submitted:&ensp;
+                        </p>
+                        <p> {contract.time}</p>
+                      </label>
                       <Button
                         icon="check-circle"
                         onClick={() => {
@@ -201,6 +216,12 @@ class ViewContracts extends Component {
           </Col>
           <Col span={3} />
         </Row>
+        <br />
+        {/* <Footer style={{ background: "#EDF5E0" }}>
+          <br />
+          <br />
+          <br />
+        </Footer> */}
       </div>
     );
   }

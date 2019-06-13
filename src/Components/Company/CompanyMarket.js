@@ -87,11 +87,11 @@ class CompanyMarket extends Component {
   };
 
   render() {
-    const { Header } = Layout;
+    const { Header, Footer } = Layout;
     const { TextArea } = Input;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
@@ -99,7 +99,6 @@ class CompanyMarket extends Component {
             <br />
             <br />
             <h2>Your approved and open contracts</h2>
-
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (
@@ -109,10 +108,25 @@ class CompanyMarket extends Component {
                       bordered={true}
                       style={{ width: 315 }}
                     >
-                      <p>Company: {contract.company}</p>
-                      <p>Details: {contract.contract}</p>
-                      <p>Date submitted: {contract.date}</p>
-                      <p>Time submitted: {contract.time}</p>
+                      <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                        {contract.contract}
+                      </p>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                        <p> {contract.company}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Date submitted:&ensp;
+                        </p>
+                        <p> {contract.date}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Time submitted:&ensp;
+                        </p>
+                        <p> {contract.time}</p>
+                      </label>
                       <Button
                         type="primary"
                         onClick={() => {
@@ -271,6 +285,10 @@ class CompanyMarket extends Component {
             </div>
           </Col>
         </Row>
+        <br />
+        <br />
+        <br />
+        {/* <Footer style={{ background: "#EDF5E0" }} /> */}
       </div>
     );
   }

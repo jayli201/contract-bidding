@@ -77,7 +77,7 @@ export default class TaskStatus extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div className="all">
+      <div className="all" style={{ background: "#EDF5E0" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
@@ -94,10 +94,25 @@ export default class TaskStatus extends React.Component {
                       bordered={true}
                       style={{ width: 315 }}
                     >
-                      <p>Company: {contract.company}</p>
-                      <p>Details: {contract.contract}</p>
-                      <p>Date submitted: {contract.date}</p>
-                      <p>Time submitted: {contract.time}</p>
+                      <p style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                        {contract.contract}
+                      </p>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Company:&ensp; </p>
+                        <p> {contract.company}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Date submitted:&ensp;
+                        </p>
+                        <p> {contract.date}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>
+                          Time submitted:&ensp;
+                        </p>
+                        <p> {contract.time}</p>
+                      </label>
                       <Button
                         type="primary"
                         onClick={() => {
@@ -164,6 +179,9 @@ export default class TaskStatus extends React.Component {
             </div>
           </Col>
         </Row>
+        <br />
+        <br />
+        <br />
       </div>
     );
   }

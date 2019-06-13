@@ -48,7 +48,7 @@ class Profiles extends React.Component {
     const { Header } = Layout;
 
     return (
-      <div>
+      <div style={{ background: "#EDF5E0" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
@@ -65,21 +65,28 @@ class Profiles extends React.Component {
                       bordered={true}
                       style={{ width: 315 }}
                     >
-                      <p>Email: {student.email}</p>
-                      <p>Phone: {student.phone}</p>
-                      <p>
-                        Github:{" "}
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Email:&ensp; </p>
+                        <p> {student.email}</p>
+                      </label>
+                      <label className="info">
+                        <p style={{ fontWeight: "bold" }}>Phone:&ensp; </p>
+                        <p> {student.phone}</p>
+                      </label>
+                      <p className="info">
                         <a href={student.github} target="_blank">
                           {student.github}
                         </a>
                       </p>
                       <p>
-                        LinkedIn:{" "}
                         <a href={student.linkedin} target="_blank">
                           {student.linkedin}
                         </a>
                       </p>
-                      <p>Skills: {student.skills}</p>
+                      <p>
+                        <p style={{ fontWeight: "bold" }}>Skills:&ensp; </p>
+                        <p> {student.skills}</p>
+                      </p>
                     </Card>
                   </div>
                 );
@@ -87,6 +94,9 @@ class Profiles extends React.Component {
             </div>
           </Col>
         </Row>
+        <br />
+        <br />
+        <br />
       </div>
     );
   }

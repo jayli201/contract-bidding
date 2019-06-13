@@ -101,6 +101,8 @@ class Login extends Component {
   }
 
   render() {
+    const { Footer } = Layout;
+
     console.log(this.state.type);
     if (this.state.admin === true) {
       this.setState({
@@ -124,13 +126,13 @@ class Login extends Component {
 
     //normal rendering for login page
     return (
-      <div class="login">
+      <div class="login" style={{ background: "#EDF5E0" }}>
         <Row>
           <Col span={3} />
           <Col span={15}>
             <PageHeader
               style={{
-                background: "white",
+                background: "#EDF5E0",
                 textAlign: "left"
               }}
             >
@@ -238,6 +240,14 @@ class Login extends Component {
           </Col>
           <Col span={2} />
         </Row>
+        <br />
+        <br />
+        {/* <Footer style={{ background: "#EDF5E0" }}>
+          <br />
+          <br />
+          <br />
+          <br />
+        </Footer> */}
       </div>
     );
   }
