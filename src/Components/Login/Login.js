@@ -172,7 +172,9 @@ class Login extends Component {
             <br />
             <br />
             <h1>Login</h1>
+            <br />
             <h3>Welcome back! Login to access your dashboard.</h3>
+            <br />
             <Form onSubmit={this.login}>
               <Row>
                 <Col span={9} />
@@ -213,6 +215,7 @@ class Login extends Component {
               />
               <br />
               <br />
+              <br />
               <div class="loginbutton">
                 <Button onClick={this.login} type="primary">
                   Login
@@ -220,7 +223,7 @@ class Login extends Component {
               </div>
               <br />
               <br />
-              <h3>New to RevTek?</h3>
+              {/* <h3>New to RevTek?</h3>
               <br />
               <div>
                 <Button onClick={this.signup}>
@@ -230,7 +233,7 @@ class Login extends Component {
               <br />
               <div>
                 <Button onClick={this.signups}>Sign up as student</Button>
-              </div>
+              </div> */}
             </Form>
           </Col>
           <Col span={2} />

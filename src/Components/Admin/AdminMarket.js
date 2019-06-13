@@ -185,6 +185,7 @@ class AdminMarket extends React.Component {
             </div>
           </Col>
         </Row>
+        <br />
       </div>
     );
   }

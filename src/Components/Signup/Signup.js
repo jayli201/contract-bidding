@@ -141,7 +141,7 @@ class Signup extends Component {
           <Col span={3} />
           <Col span={15}>
             <PageHeader style={{ background: "white", textAlign: "left" }}>
-              <NavLink to="/login">
+              <NavLink to="/">
                 <img src="images/logo.png" width="175" height="50" />
               </NavLink>
             </PageHeader>

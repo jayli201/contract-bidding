@@ -15,7 +15,7 @@ class Welcome extends Component {
   };
 
   render() {
-    const { Header, Sider } = Layout;
+    const { Header, Sider, Content } = Layout;
 
     //normal rendering for login page
     return (
@@ -34,6 +34,23 @@ class Welcome extends Component {
               </NavLink>
             </PageHeader>
           </Col>
+          {/* <Col span={3}>
+            <PageHeader style={{ background: "white" }}>
+              <Menu>
+                <Menu.Item>
+                  <NavLink
+                    to="/login"
+                    style={{
+                      color: "green",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    LOGIN
+                  </NavLink>
+                </Menu.Item>
+              </Menu>
+            </PageHeader>
+          </Col> */}
         </Row>
         <Row>
           <Col span={3} />
@@ -42,12 +59,27 @@ class Welcome extends Component {
           </Col>
           <Col span={3} />
         </Row>
+        <br />
+        <br />
+        <br />
         <Row>
-          <Col span={3} />
-          <Col span={18}>
+          <Col span={4} />
+          <Col span={8}>
             <br />
-            <br />
-            <h1>Welcome to RevTek</h1>
+            <img
+              style={{
+                height: "45vh"
+              }}
+              src="/images/coding2.jpg"
+            />
+          </Col>
+          <Col span={1} />
+          <Col span={7}>
+            <h1>Thinking Together</h1>
+            <h2>
+              RevTek makes communicating easier so you can start focusing on
+              projects sooner
+            </h2>
             <br />
             <Button
               type="primary"
@@ -57,6 +89,31 @@ class Welcome extends Component {
             >
               Login
             </Button>
+            <br />
+            <br />
+            <br />
+            <br />
+            <h2>New to Revtek?</h2>
+            <br />
+            <div>
+              <Button
+                onClick={() => {
+                  this.props.history.push("/signup");
+                }}
+              >
+                Sign up as an admin or company
+              </Button>
+            </div>
+            <br />
+            <div>
+              <Button
+                onClick={() => {
+                  this.props.history.push("/signups");
+                }}
+              >
+                Sign up as a student
+              </Button>
+            </div>
           </Col>
           <Col span={3} />
         </Row>
@@ -65,5 +122,4 @@ class Welcome extends Component {
   }
 }
 
-//uses withRouter for changing urls if signup page is clicked
 export default withRouter(Welcome);
