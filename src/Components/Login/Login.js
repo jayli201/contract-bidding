@@ -166,9 +166,9 @@ class Login extends Component {
           <Col span={2} />
           <Col span={20}>
             <br />
-            <h1>Login</h1>
+            <h1 className="text">Welcome back!</h1>
+            <h2>Login to access your dashboard.</h2>
             <br />
-            <h3>Welcome back! Login to access your dashboard.</h3>
             <Form onSubmit={this.login}>
               <Row>
                 <Col span={9} />
@@ -217,7 +217,7 @@ class Login extends Component {
               </div>
               <br />
               <br />
-              <h2>New to RevTek?</h2>
+              <h2 className="text">New to RevTek?</h2>
               <br />
               <div>
                 <Button onClick={this.signup}>

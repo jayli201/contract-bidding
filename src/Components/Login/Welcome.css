@@ -8,8 +8,9 @@
   /* align-items: center; */
   align-items: center;
   justify-content: center;
-  margin-left: 580px;
-  margin-right: 580px;
+  /* margin-left: 580px; */
+  /* margin-right: 580px; */
+
   font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
     "Times New Roman", serif;
   font-weight: bold;
@@ -19,4 +20,9 @@
   font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
     "Times New Roman", serif;
   font-weight: bold;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
 }

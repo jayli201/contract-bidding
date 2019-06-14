@@ -67,7 +67,7 @@ class DailyChallengeView extends Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <h1>Challenges</h1>
+            <h1 className="text">Challenges</h1>
             <div className="cards">{this.mapChallenges()}</div>
           </Col>
         </Row>

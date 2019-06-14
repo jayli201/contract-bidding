@@ -132,7 +132,7 @@ class StudentMarket extends React.Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <h1>All available contracts</h1>
+            <h1 className="text">All available contracts</h1>
             <div className="cards">{contracts}</div>
           </Col>
         </Row>

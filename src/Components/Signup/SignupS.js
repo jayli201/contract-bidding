@@ -84,7 +84,7 @@ class SignupS extends Component {
   }
 
   back = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   render() {
@@ -126,7 +126,7 @@ class SignupS extends Component {
           <Col span={2} />
           <Col span={20}>
             <br />
-            <h1>Create student account</h1>
+            <h1 className="text">Create student account</h1>
             <Row>
               <Col span={9} />
               <Col span={6}>
