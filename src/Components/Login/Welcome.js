@@ -124,6 +124,7 @@ class Welcome extends Component {
           </h1>
           <br />
           <Divider />
+          {/* <PageHeader style={{ background: "#237804" }} /> */}
           <br />
           <Content>
             <br />
