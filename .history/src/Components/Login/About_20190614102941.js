@@ -1,0 +1,37 @@
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import firebase from "../firebase.js";
+import { Redirect, withRouter } from "react-router-dom";
+
+
+class About extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+
+    }
+
+
+
+    render() {
+        return (
+            <div>
+                {console.log("hi")}
+                <p>About RevTek</p>
+
+
+
+
+
+
+            </div>
+
+
+
+
+        )
+    }
+}
+export default withRouter(About)

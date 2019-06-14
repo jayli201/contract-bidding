@@ -60,19 +60,10 @@ class Welcome extends Component {
                     LOGIN
                   </NavLink>
                 </Menu.Item>
-                <Menu.Item>
-                  <NavLink to="/About" style={{
-                    color: "green",
-                    fontWeight: "bold"
-                  }}>
-                    ABOUT
-              </NavLink>
-                </Menu.Item>
               </Menu>
             </PageHeader>
           </Col>
           <Divider />
-
         </Row>
         {/* <Row>
           <Col span={3} />

@@ -61,11 +61,11 @@ class Welcome extends Component {
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
-                  <NavLink to="/About" style={{
+                  <NavLink to="/about" style={{
                     color: "green",
                     fontWeight: "bold"
                   }}>
-                    ABOUT
+                    About
               </NavLink>
                 </Menu.Item>
               </Menu>
