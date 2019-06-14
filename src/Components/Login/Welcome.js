@@ -93,13 +93,6 @@ class Welcome extends Component {
           </Col>
           <Divider />
         </Row>
-        {/* <Row>
-          <Col span={3} />
-          <Col span={18}>
-            <PageHeader style={{ background: "#389e0d" }} />
-          </Col>
-          <Col span={3} />
-        </Row> */}
         <br />
         <br />
         <Row>
@@ -107,15 +100,12 @@ class Welcome extends Component {
             className="center"
             style={{
               textAlign: "center",
-              // borderStyle: "solid",
-              // borderColor: "#237804",
-              fontSize: "25px"
+              fontSize: "35px"
             }}
           >
             <br />
             <label className="title">
               <h1 style={{ fontWeight: "bold" }}>We&ensp;think&ensp; </h1>
-
               <h1 style={{ color: "#237804", fontWeight: "bold" }}>
                 together.
               </h1>
@@ -123,7 +113,6 @@ class Welcome extends Component {
             {/* <Icon type="bulb" theme="twoTone" twoToneColor="#52c41a" /> */}
             <br />
           </div>
-          <br />
           <h1
             className="text"
             style={{
@@ -180,15 +169,6 @@ class Welcome extends Component {
             <Col span={4} />
           </Content>
         </Row>
-        {/* <Row>
-          <Button
-            type="primary"
-            icon="double-right"
-            onClick={() => {
-              this.props.history.push("/login");
-            }}
-          />
-        </Row> */}
         <br />
         <br />
       </div>

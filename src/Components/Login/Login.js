@@ -122,8 +122,6 @@ class Login extends Component {
       this.props.history.push("/smarket");
     }
 
-    const { Header, Sider } = Layout;
-
     //normal rendering for login page
     return (
       <div class="login" style={{ background: "white" }}>
@@ -141,24 +139,6 @@ class Login extends Component {
               </NavLink>
             </PageHeader>
           </Col>
-          {/* <Col span={3}>
-            <PageHeader style={{ background: "white" }}>
-              <br />
-              <Menu>
-                <Menu.Item>
-                  <NavLink
-                    to="/signup"
-                    style={{
-                      color: "green",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    SIGN UP
-                  </NavLink>
-                </Menu.Item>
-              </Menu>
-            </PageHeader>
-          </Col> */}
           <Col span={3} />
           <Divider />
         </Row>

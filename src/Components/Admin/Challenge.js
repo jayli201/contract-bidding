@@ -185,7 +185,7 @@ class Challenge extends React.Component {
                 onChange={this.handleChange}
                 name="name"
                 value={this.state.name}
-                placeholder="enter contract title"
+                placeholder="challenge title"
               />
               <br />
               <br />
@@ -194,7 +194,7 @@ class Challenge extends React.Component {
                 onChange={this.handleChange}
                 name="details"
                 value={this.state.details}
-                placeholder="enter contract details"
+                placeholder="challenge details"
               />
             </Modal>
             <Popconfirm

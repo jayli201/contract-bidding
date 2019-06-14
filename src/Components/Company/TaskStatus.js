@@ -13,7 +13,6 @@ import {
   Checkbox
 } from "antd";
 import NavbarCo from "./NavbarCo";
-import TransferList from "antd/lib/transfer/list";
 
 export default class TaskStatus extends React.Component {
   constructor(props) {
