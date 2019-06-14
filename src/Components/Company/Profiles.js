@@ -54,7 +54,7 @@ class Profiles extends React.Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <h1>All students</h1>
+            <h1 className="text">All students</h1>
             <div className="cards">
               {this.state.info.map(student => {
                 return (

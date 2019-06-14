@@ -104,7 +104,7 @@ class StudentProfile extends React.Component {
       <div style={{ background: "white" }}>
         <NavbarSt />
         <br />
-        <h1>Your profile</h1>
+        <h1 className="text">Your profile</h1>
         <br />
         <div className="profile">
           <Card

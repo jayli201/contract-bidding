@@ -185,7 +185,7 @@ class Challenge extends React.Component {
                 onChange={this.handleChange}
                 name="name"
                 value={this.state.name}
-                placeholder="enter contract title"
+                placeholder="challenge title"
               />
               <br />
               <br />
@@ -194,7 +194,7 @@ class Challenge extends React.Component {
                 onChange={this.handleChange}
                 name="details"
                 value={this.state.details}
-                placeholder="enter contract details"
+                placeholder="challenge details"
               />
             </Modal>
             <Popconfirm
@@ -220,7 +220,9 @@ class Challenge extends React.Component {
       <div className="all" style={{ background: "white" }}>
         <NavbarAd />
         <br />
-        <h1 style={{ textAlign: "center" }}>Submit a challenge</h1>
+        <h1 className="text" style={{ textAlign: "center" }}>
+          Submit a challenge
+        </h1>
         <div className="submit">
           <Row>
             <Col span={9} />
@@ -266,7 +268,7 @@ class Challenge extends React.Component {
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
             <br />
-            <h2>Current challenges</h2>
+            <h1 className="text">Current challenges</h1>
             <div className="cards">{challenges}</div>
           </Col>
         </Row>

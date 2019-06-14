@@ -97,7 +97,7 @@ class CompanyMarket extends Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <h1>Your approved and open contracts</h1>
+            <h1 className="text">Your approved and open contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (
@@ -150,15 +150,17 @@ class CompanyMarket extends Component {
                               .on("value", snapshot => {
                                 let info = snapshot.val();
                                 console.log(info);
-                                studentInfo.push({
-                                  name: info.name,
-                                  email: info.email,
-                                  phone: info.phone,
-                                  github: info.github,
-                                  linkedin: info.linkedin,
-                                  skills: info.skills,
-                                  pushId: info.pushId
-                                });
+                                if (info != null) {
+                                  studentInfo.push({
+                                    name: info.name,
+                                    email: info.email,
+                                    phone: info.phone,
+                                    github: info.github,
+                                    linkedin: info.linkedin,
+                                    skills: info.skills,
+                                    pushId: info.pushId
+                                  });
+                                }
                               });
                           });
                           this.setState({
@@ -287,7 +289,6 @@ class CompanyMarket extends Component {
         <br />
         <br />
         <br />
-        {/* <Footer style={{ background: "white" }} /> */}
       </div>
     );
   }

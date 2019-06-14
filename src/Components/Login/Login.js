@@ -122,8 +122,6 @@ class Login extends Component {
       this.props.history.push("/smarket");
     }
 
-    const { Header, Sider } = Layout;
-
     //normal rendering for login page
     return (
       <div class="login" style={{ background: "white" }}>
@@ -141,24 +139,6 @@ class Login extends Component {
               </NavLink>
             </PageHeader>
           </Col>
-          {/* <Col span={3}>
-            <PageHeader style={{ background: "white" }}>
-              <br />
-              <Menu>
-                <Menu.Item>
-                  <NavLink
-                    to="/signup"
-                    style={{
-                      color: "green",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    SIGN UP
-                  </NavLink>
-                </Menu.Item>
-              </Menu>
-            </PageHeader>
-          </Col> */}
           <Col span={3} />
           <Divider />
         </Row>
@@ -166,9 +146,9 @@ class Login extends Component {
           <Col span={2} />
           <Col span={20}>
             <br />
-            <h1>Login</h1>
+            <h1 className="text">Welcome back!</h1>
+            <h2>Login to access your dashboard.</h2>
             <br />
-            <h3>Welcome back! Login to access your dashboard.</h3>
             <Form onSubmit={this.login}>
               <Row>
                 <Col span={9} />
@@ -217,7 +197,7 @@ class Login extends Component {
               </div>
               <br />
               <br />
-              <h2>New to RevTek?</h2>
+              <h2 className="text">New to RevTek?</h2>
               <br />
               <div>
                 <Button onClick={this.signup}>
