@@ -97,8 +97,7 @@ class CompanyMarket extends Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Your approved and open contracts</h2>
+            <h1>Your approved and open contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (

@@ -109,8 +109,7 @@ export default class ComContractSubmit extends React.Component {
       <div style={{ background: "white" }}>
         <NavbarCo />
         <br />
-        <br />
-        <h2 style={{ textAlign: "center" }}>Submit a new contract</h2>
+        <h1 style={{ textAlign: "center" }}>Submit a new contract</h1>
         <div className="submit">
           <Row>
             <Col span={9} />

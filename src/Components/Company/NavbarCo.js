@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import { Menu, Button, Row, Col, PageHeader } from "antd";
+import { Menu, Button, Row, Col, PageHeader, Divider } from "antd";
 import firebase from "../firebase.js";
 
 class NavbarCo extends Component {
@@ -12,7 +12,7 @@ class NavbarCo extends Component {
 
   render() {
     const styles = {
-      fontSize: "20px"
+      fontSize: "18px"
     };
 
     return (
@@ -29,7 +29,10 @@ class NavbarCo extends Component {
           <Col span={10}>
             <PageHeader style={{ background: "white" }}>
               <br />
-              <Menu mode="horizontal" style={{ background: "white" }}>
+              <Menu
+                mode="horizontal"
+                style={{ background: "white", borderBottom: "transparent" }}
+              >
                 <Menu.Item>
                   <NavLink
                     to="/contract"
@@ -83,13 +86,7 @@ class NavbarCo extends Component {
             </PageHeader>
           </Col>
           <Col span={3} />
-        </Row>
-        <Row type="flex" justify="center" align="top">
-          <Col span={3} />
-          <Col span={18}>
-            <PageHeader style={{ background: "#389e0d" }} />
-          </Col>
-          <Col span={3} />
+          <Divider />
         </Row>
       </div>
     );

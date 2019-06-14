@@ -160,23 +160,15 @@ class Login extends Component {
             </PageHeader>
           </Col> */}
           <Col span={3} />
-        </Row>
-        <Row>
-          <Col span={3} />
-          <Col span={18}>
-            <PageHeader style={{ background: "#389e0d" }} />
-          </Col>
-          <Col span={3} />
+          <Divider />
         </Row>
         <Row>
           <Col span={2} />
           <Col span={20}>
             <br />
-            <br />
             <h1>Login</h1>
             <br />
             <h3>Welcome back! Login to access your dashboard.</h3>
-            <br />
             <Form onSubmit={this.login}>
               <Row>
                 <Col span={9} />
@@ -224,7 +216,8 @@ class Login extends Component {
                 </Button>
               </div>
               <br />
-              {/* <h3>New to RevTek?</h3>
+              <br />
+              <h2>New to RevTek?</h2>
               <br />
               <div>
                 <Button onClick={this.signup}>
@@ -234,26 +227,22 @@ class Login extends Component {
               <br />
               <div>
                 <Button onClick={this.signups}>Sign up as student</Button>
-              </div> */}
+              </div>
+              <br />
               <Button
+                type="primary"
+                icon="double-left"
                 onClick={() => {
                   this.props.history.push("/");
                 }}
-              >
-                Cancel
-              </Button>
+              />
             </Form>
           </Col>
           <Col span={2} />
         </Row>
         <br />
         <br />
-        {/* <Footer style={{ background: "white" }}>
-          <br />
-          <br />
-          <br />
-          <br />
-        </Footer> */}
+        <br />
       </div>
     );
   }

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import { Menu, Button, Row, Col, PageHeader } from "antd";
+import { Menu, Button, Row, Col, PageHeader, Divider, Tabs } from "antd";
 import firebase from "../firebase.js";
+
+const { TabPane } = Tabs;
 
 class NavbarAd extends Component {
   logout = () => {
@@ -12,7 +14,7 @@ class NavbarAd extends Component {
 
   render() {
     const styles = {
-      fontSize: "20px"
+      fontSize: "18px"
     };
 
     return (
@@ -29,7 +31,10 @@ class NavbarAd extends Component {
           <Col span={10}>
             <PageHeader style={{ background: "white" }}>
               <br />
-              <Menu mode="horizontal" style={{ background: "white" }}>
+              <Menu
+                mode="horizontal"
+                style={{ background: "white", borderBottom: "transparent" }}
+              >
                 <Menu.Item>
                   <NavLink
                     to="/approve"
@@ -86,14 +91,15 @@ class NavbarAd extends Component {
             </PageHeader>
           </Col>
           <Col span={3} />
+          <Divider className="shadow" />
         </Row>
-        <Row type="flex" justify="center" align="top">
+        {/* <Row type="flex" justify="center" align="top">
           <Col span={3} />
           <Col span={18}>
             <PageHeader style={{ background: "#389e0d" }} />
           </Col>
           <Col span={3} />
-        </Row>
+        </Row> */}
       </div>
     );
   }

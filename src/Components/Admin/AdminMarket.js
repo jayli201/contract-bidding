@@ -87,8 +87,7 @@ class AdminMarket extends React.Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Approved and open contracts</h2>
+            <h1>Approved and open contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (

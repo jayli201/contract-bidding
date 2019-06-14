@@ -120,21 +120,13 @@ class SignupS extends Component {
             </PageHeader>
           </Col> */}
           <Col span={3} />
-        </Row>
-        <Row>
-          <Col span={3} />
-          <Col span={18}>
-            <PageHeader style={{ background: "#389e0d" }} />
-          </Col>
-          <Col span={3} />
+          <Divider />
         </Row>
         <Row>
           <Col span={2} />
           <Col span={20}>
             <br />
-            <br />
             <h1>Create student account</h1>
-            <br />
             <Row>
               <Col span={9} />
               <Col span={6}>
@@ -234,9 +226,7 @@ class SignupS extends Component {
           <Button onClick={this.handleClick}>Sign up</Button>
           <div />
           <br />
-          <Button onClick={this.back} type="primary">
-            Cancel
-          </Button>
+          <Button onClick={this.back} type="primary" icon="double-left" />
           <br />
           <br />
           <br />

@@ -83,8 +83,7 @@ export default class TaskStatus extends React.Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Completed student tasks</h2>
+            <h1>Completed student tasks</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (

@@ -86,8 +86,7 @@ class ViewContracts extends Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center", background: "white" }}>
             <br />
-            <br />
-            <h2>Pending contracts</h2>
+            <h1 className="text">Pending contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (

@@ -186,8 +186,7 @@ class StudentProfile extends React.Component {
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Company tasks</h2>
+            <h1>Company tasks</h1>
             <div className="cards">{contracts}</div>
           </Col>
         </Row>

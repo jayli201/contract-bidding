@@ -220,8 +220,7 @@ class Challenge extends React.Component {
       <div className="all" style={{ background: "white" }}>
         <NavbarAd />
         <br />
-        <br />
-        <h2 style={{ textAlign: "center" }}>Submit a challenge</h2>
+        <h1 style={{ textAlign: "center" }}>Submit a challenge</h1>
         <div className="submit">
           <Row>
             <Col span={9} />
