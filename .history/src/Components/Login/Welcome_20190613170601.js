@@ -18,7 +18,7 @@ class Welcome extends Component {
 
 
   render() {
-    // const { Header, Sider, Content } = Layout;
+    const { Header, Sider, Content, Footer } = Layout;
 
 
     //normal rendering for login page
@@ -123,10 +123,10 @@ class Welcome extends Component {
         </Row>
         <br />
         <br />
-        {/* <Footer >
+        <Footer >
           <br />
           <br />
-        </Footer> */}
+        </Footer>
       </div>
     );
   }

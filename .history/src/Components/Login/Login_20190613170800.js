@@ -132,6 +132,7 @@ class Login extends Component {
           <Col span={15}>
             <PageHeader
               style={{
+                background: "#EDF5E0",
                 textAlign: "left"
               }}
             >

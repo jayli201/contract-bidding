@@ -126,12 +126,13 @@ class Login extends Component {
 
     //normal rendering for login page
     return (
-      <div class="login">
+      <div class="login" style={{ background: "#EDF5E0" }}>
         <Row>
           <Col span={3} />
           <Col span={15}>
             <PageHeader
               style={{
+                background: "#EDF5E0",
                 textAlign: "left"
               }}
             >

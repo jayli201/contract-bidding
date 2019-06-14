@@ -123,10 +123,10 @@ class Welcome extends Component {
         </Row>
         <br />
         <br />
-        {/* <Footer >
+        <Footer >
           <br />
           <br />
-        </Footer> */}
+        </Footer>
       </div>
     );
   }
