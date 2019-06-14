@@ -1,5 +1,4 @@
 .parent {
-<<<<<<< HEAD
     display: flex;
    }
    
@@ -21,27 +20,6 @@
       "Times New Roman", serif;
     font-weight: bold;
    }
-=======
-  display: flex;
-}
-
-.center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
-    "Times New Roman", serif;
-  font-weight: bold;
-}
-
-.text {
-  font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
-    "Times New Roman", serif;
-  font-weight: bold;
-}
-
-.title {
-  display: flex;
-  justify-content: center;
-}
->>>>>>> 51f86528e51c48f925dc3e6762af16eef5eb42b1
+   body{
+       background-blend-mode: soft-light
+   }
