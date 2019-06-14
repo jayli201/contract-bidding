@@ -1,37 +1,24 @@
 .parent {
-<<<<<<< HEAD
-    display: flex;
-   }
-   
-   .center {
-    display: flex;
-    /* flex-direction: column; */
-    /* align-items: center; */
-    align-items: center;
-    justify-content: center;
-    margin-left: 580px;
-    margin-right: 580px;
-    font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
-      "Times New Roman", serif;
-    font-weight: bold;
-   }
-   
-   .text {
-    font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
-      "Times New Roman", serif;
-    font-weight: bold;
-   }
-=======
   display: flex;
 }
 
 .center {
   display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
   align-items: center;
   justify-content: center;
+  margin-left: 580px;
+  margin-right: 580px;
   font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
     "Times New Roman", serif;
   font-weight: bold;
+}
+
+.mission {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .text {
@@ -43,5 +30,6 @@
 .title {
   display: flex;
   justify-content: center;
+  font-family: "Courier Bold", Rockwell, Courier, Georgia, Times,
+    "Times New Roman", serif;
 }
->>>>>>> 51f86528e51c48f925dc3e6762af16eef5eb42b1
