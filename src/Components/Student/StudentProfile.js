@@ -58,7 +58,12 @@ class StudentProfile extends React.Component {
   handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false
+      visible: false,
+      name: "",
+      phone: "",
+      github: "",
+      linkedin: "",
+      skills: ""
     });
   };
 
@@ -96,11 +101,10 @@ class StudentProfile extends React.Component {
     const { Header } = Layout;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarSt />
         <br />
-        <br />
-        <h2>Your profile</h2>
+        <h1>Your profile</h1>
         <br />
         <div className="profile">
           <Card

@@ -48,14 +48,13 @@ class AllStudents extends React.Component {
     const { Header, Footer } = Layout;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>All student profiles</h2>
+            <h1>All student profiles</h1>
             <div className="cards">
               {this.state.info.map(student => {
                 return (
@@ -95,7 +94,7 @@ class AllStudents extends React.Component {
           </Col>
         </Row>
         <br />
-        {/* <Footer style={{ background: "#EDF5E0" }}>
+        {/* <Footer style={{ background: "white" }}>
           <br />
           <br />
           <br />

@@ -80,14 +80,13 @@ class ViewContracts extends Component {
     const { TextArea } = Input;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />
-          <Col span={18} style={{ textAlign: "center", background: "#EDF5E0" }}>
+          <Col span={18} style={{ textAlign: "center", background: "white" }}>
             <br />
-            <br />
-            <h2>Pending contracts</h2>
+            <h1 className="text">Pending contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (
@@ -217,7 +216,7 @@ class ViewContracts extends Component {
           <Col span={3} />
         </Row>
         <br />
-        {/* <Footer style={{ background: "#EDF5E0" }}>
+        {/* <Footer style={{ background: "white" }}>
           <br />
           <br />
           <br />

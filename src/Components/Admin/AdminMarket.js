@@ -81,14 +81,13 @@ class AdminMarket extends React.Component {
     const { visible } = this.state;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarAd />
         <Row>
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Approved and open contracts</h2>
+            <h1>Approved and open contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (

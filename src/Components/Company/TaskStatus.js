@@ -77,14 +77,13 @@ export default class TaskStatus extends React.Component {
     const { TextArea } = Input;
 
     return (
-      <div className="all" style={{ background: "#EDF5E0" }}>
+      <div className="all" style={{ background: "white" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Completed student tasks</h2>
+            <h1>Completed student tasks</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (

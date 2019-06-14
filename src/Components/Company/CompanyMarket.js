@@ -91,14 +91,13 @@ class CompanyMarket extends Component {
     const { TextArea } = Input;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Your approved and open contracts</h2>
+            <h1>Your approved and open contracts</h1>
             <div className="cards">
               {this.state.contracts.map(contract => {
                 return (
@@ -288,7 +287,7 @@ class CompanyMarket extends Component {
         <br />
         <br />
         <br />
-        {/* <Footer style={{ background: "#EDF5E0" }} /> */}
+        {/* <Footer style={{ background: "white" }} /> */}
       </div>
     );
   }

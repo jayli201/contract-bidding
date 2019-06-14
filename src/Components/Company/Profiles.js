@@ -48,14 +48,13 @@ class Profiles extends React.Component {
     const { Header } = Layout;
 
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarCo />
         <Row>
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>All students</h2>
+            <h1>All students</h1>
             <div className="cards">
               {this.state.info.map(student => {
                 return (

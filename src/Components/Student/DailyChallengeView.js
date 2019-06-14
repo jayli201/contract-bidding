@@ -61,14 +61,13 @@ class DailyChallengeView extends Component {
 
   render() {
     return (
-      <div style={{ background: "#EDF5E0" }}>
+      <div style={{ background: "white" }}>
         <NavbarSt />
         <Row>
           <Col span={3} />
           <Col span={18} style={{ textAlign: "center" }}>
             <br />
-            <br />
-            <h2>Challenges</h2>
+            <h1>Challenges</h1>
             <div className="cards">{this.mapChallenges()}</div>
           </Col>
         </Row>
