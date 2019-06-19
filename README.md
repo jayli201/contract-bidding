@@ -13,14 +13,14 @@ RevTek is a company that aims to improve communication between companies and stu
 ## Features of students
 
 Students can see available contracts in the marketplace and bid on contracts they are interested in. 
-They can view tasks that have been assigned to them by companies. After the tasks are completed, the students can mark them as completed.
+They have a task manager where they can view tasks that have been assigned to them by companies. After the tasks are completed, the students can mark them as completed.
 They can view daily challenges submitted by admins.
 They can edit their profiles to add appropriate links.
 
 ## Features of companies
 
 Companies can submit contracts. 
-They can view approved contracts and edit or close them. 
+They can view approved contracts and edit or close them. They can see tasks that have been completed by students.
 They can view students who have bidded on their contracts and assign them tasks.
 They can view all student profiles.
 
