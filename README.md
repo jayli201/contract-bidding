@@ -32,6 +32,6 @@ They can view all student profiles.
 
 ## Tools used
 
-Firebase - authentication, database
-react-router-dom - routing
-Antdesign - UI package
+- Firebase - authentication, database
+- react-router-dom - routing
+- Antdesign - UI package
