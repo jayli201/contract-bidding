@@ -25,7 +25,7 @@ class Welcome extends Component {
     this.history.props.push("/login");
   };
   render() {
-    const { Header, Sider, Content, Footer } = Layout;
+    const { Content } = Layout;
     const dataS = [
       "Bid on contracts",
       "Do daily challenges",
@@ -92,14 +92,13 @@ class Welcome extends Component {
         <br />
         <Row>
           <div
-            className="center"
             style={{
               textAlign: "center",
               fontSize: "35px"
             }}
           >
             <br />
-            <label className="text">
+            <label>
               <h1 style={{ fontWeight: "bold" }}>We&ensp;think&ensp; </h1>
               <h1 style={{ color: "#237804", fontWeight: "bold" }}>
                 together.
