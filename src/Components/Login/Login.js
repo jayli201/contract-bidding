@@ -101,9 +101,6 @@ class Login extends Component {
   }
 
   render() {
-    const { Footer } = Layout;
-
-    console.log(this.state.type);
     if (this.state.admin === true) {
       this.setState({
         admin: false
