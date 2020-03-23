@@ -35,3 +35,4 @@ They can view all student profiles.
 - Firebase - authentication, database
 - react-router-dom - routing
 - Antdesign - UI package
+- Express - backend server for API calls
