@@ -17,7 +17,7 @@
     "react-firebase-file-uploader": "^2.4.2",
     "react-mdl": "^1.11.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "save": "^2.4.0"
   },
   "scripts": {
